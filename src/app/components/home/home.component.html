@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyHome - Sito Immobiliare</title>
+
+</head>
+
+<body>
+
+<header>
+
+</header>
+
+<main>
+  <navbar></navbar>
+  <section class="hero">
+
+    <h1>Benvenuto su EasyHome</h1>
+    <p>Trova la casa dei tuoi sogni in modo semplice e veloce.</p>
+  </section>
+  <section class="search-section">
+    <h2>Ricerca Avanzata</h2>
+    <form action="/search" method="get">
+      <div class="filters">
+        <!-- Tipo di immobile -->
+        <div class="filter">
+          <label for="property-type">Tipo di immobile:</label>
+          <select id="property-type" name="property-type">
+            <option value="appartamento">Appartamento</option>
+            <option value="villa">Villa</option>
+            <option value="casa">Casa</option>
+            <option value="ufficio">Ufficio</option>
+          </select>
+        </div>
+
+        <!-- Vendita o Affitto -->
+        <div class="filter">
+          <label for="property-status">Tipo Annuncio:</label>
+          <select id="property-status" name="property-status">
+            <option value="vendita">Vendita</option>
+            <option value="affitto">Affitto</option>
+          </select>
+        </div>
+
+        <!-- Ordina per -->
+        <div class="filter">
+          <label for="sort">Ordina per:</label>
+          <select id="sort" name="sort">
+            <option value="prezzo-asc">Prezzo: dal più basso</option>
+            <option value="prezzo-desc">Prezzo: dal più alto</option>
+            <option value="data-asc">Data: più vecchie</option>
+            <option value="data-desc">Data: più recenti</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Barra di ricerca -->
+      <div class="search-bar">
+        <input type="text" id="city" name="city" placeholder="Es. Cosenza">
+        <button>Cerca</button>
+
+      </div>
+    </form>
+  </section>
+
+  <section class="featured-listings">
+    <h2>Annunci in Evidenza</h2>
+    <div class="listing">
+      <h3>Appartamento a Milano</h3>
+      <p>Una descrizione breve dell'appartamento...</p>
+      <a href="/listing/milano">Dettagli</a>
+    </div>
+    <div class="listing">
+      <h3>Villa al mare</h3>
+      <p>Una descrizione breve della villa...</p>
+      <a href="/listing/villa">Dettagli</a>
+    </div>
+    <!-- Aggiungi altri annunci qui -->
+  </section>
+
+  <section class="about-us">
+    <h2>Chi Siamo</h2>
+    <p>Scopri di più su EasyHome e sulla nostra missione di aiutarti a trovare la casa perfetta.</p>
+    <a href="/about">Leggi di più</a>
+  </section>
+</main>
+
+
+
+
+
+<footer>
+  <p>&copy; 2025 EasyHome. Tutti i diritti riservati.</p>
+  <ul>
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Termini e condizioni</a></li>
+  </ul>
+</footer>
+
+</body>
+
+</html>

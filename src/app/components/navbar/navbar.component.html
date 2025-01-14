@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <!-- Logo -->
+  <span class="logo">EasyHome</span>
+
+  <!-- Menu items -->
+  <div class="menu">
+    <ng-container *ngFor="let item of menuItems">
+      <button mat-button (click)="onMenuClick(item)" [routerLink]="item.route">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </button>
+    </ng-container>
+  </div>
+
+  <!-- Azione a destra (esempio: login/logout) -->
+  <button mat-icon-button aria-label="Account">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
