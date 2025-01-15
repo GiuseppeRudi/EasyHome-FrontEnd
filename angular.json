@@ -93,6 +93,7 @@
               {
                 "glob": "**/*",
                 "input": "public"
+
               }
             ],
             "styles": [

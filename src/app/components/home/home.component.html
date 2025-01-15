@@ -1,69 +1,95 @@
-<!DOCTYPE html>
-<html lang="it">
+<!-- Template per "Tipo Immobile" -->
+<ng-template #immobiliTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container">
+    <h2>Tipo Immobile</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of ['Casa', 'Appartamento', 'Villa']"
+          class="option-item"
+          (click)="selectOption(dialogRef, option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</ng-template>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EasyHome - Sito Immobiliare</title>
+<!-- Template per "Tipo Annuncio" -->
+<ng-template #annuncioTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container">
+    <h2>Tipo Annuncio</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of ['Affitto', 'Vendita']"
+          class="option-item"
+          (click)="selectOption(dialogRef, option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</ng-template>
 
-</head>
+<!-- Template per "Luogo" -->
+<ng-template #luogoTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container-luogo">
+    <h2>Seleziona Luogo</h2>
+    <ul class="options-list">
+      <li *ngFor="let city of places"
+          class="option-item"
+          (click)="selectLuogo(dialogRef, city.name, city.coordinates)"
+          (mouseenter)="onMouseEnter(city)">
+        {{ city.name }}
+        <!-- Mostra i luoghi di interesse quando il mouse passa sopra la città -->
+        <ul *ngIf="hoveredCity === city.name">
+        </ul>
+      </li>
+    </ul>
 
-<body>
+    <!-- Aggiungi la mappa qui separatamente -->
+    <google-map [center]="center" [zoom]="zoom">
+      <map-marker *ngFor="let marker of markers"
+                  [position]="marker.coordinates">
+      </map-marker>
+    </google-map>
+  </div>
+</ng-template>
+
 
 <header>
-
+  <navbar></navbar>
 </header>
 
 <main>
-  <navbar></navbar>
   <section class="hero">
+    <img class="logo" src="assets/logo.png">
+    <section class="search-section">
+      <form action="/search" method="get">
+        <div class="filters">
+          <!-- Sezione superiore in una riga con Flexbox -->
+          <div class="search-line">
+            <p>Cerco</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openSelectDialog(immobiliTemplate, 'selectedImmobili')">
+                {{ selectedImmobili || 'Tipo Immobile' }}
+              </button>
+            </div>
+            <p>in</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openSelectDialog(annuncioTemplate, 'selectedAffittoVendita')">
+                {{ selectedAffittoVendita || 'Tipo Annuncio' }}
+              </button>
+            </div>
+          </div>
 
-    <h1>Benvenuto su EasyHome</h1>
-    <p>Trova la casa dei tuoi sogni in modo semplice e veloce.</p>
-  </section>
-  <section class="search-section">
-    <h2>Ricerca Avanzata</h2>
-    <form action="/search" method="get">
-      <div class="filters">
-        <!-- Tipo di immobile -->
-        <div class="filter">
-          <label for="property-type">Tipo di immobile:</label>
-          <select id="property-type" name="property-type">
-            <option value="appartamento">Appartamento</option>
-            <option value="villa">Villa</option>
-            <option value="casa">Casa</option>
-            <option value="ufficio">Ufficio</option>
-          </select>
+          <!-- Sezione inferiore con "a" e Luogo -->
+          <div class="search-line">
+            <p>a</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openMap(luogoTemplate, 'selectedLuogo')">
+                {{ selectedLuogo || 'Seleziona Luogo' }}
+              </button>
+            </div>
+          </div>
         </div>
-
-        <!-- Vendita o Affitto -->
-        <div class="filter">
-          <label for="property-status">Tipo Annuncio:</label>
-          <select id="property-status" name="property-status">
-            <option value="vendita">Vendita</option>
-            <option value="affitto">Affitto</option>
-          </select>
-        </div>
-
-        <!-- Ordina per -->
-        <div class="filter">
-          <label for="sort">Ordina per:</label>
-          <select id="sort" name="sort">
-            <option value="prezzo-asc">Prezzo: dal più basso</option>
-            <option value="prezzo-desc">Prezzo: dal più alto</option>
-            <option value="data-asc">Data: più vecchie</option>
-            <option value="data-desc">Data: più recenti</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Barra di ricerca -->
-      <div class="search-bar">
-        <input type="text" id="city" name="city" placeholder="Es. Cosenza">
-        <button>Cerca</button>
-
-      </div>
-    </form>
+      </form>
+    </section>
   </section>
 
   <section class="featured-listings">
@@ -78,7 +104,6 @@
       <p>Una descrizione breve della villa...</p>
       <a href="/listing/villa">Dettagli</a>
     </div>
-    <!-- Aggiungi altri annunci qui -->
   </section>
 
   <section class="about-us">
@@ -88,10 +113,6 @@
   </section>
 </main>
 
-
-
-
-
 <footer>
   <p>&copy; 2025 EasyHome. Tutti i diritti riservati.</p>
   <ul>
@@ -99,7 +120,3 @@
     <li><a href="/terms">Termini e condizioni</a></li>
   </ul>
 </footer>
-
-</body>
-
-</html>
