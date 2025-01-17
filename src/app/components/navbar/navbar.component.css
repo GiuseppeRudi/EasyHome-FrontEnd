@@ -1,6 +1,21 @@
 .logo{
   width: 20%;
 }
+
+.name-row {
+  display: flex;
+  gap: 1rem; /* Spaziatura tra i campi */
+}
+
+.name-row .form-group {
+  flex: 1; /* Divide equamente lo spazio tra i due campi */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 mat-dialog-content {
   margin-top: 10px;
   animation: fadeIn 1s ease;
