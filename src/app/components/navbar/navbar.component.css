@@ -21,14 +21,6 @@ mat-dialog-content {
   animation: fadeIn 1s ease;
 }
 
-/* Contenitore per la login e registrazione */
-.register-container {
-
-  border-radius: 12px;
-  width: 100%;
-  max-width: 400px;
-
-}
 
 /* Animazione di fade-in */
 @keyframes fadeIn {
