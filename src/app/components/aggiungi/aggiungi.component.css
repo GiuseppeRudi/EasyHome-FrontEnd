@@ -1,0 +1,168 @@
+/* Contenitore principale con colori scuri e transizioni fluide */
+
+main{
+  background-image: url("/assets/agg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+
+
+.wizard-container {
+  max-width: 800px;
+  height: 80vh; /* Altezza responsive */
+  margin: 100px auto 100px auto  ;
+  padding: 40px;
+
+  background: #121212; /* Colore di sfondo scuro */
+  border-radius: 10px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.6); /* Ombra più marcata */
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  color: #fff; /* Colore del testo bianco per contrasto */
+
+}
+
+.step {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.step-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Aggiunge ombra per l'effetto luminoso */
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #444; /* Bordo più scuro */
+  border-radius: 8px;
+  background: #333; /* Sfondo scuro per input */
+  color: #fff; /* Colore del testo chiaro */
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  border-color: #00c7ff; /* Colore di evidenziazione blu */
+  box-shadow: 0 0 8px rgba(0, 199, 255, 0.5); /* Glow blu */
+}
+
+button {
+  margin-top: 15px;
+  padding: 14px 24px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid #444;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0093b8;
+  transform: scale(1.05); /* Effetto hover che ingrandisce il pulsante */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Pulsanti ai lati opposti */
+  margin-top: 30px;
+}
+
+.prev-button:hover, .next-button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+.submit-button {
+  padding: 14px 24px;
+  background-color: #ff4500; /* Colore arancione brillante per il submit */
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #e43f00;
+  transform: scale(1.05);
+}
+
+/* Stile per la visualizzazione delle anteprime delle immagini */
+.preview-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.preview-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Ombra per le immagini */
+}
+
+input[type="file"] {
+  padding: 12px;
+  background: #222;
+  border-radius: 8px;
+  border: 1px solid #444;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="file"]:focus {
+  border-color: #00c7ff;
+  box-shadow: 0 0 8px rgba(0, 199, 255, 0.5);
+}
+
+input[type="file"]:hover {
+  background-color: #333;
+}
+
+/* Effetti di transizione per i passi */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsività */
+@media (max-width: 768px) {
+  .wizard-container {
+    max-width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .step-title {
+    font-size: 2rem;
+  }
+
+  input, select {
+    padding: 10px;
+  }
+
+  button, .prev-button, .next-button, .submit-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .preview-img {
+    width: 80px;
+    height: 80px;
+  }
+}

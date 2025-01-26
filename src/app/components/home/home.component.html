@@ -1,0 +1,122 @@
+<!-- Template per "Tipo Immobile" -->
+<ng-template #immobiliTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container">
+    <h2>Tipo Immobile</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of ['Tutti', 'Casa', 'Appartamento', 'Villa']"
+          class="option-item"
+          (click)="selectOption(dialogRef, option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<!-- Template per "Tipo Annuncio" -->
+<ng-template #annuncioTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container">
+    <h2>Tipo Annuncio</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of ['Affitto', 'Vendita']"
+          class="option-item"
+          (click)="selectOption(dialogRef, option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</ng-template>
+<!-- Template per "Luogo" -->
+<ng-template #luogoTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container-luogo">
+    <h2>Seleziona Luogo</h2>
+    <ul class="options-list">
+      <li *ngFor="let city of places"
+          class="option-item"
+          (click)="selectLuogo(dialogRef, city.name, city.coordinates)"
+          (mouseenter)="onMouseEnter(city)">
+        {{ city.name }}
+      </li>
+    </ul>
+
+
+    <!-- Aggiungi la mappa qui separatamente -->
+    <google-map [center]="center" [zoom]="zoom">
+      <map-marker *ngFor="let marker of markers"
+                  [position]="marker.coordinates">
+      </map-marker>
+    </google-map>
+  </div>
+</ng-template>
+
+
+
+<header>
+  <navbar></navbar>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="logo" src="assets/logo.png">
+    <section class="search-section">
+      <form action="/search" method="get">
+        <div class="filters">
+          <!-- Sezione superiore in una riga con Flexbox -->
+          <div class="search-line">
+            <p>Cerco</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openSelectDialog(immobiliTemplate, 'selectedImmobili')">
+                {{ selectedImmobili || 'Tipo Immobile' }}
+              </button>
+            </div>
+            <p>in</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openSelectDialog(annuncioTemplate, 'selectedAffittoVendita')">
+                {{ selectedAffittoVendita || 'Tipo Annuncio' }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Sezione inferiore con "a" e Luogo -->
+          <div class="search-line">
+            <p>a</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openMap(luogoTemplate, 'selectedLuogo')">
+                {{ selectedLuogo || 'Seleziona Luogo' }}
+              </button>
+            </div>
+
+          </div>
+          <button
+            [class.attivo]="isSelectionComplete()"
+            [class.inattivo]="!isSelectionComplete()"
+            [disabled]="!isSelectionComplete()"   (click)="navigateToPath()" class="ricerca">Vedi risultati</button>
+        </div>
+      </form>
+    </section>
+  </section>
+
+  <section class="featured-properties">
+    <h2>EasyHome - è più facile con noi</h2>
+    <div class="properties-container">
+      <figure>
+        <img src="/assets/dream-house.png" alt="Appartamento moderno a Milano">
+        <figcaption>Trova la casa dei tuoi sogni</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/mappa.png" alt="Visualizza Mappe Interattive">
+        <figcaption>Visualizza mappe interattive</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/customers.png" alt="Vicine a te">
+        <figcaption>Vicine a te</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/agent.png" alt="Non siamo una semplice agenzia">
+        <figcaption>Non siamo una semplice agenzia</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<footer>
+  <app-footer></app-footer>
+</footer>

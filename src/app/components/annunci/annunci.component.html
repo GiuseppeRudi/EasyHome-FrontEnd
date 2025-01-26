@@ -1,0 +1,34 @@
+<header>
+  <navbar></navbar>
+</header>
+
+<div class="annunci-container">
+  <mat-card *ngFor="let annuncio of annunci" class="annuncio-card">
+    <img mat-card-image [src]="annuncio.foto" alt="Foto casa">
+    <mat-card-content>
+      <h2>{{ annuncio.descrizione }}</h2>
+      <p><strong>Tipo:</strong> {{ annuncio.tipo }}</p> <!-- Nuovo campo -->
+      <p><strong>Prezzo:</strong> {{ annuncio.prezzo }} €</p>
+      <p><strong>Metri Quadri:</strong> {{ annuncio.mq }} m²</p>
+      <p><strong>Camere:</strong> {{ annuncio.camere }}</p> <!-- Nuovo campo -->
+      <p><strong>Bagni:</strong> {{ annuncio.bagni }}</p> <!-- Nuovo campo -->
+      <p><strong>Anno di costruzione:</strong> {{ annuncio.anno }}</p> <!-- Nuovo campo -->
+      <p><strong>Posizione:</strong></p>
+      <google-map
+        [height]="'200px'"
+        [width]="'100%'"
+        [center]="annuncio.posizione"
+        [zoom]="15">
+        <map-marker
+          [position]="annuncio.posizione"
+          [title]="annuncio.descrizione"
+          [label]="annuncio.etichetta">
+        </map-marker>
+      </google-map>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<footer>
+  <app-footer></app-footer>
+</footer>

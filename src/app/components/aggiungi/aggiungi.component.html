@@ -1,0 +1,100 @@
+
+<main>
+<header>
+  <navbar></navbar>
+</header>
+
+  <div class="wizard-container">
+    <!-- Passo 1: Dettagli dell'annuncio -->
+    <div *ngIf="passoAttuale === 1" class="step">
+      <h2 class="step-title">Passo 1: Dettagli dell'annuncio</h2>
+      <form [formGroup]="form">
+        <div class="form-field">
+          <label for="foto">Foto (Puoi caricare più immagini)</label>
+          <input id="foto" formControlName="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
+
+          <!-- Mostra anteprima delle immagini caricate -->
+          <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
+            <div *ngFor="let file of anteprimaImmagini">
+              <img [src]="file" alt="Anteprima immagine" class="preview-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="descrizione">Descrizione</label>
+          <input id="descrizione" formControlName="descrizione" type="text" placeholder="Descrizione dell'annuncio">
+        </div>
+
+        <div class="form-field">
+          <label for="tipo">Tipo di Annuncio</label>
+          <select id="tipo" formControlName="tipo">
+            <option value="vendita">Vendita</option>
+            <option value="affitto">Affitto</option>
+          </select>
+        </div>
+
+        <button type="button" class="next-button" (click)="passaPasso()">Next</button>
+      </form>
+    </div>
+
+
+
+  <!-- Passo 2: Dettagli finanziari e struttura -->
+  <div *ngIf="passoAttuale === 2" class="step">
+    <h2 class="step-title">Passo 2: Dettagli finanziari e struttura</h2>
+    <form [formGroup]="form">
+      <div class="form-field">
+        <label for="prezzo">Prezzo</label>
+        <input id="prezzo" formControlName="prezzo" type="number" placeholder="Prezzo dell'immobile">
+      </div>
+      <div class="form-field">
+        <label for="mq">Metri Quadri</label>
+        <input id="mq" formControlName="mq" type="number" placeholder="Metri quadri dell'immobile">
+      </div>
+      <div *ngIf="tipoAnnuncio === 'vendita'" class="form-field">
+        <label for="anno">Anno di costruzione</label>
+        <input id="anno" formControlName="anno" type="number" placeholder="Anno di costruzione">
+      </div>
+      <div *ngIf="tipoAnnuncio === 'affitto'" class="form-field">
+        <label for="camere">Camere</label>
+        <input id="camere" formControlName="camere" type="number" placeholder="Numero di camere">
+      </div>
+      <div *ngIf="tipoAnnuncio === 'affitto'" class="form-field">
+        <label for="bagni">Bagni</label>
+        <input id="bagni" formControlName="bagni" type="number" placeholder="Numero di bagni">
+      </div>
+      <div class="button-group">
+        <button type="button" class="prev-button" (click)="tornaPasso()">Back</button>
+        <button type="button" class="next-button" (click)="passaPasso()">Next</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Passo 3: Posizione e conferma -->
+  <div *ngIf="passoAttuale === 3" class="step">
+    <h2 class="step-title">Passo 3: Posizione e conferma</h2>
+    <form [formGroup]="form">
+      <div class="form-field">
+        <label for="posizione">Posizione (Lat, Lng)</label>
+        <div id="posizione">
+          <input id="lat" formControlName="posizione.lat" type="number" placeholder="Latitudine">
+          <input id="lng" formControlName="posizione.lng" type="number" placeholder="Longitudine">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="etichetta">Etichetta</label>
+        <input id="etichetta" formControlName="etichetta" type="text" placeholder="Etichetta dell'immobile">
+      </div>
+      <div class="button-group">
+        <button type="button" class="prev-button" (click)="tornaPasso()">Back</button>
+        <button type="button" class="submit-button" (click)="aggiungiAnnuncio()">Aggiungi Annuncio</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <app-footer></app-footer>
+</footer>
+</main>

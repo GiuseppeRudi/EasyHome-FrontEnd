@@ -1,0 +1,70 @@
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<mat-toolbar color="primary">
+  <!-- Logo -->
+  <a [routerLink]="['/']">
+    <img class="logo" src="assets/logo1.jpg" alt="Logo">
+  </a>
+
+  <!-- Menu items -->
+  <!-- Menu items -->
+  <div class="menu">
+    <ng-container *ngFor="let item of menuItems">
+      <!-- Comportamento speciale per Modifica/Aggiungi Annuncio -->
+      <button
+        mat-button
+        *ngIf="item.label === 'Modifica/Aggiungi Annuncio'; else normalButton"
+        (click)="openDialogWithPrevent($event, editAddDialog)"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </button>
+      <!-- Comportamento normale per gli altri bottoni -->
+      <ng-template #normalButton>
+        <button mat-button [routerLink]="item.route">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </ng-template>
+    </ng-container>
+  </div>
+  <!-- Template per Modifica/Aggiungi Annuncio -->
+  <ng-template #editAddDialog>
+    <mat-dialog-content>
+      <h2 class="mb-4 text-center" style="font-size: 1.25rem;">Vuoi aggiungere un annuncio o modificarne uno già pubblicato?</h2>
+      <div class="d-flex flex-column gap-3">
+        <!-- Bottone Modifica -->
+        <button
+          class="btn w-100 text-uppercase fw-bold text-white rounded-pill"
+          style="background: linear-gradient(90deg, #000000, #333333); padding: 12px 20px; font-size: 0.8rem; border: none; transition: transform 0.2s, background-color 0.2s;"
+          (click)="navigateTo('/modifica_annuncio')">
+          Modifica Annuncio
+        </button>
+        <!-- Bottone Aggiungi -->
+        <button
+          class="btn w-100 text-uppercase fw-bold text-white rounded-pill"
+          style="background: linear-gradient(90deg, #000000, #333333); padding: 12px 20px; font-size: 0.8rem; border: none; transition: transform 0.2s, background-color 0.2s;"
+          (click)="navigateTo('/aggiungi_annuncio')">
+          Aggiungi Annuncio
+        </button>
+      </div>
+    </mat-dialog-content>
+  </ng-template>
+
+  <!-- Azione a destra (esempio: login/logout) -->
+  <button mat-icon-button aria-label="Account"  (click)="toggleLogin()" (click)="openLoginDialog()">
+    <mat-icon>{{ logged ? 'exit_to_app' : 'account_circle' }}</mat-icon>
+
+  </button>
+</mat-toolbar>
+
+
+
+
+
+
+

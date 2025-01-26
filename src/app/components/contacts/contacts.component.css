@@ -1,0 +1,143 @@
+/* Stili per h2, h3 */
+h2, h3 {
+  color: #000000;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Stile per i link di navigazione */
+.nav-link {
+  color: #000000;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+/* Stile per il link attivo */
+.active-red {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+/* Stili per i pulsanti */
+.btn-primary {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-primary:hover {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-secondary:hover {
+  background-color: black;
+  border-color: black;
+}
+
+/* Stile per lo sfondo rosso scuro */
+.bg-dark-red {
+  background-color: #000000 !important;
+}
+
+/* Stile per i bordi rossi chiari */
+.border-light-red {
+  border-color: #000000 !important;
+}
+
+/* Stile per il piè di pagina */
+footer {
+  background-color: #000000;
+  color: #ffcccc;
+  transition: background-color 0.3s ease;
+}
+
+footer:hover {
+  background-color: #000000;
+}
+
+/* Colore rosa per il testo */
+.text-pink {
+  color: #ffcccc;
+}
+
+/* Gestione dell'overflow per il corpo */
+body {
+  overflow-x: hidden;
+}
+
+/* Animazione di fade-in per gli elementi */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Effetto hover per le immagini */
+img {
+  transition: transform 0.5s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+/* Effetto hover per i pulsanti */
+.btn {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Effetto hover per le card */
+.card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Stile per i form di input */
+.input-group .form-control {
+  border-radius: 0.25rem;
+}
+
+.input-group-text {
+  background-color: black;
+  color: white;
+}
+
+input.form-control:focus, textarea.form-control:focus {
+  border-color: black;
+  box-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
+}
+
+/* Stile per il footer */
+footer {
+  background-color: black;
+  color: #ffcccc;
+  padding: 10px;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Stili per la sezione alert */
+.alert-info {
+  background-color: #f0f8ff;
+  color: black;
+}

@@ -1,0 +1,40 @@
+<body>
+<div class="background">
+  <div class="blur-overlay"></div>
+  <div class="container">
+    <div class="header">
+      <h2>Pannello di controllo</h2>
+    </div>
+    <hr class="horizontalrow">
+
+    <!-- Cambia ruolo utente -->
+    <div class="changeUserTypeSection">
+      <h3>Cambia ruolo utente</h3>
+      <div class="changeUserTypeContainer">
+        <form class="changeUserTypeForm" >
+          <input type="text" formControlName="user_id_1" id="user_id" placeholder="ID User" required>
+          <select formControlName="user_type" id="user_type" required>
+            <option value="" selected disabled>-- Seleziona ruolo --</option>
+            <option value="seller">Utente</option>
+            <option value="admin">Amministratore</option>
+          </select>
+          <button type="submit" class="submit-btn">Applica</button>
+        </form>
+      </div>
+    </div>
+
+    <hr class="horizontalrow2">
+
+    <!-- Banna utente -->
+    <div class="banUserSection">
+      <h3>Banna utente</h3>
+      <div class="banUserContainer">
+        <form class="banUserForm">
+          <input type="text" formControlName="user_id_2" placeholder="ID User" required>
+          <button type="submit" class="submit-btn">Applica</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
