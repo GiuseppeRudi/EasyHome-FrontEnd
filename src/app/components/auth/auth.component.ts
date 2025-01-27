@@ -22,8 +22,7 @@ export class AuthComponent {
 
   errorMessage: string = '';
 
-  //user = { firstName: '',lastName:'',birthdate:'',province:'',city:'',cap:'',id:'',confirmPassword:'',phoneNumber:'',address:'', email: '', password: '',gender:'' };
-  user = {username: '', password: ''};
+  user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '',gender:'' };
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -44,12 +43,26 @@ export class AuthComponent {
     this.dialog.closeAll();
   }
 
-  registerUser() {
-    this.http.post('/api/register', this.user).subscribe({
-      next: (response) => alert(response),
-      error: (err) => console.error('Errore:', err),
-    });
+  register() {
+    this.authService.register(this.user.firstName, this.user.lastName, this.user.birthdate, this.user.country,this.user.username, this.user.email,this.user.password)
+      .subscribe({
+        next: (response: any) => {
+          console.log('Registrazione effettuata con successo:', response);
+
+          this.closeDialog();
+          setTimeout(() => {
+            this.router.navigate(['/']).then(() => {
+                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+              });
+          }, 500);
+        },
+        error: (err) => {
+          console.error('Errore durante la registrazione:', err);
+          this.resetForm();
+        }
+      });
   }
+
 
 
   login() {
@@ -63,13 +76,17 @@ export class AuthComponent {
           localStorage.setItem('role', response.role);
           this.closeDialog();
           setTimeout(() => {
-            // Reindirizza in base al ruolo
+            // Reindirizza o ricarica la pagina
             if (response.role === 'ROLE_ADMIN') {
-              this.router.navigate(['/admin']);
-            } else if(response.role=='ROLE_USER') {
-              this.router.navigate(['/']);
+              this.router.navigate(['/admin']).then(() => {
+                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+              });
+            } else {
+              this.router.navigate(['/']).then(() => {
+                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+              });
             }
-          }, 500); // Timeout di 500 ms
+          }, 500);
         },
         error: (err) => {
           console.error('Errore durante il login:', err);
@@ -84,6 +101,6 @@ export class AuthComponent {
       });
   }
   resetForm() {
-    this.user = { username: '', password: '' };
+    this.user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '',gender:'' };
   }
 }
