@@ -15,13 +15,6 @@
         <label class="form-label">Password</label>
         <input type="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Inserisci la tua password" required />
       </div>
-      <div class="mb-3">
-        <label class="form-label">Ruolo</label>
-        <select name="role" [(ngModel)]="user.role" class="form-control" required>
-          <option [value]="'ROLE_USER'">Utente</option>
-          <option [value]="'ROLE_ADMIN'">Amministratore</option>
-        </select>
-      </div>
       <button type="submit" class="btn btn-primary">Login</button>
 
       <!-- Mostra errore se esiste -->
@@ -35,9 +28,7 @@
     </div>
   </mat-dialog-content>
 </ng-template>
-
-
-<!-- Template per Registrati
+<!--
 <ng-template #registerDialog>
   <mat-dialog-content>
     <div class="register-container">

@@ -9,7 +9,11 @@ import { AuthService } from '../../auth/auth.service';
   styleUrl: './adminpage.component.css'
 })
 export class AdminpageComponent {
-  constructor(private router: Router, private authService: AuthService){}
+  username: string | null = '';
+
+  constructor(private router: Router, private authService: AuthService) {
+    this.username = localStorage.getItem('username'); // Recupera l'username dal localStorage
+  }
 
   logout() {
     this.authService.logout(); // Invalida l'autenticazione (se implementata)

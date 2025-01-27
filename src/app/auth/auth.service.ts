@@ -18,11 +18,10 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string, role: UserRole): Observable<void> {
+  login(username: string, password: string): Observable<void> {
     const body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
-    body.set('role', role);
 
     return this.http.post<void>(`${this.apiUrl}/login`, body.toString(), {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -64,7 +63,4 @@ export class AuthService {
       })
     );
   }
-
-
-
 }

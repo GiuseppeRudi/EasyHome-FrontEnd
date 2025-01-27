@@ -96,6 +96,25 @@ input, select {
   box-sizing: border-box; /* Assicura che il padding non influisca sulla larghezza */
 }
 
+.username {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.username:hover {
+  background: rgba(255, 255, 255, 0.4);
+  color: #000;
+}
 /* Pulsanti */
 .submit-btn {
   background-color: #0027ea;

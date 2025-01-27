@@ -16,11 +16,14 @@ import {UserRole} from '../../auth/user-role';
 export class AuthComponent {
   @ViewChild('authOptionsDialog') authOptionsDialog!: TemplateRef<any>;
   @ViewChild('registerDialog') registerDialog!: TemplateRef<any>;
-  constructor(private dialogService: DialogService,private dialog: MatDialog, private http: HttpClient,private router: Router, private authService: AuthService) {}
+
+  constructor(private dialogService: DialogService, private dialog: MatDialog, private http: HttpClient, private router: Router, private authService: AuthService) {
+  }
+
   errorMessage: string = '';
 
   //user = { firstName: '',lastName:'',birthdate:'',province:'',city:'',cap:'',id:'',confirmPassword:'',phoneNumber:'',address:'', email: '', password: '',gender:'' };
-  user = { username: '',password:'',role: UserRole.USER};
+  user = {username: '', password: ''};
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -36,6 +39,7 @@ export class AuthComponent {
       width: '400px',
     });
   }
+
   closeDialog() {
     this.dialog.closeAll();
   }
@@ -49,32 +53,37 @@ export class AuthComponent {
 
 
   login() {
-    this.authService.login(this.user.username, this.user.password, this.user.role).subscribe({
-      next: (response) => {
-        this.errorMessage = ''; // Reset messaggio errore
-        console.log('Login effettuato con successo:', response);
-        this.closeDialog();
-        setTimeout(() => {
-          this.router.navigate(['/']); // Cambia il percorso in base alle tue esigenze
-        }, 500);
-      },
-      error: (err) => {
-        console.error('Errore durante il login:', err);
-        if (err.status === 401) {
-          this.errorMessage = 'Credenziali errate. Riprova.';
-        } else {
-          this.errorMessage = 'Si è verificato un errore. Riprova più tardi.';
+    this.authService.login(this.user.username, this.user.password)
+      .subscribe({
+        next: (response: any) => {
+          console.log('Login effettuato con successo:', response);
+
+          // Salva le informazioni dell'utente nel frontend (es. localStorage o variabili)
+          localStorage.setItem('username', response.username);
+          localStorage.setItem('role', response.role);
+          this.closeDialog();
+          setTimeout(() => {
+            // Reindirizza in base al ruolo
+            if (response.role === 'ROLE_ADMIN') {
+              this.router.navigate(['/admin']);
+            } else if(response.role=='ROLE_USER') {
+              this.router.navigate(['/']);
+            }
+          }, 500); // Timeout di 500 ms
+        },
+        error: (err) => {
+          console.error('Errore durante il login:', err);
+
+          if (err.status === 401) {
+            this.errorMessage = "Credenziali errate. Riprova.";
+          } else {
+            this.errorMessage = "Si è verificato un errore. Riprova più tardi.";
+          }
+          this.resetForm();
         }
-        this.resetForm(); // Reset dei campi del modulo
-      },
-    });
+      });
   }
-
   resetForm() {
-    this.user = { username: '', password: '', role: UserRole.USER };
+    this.user = { username: '', password: '' };
   }
-
-
-
-  protected readonly UserRole = UserRole;
 }
