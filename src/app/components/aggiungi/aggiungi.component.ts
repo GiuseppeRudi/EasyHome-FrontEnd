@@ -48,9 +48,9 @@ export class AggiungiComponent {
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          console.log("Anteprima immagine:", e.target.result);
+          //console.log("Anteprima immagine:", e.target.result);
           this.anteprimaImmagini.push(e.target.result);  // Aggiungi l'immagine in base64 all'array
-          console.log("Anteprima immagini:", this.anteprimaImmagini);  // Verifica l'array
+          //console.log("Anteprima immagini:", this.anteprimaImmagini);  // Verifica l'array
         };
         reader.readAsDataURL(files[i]);  // Legge il file come base64
       }

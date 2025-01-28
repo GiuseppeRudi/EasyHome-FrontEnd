@@ -19,7 +19,7 @@ export class ServiceService {
     };
 
     // Usando query params anziché path params, che è una pratica più comune nelle chiamate API
-    return this.http.get<Immobile[]>(`${this.apiUrl}/open/v1/immobili/${tipo}/${affittoVendita}/${luogo}`, {
+    return this.http.get<Immobile[]>(`${this.apiUrl}/open/immobili`, {
       params: params, // Query params
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true, // Se necessario inviare i cookie di sessione

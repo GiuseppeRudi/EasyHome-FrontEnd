@@ -40,7 +40,7 @@ export class AuthService {
       password: password,
     };
 
-    return this.http.post<void>(`${this.apiUrl}/open/v1/createUser`, body, {
+    return this.http.post<void>(`${this.apiUrl}/open/createUser`, body, {
       headers: {'Content-Type': 'application/json'},
       withCredentials: true, // Per inviare i cookie di sessione
     });
