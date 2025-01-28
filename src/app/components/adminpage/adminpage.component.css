@@ -9,6 +9,21 @@
   color: #fff; /* Testo bianco su sfondo scuro */
   overflow: hidden; /* Impedisce che il contenuto esca fuori dal layout */
 }
+.logout-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  float: right;
+  margin-top: -35px;
+}
+
+.logout-btn:hover {
+  background-color: #ff1a1a;
+}
 
 /* Overlay sfocato */
 .blur-overlay {
@@ -81,6 +96,25 @@ input, select {
   box-sizing: border-box; /* Assicura che il padding non influisca sulla larghezza */
 }
 
+.username {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.username:hover {
+  background: rgba(255, 255, 255, 0.4);
+  color: #000;
+}
 /* Pulsanti */
 .submit-btn {
   background-color: #0027ea;

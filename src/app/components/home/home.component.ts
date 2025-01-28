@@ -1,6 +1,8 @@
 import { Component, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {AuthService} from '../../auth/auth.service';
+import {ServiceService} from '../../service/service.service';
 
 interface LatLngLiteral {
   lat: number;
@@ -13,6 +15,7 @@ interface LatLngLiteral {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
+
 export class HomeComponent {
   selectedImmobili: string | null = 'Tipo Immobile';
   selectedAffittoVendita: string | null = 'Tipo Annuncio';
@@ -50,7 +53,7 @@ export class HomeComponent {
     },
   ];
 
-  constructor(public dialog: MatDialog ,private router: Router) {}
+  constructor(public dialog: MatDialog ,private router: Router, private service: ServiceService) {}
 
   // Apre il dialog per selezionare un campo (Tipo Immobile, Tipo Annuncio, Luogo)
   openSelectDialog(
@@ -111,10 +114,17 @@ export class HomeComponent {
       this.selectedLuogo !== 'Luogo'
     );
   }
-  navigateToPath(): void {
-    if (this.isSelectionComplete()) {
-      this.router.navigate(['/annunci']); // Sostituisci con il tuo path
-    }
+  seeResults(): void {
+    this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo)
+      .subscribe({
+        next: () => {
+          if (this.isSelectionComplete()) {
+            this.router.navigate(['/annunci']); // Sostituisci con il tuo path
+          }
+        },
+        error: (err) => console.error("GetImmobili doesn't work", err),
+      });
   }
+
 
 }

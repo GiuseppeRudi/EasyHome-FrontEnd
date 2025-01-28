@@ -24,6 +24,7 @@ export class NavbarComponent {
 
   constructor(private dialog: MatDialog, private router: Router, private dialogService: DialogService) {
   }
+  username: string | null = null;
 
   openDialogWithPrevent(event: Event, dialogTemplate: TemplateRef<any>) {
     event.preventDefault(); // Previene la navigazione
@@ -38,7 +39,11 @@ export class NavbarComponent {
   }
 
   toggleLogin() {
-    this.logged = !this.logged;
+    if (!this.logged) {
+      this.openLoginDialog();
+    } else {
+      this.logout();
+    }
   }
 
   navigateTo(route: string) {
@@ -52,6 +57,20 @@ export class NavbarComponent {
 
   }
 
+  logout(): void {
+    localStorage.clear(); // Rimuove i dati dell'utente
+    this.logged = false;
+    this.username = null; // Resetta il nome utente
+    this.router.navigate(['/']); // Torna alla home
+  }
+
+  ngOnInit(): void {
+    // Verifica se l'utente è loggato all'inizio
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      this.logged = true;
+      this.username = storedUsername; // Imposta il nome utente
+    }
+  }
 
 }
-

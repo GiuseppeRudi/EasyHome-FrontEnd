@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {DialogService} from '../../service/dialog.service';
+import {UserRole} from '../../auth/user-role';
 
 @Component({
   selector: 'app-auth',
@@ -15,9 +16,13 @@ import {DialogService} from '../../service/dialog.service';
 export class AuthComponent {
   @ViewChild('authOptionsDialog') authOptionsDialog!: TemplateRef<any>;
   @ViewChild('registerDialog') registerDialog!: TemplateRef<any>;
-  constructor(private dialogService: DialogService,private dialog: MatDialog, private http: HttpClient,private router: Router, private authService: AuthService) {}
 
-  user = { firstName: '',lastName:'',birthdate:'',province:'',city:'',cap:'',id:'',confirmPassword:'',phoneNumber:'',address:'', email: '', password: '',gender:'' };
+  constructor(private dialogService: DialogService, private dialog: MatDialog, private http: HttpClient, private router: Router, private authService: AuthService) {
+  }
+
+  errorMessage: string = '';
+
+  user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '',gender:'' };
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -33,30 +38,69 @@ export class AuthComponent {
       width: '400px',
     });
   }
+
   closeDialog() {
     this.dialog.closeAll();
   }
 
-  registerUser() {
-    this.http.post('http://localhost:4200/api/register', this.user).subscribe({
-      next: (response) => alert(response),
-      error: (err) => console.error('Errore:', err),
-    });
-  }
-
-
-  login() {
-    this.authService.login(this.user.email, this.user.password)
+  register() {
+    this.authService.register(this.user.firstName, this.user.lastName, this.user.birthdate, this.user.country,this.user.username, this.user.email,this.user.password)
       .subscribe({
-        next: () => {
-          console.log("Logged User:", )
-          this.router.navigate([  "/user-profile" ]);
+        next: (response: any) => {
+          console.log('Registrazione effettuata con successo:', response);
+
+          this.closeDialog();
+          setTimeout(() => {
+            this.router.navigate(['/']).then(() => {
+              window.location.reload(); // Ricarica la pagina per aggiornare i dati
+            });
+          }, 500);
         },
-        error: (err) => console.error('Login failed', err),
+        error: (err) => {
+          console.error('Errore durante la registrazione:', err);
+          this.resetForm();
+        }
       });
   }
 
 
 
+  login() {
+    this.authService.login(this.user.username, this.user.password)
+      .subscribe({
+        next: (response: any) => {
+          console.log('Login effettuato con successo:', response);
 
+          // Salva le informazioni dell'utente nel frontend (es. localStorage o variabili)
+          localStorage.setItem('username', response.username);
+          localStorage.setItem('role', response.role);
+          this.closeDialog();
+          setTimeout(() => {
+            // Reindirizza o ricarica la pagina
+            if (response.role === 'ROLE_ADMIN') {
+              this.router.navigate(['/admin']).then(() => {
+                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+              });
+            } else {
+              this.router.navigate(['/']).then(() => {
+                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+              });
+            }
+          }, 500);
+        },
+        error: (err) => {
+          console.error('Errore durante il login:', err);
+
+          if (err.status === 401) {
+            this.errorMessage = "Credenziali errate. Riprova.";
+          } else {
+            this.errorMessage = "Si è verificato un errore. Riprova più tardi.";
+          }
+          this.resetForm();
+        }
+      });
+  }
+  resetForm() {
+    this.user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '',gender:'' };
+  }
 }

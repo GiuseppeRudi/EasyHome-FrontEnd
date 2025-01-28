@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, catchError, Observable, of, switchMap, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {UserRole} from './user-role';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,23 @@ export class AuthService {
     return this.http.post<void>(`${this.apiUrl}/login`, body.toString(), {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       withCredentials: true, // Per inviare il cookie di sessione
+    });
+  }
+
+  register(firstName: string, lastName: string, birthdate: string, country: string, username: string, email: string, password: string): Observable<void> {
+    const body = {
+      nome: firstName,
+      cognome: lastName,
+      data_nascita: birthdate,
+      nazionalita: country,
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    return this.http.post<void>(`${this.apiUrl}/open/v1/createUser`, body, {
+      headers: {'Content-Type': 'application/json'},
+      withCredentials: true, // Per inviare i cookie di sessione
     });
   }
 

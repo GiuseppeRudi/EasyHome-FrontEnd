@@ -56,15 +56,12 @@
   </ng-template>
 
   <!-- Azione a destra (esempio: login/logout) -->
-  <button mat-icon-button aria-label="Account"  (click)="toggleLogin()" (click)="openLoginDialog()">
-    <mat-icon>{{ logged ? 'exit_to_app' : 'account_circle' }}</mat-icon>
+  <!-- Azione a destra (login/logout con nome utente) -->
+  <div class="user-info">
+    <button mat-icon-button aria-label="Account" (click)="toggleLogin()">
+      <mat-icon>{{ logged ? 'exit_to_app' : 'account_circle' }}</mat-icon>
+    </button>
+    <span *ngIf="logged" class="username">{{ username }}</span>
+  </div>
 
-  </button>
 </mat-toolbar>
-
-
-
-
-
-
-

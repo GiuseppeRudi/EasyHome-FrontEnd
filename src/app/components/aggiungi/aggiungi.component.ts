@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-aggiungi',
@@ -14,7 +15,7 @@ export class AggiungiComponent {
   tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
   fotoFiles: any[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
       foto: [[], Validators.required],
       descrizione: ['', Validators.required],
@@ -72,12 +73,21 @@ export class AggiungiComponent {
 
   aggiungiAnnuncio() {
     if (this.form.valid) {
-      const nuoviAnnunci = JSON.parse(localStorage.getItem('annunci') || '[]');
-      nuoviAnnunci.push(this.form.value);
-      localStorage.setItem('annunci', JSON.stringify(nuoviAnnunci));
-      this.router.navigate(['/']);
+      const formData = this.form.value;
+      formData.foto = this.anteprimaImmagini; // Aggiungi le immagini all'oggetto
+
+      this.service.addAnnuncio(formData).subscribe({
+        next: (response) => {
+          alert('Annuncio aggiunto con successo!');
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          alert("Errore durante l'invio dell'annuncio.");
+          console.error(error);
+        }
+      });
     } else {
       alert('Per favore, completa tutti i campi.');
     }
   }
-  }
+}
