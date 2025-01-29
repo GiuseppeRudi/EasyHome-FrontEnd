@@ -41,7 +41,7 @@ main{
   margin-bottom: 20px;
 }
 
-input, select {
+input, select,textarea {
   width: 100%;
   padding: 12px;
   margin-top: 5px;

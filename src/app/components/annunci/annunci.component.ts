@@ -11,8 +11,10 @@ export class AnnunciComponent {
 
   annunci = [
     {
+
       foto: '/assets/appartamento.jpg',
       descrizione: 'Appartamento moderno con vista sul mare',
+
       prezzo: 200000,
       mq: 120,
       tipo: 'Appartamento', // Nuovo campo

@@ -9,21 +9,15 @@
     <div *ngIf="passoAttuale === 1" class="step">
       <h2 class="step-title">Passo 1: Dettagli dell'annuncio</h2>
       <form [formGroup]="form">
-        <div class="form-field">
-          <label for="foto">Foto (Puoi caricare più immagini)</label>
-          <input id="foto" formControlName="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
 
-          <!-- Mostra anteprima delle immagini caricate -->
-          <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
-            <div *ngFor="let file of anteprimaImmagini">
-              <img [src]="file" alt="Anteprima immagine" class="preview-img">
-            </div>
-          </div>
+        <div class="form-field">
+          <label for="nome">Nome</label>
+          <input id="nome" formControlName="nome" type="text" placeholder="Nome dell'annuncio">
         </div>
 
         <div class="form-field">
           <label for="descrizione">Descrizione</label>
-          <input id="descrizione" formControlName="descrizione" type="text" placeholder="Descrizione dell'annuncio">
+          <textarea id="descrizione" formControlName="descrizione"  placeholder="Descrizione dell'annuncio"></textarea>
         </div>
 
         <div class="form-field">
@@ -64,7 +58,9 @@
         <label for="bagni">Bagni</label>
         <input id="bagni" formControlName="bagni" type="number" placeholder="Numero di bagni">
       </div>
+
       <div class="button-group">
+
         <button type="button" class="prev-button" (click)="tornaPasso()">Back</button>
         <button type="button" class="next-button" (click)="passaPasso()">Next</button>
       </div>
@@ -76,10 +72,20 @@
     <h2 class="step-title">Passo 3: Posizione e conferma</h2>
     <form [formGroup]="form">
       <div class="form-field">
-        <label for="posizione">Posizione (Lat, Lng)</label>
-        <div id="posizione">
-          <input id="lat" formControlName="posizione.lat" type="number" placeholder="Latitudine">
-          <input id="lng" formControlName="posizione.lng" type="number" placeholder="Longitudine">
+        <label for="foto">Foto (Puoi caricare più immagini)</label>
+        <input id="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
+
+        <!-- Mostra anteprima delle immagini caricate -->
+        <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
+          <div *ngFor="let file of anteprimaImmagini">
+            <img [src]="file" alt="Anteprima immagine" class="preview-img">
+          </div>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="posizione">Posizione</label>
+        <div>
+          <input id="posizione" formControlName="posizione" type="text" placeholder="Posizione">
         </div>
       </div>
       <div class="form-field">

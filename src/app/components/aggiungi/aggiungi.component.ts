@@ -17,6 +17,7 @@ export class AggiungiComponent {
 
   constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
+      nome:['',Validators.required],
       foto: [[], Validators.required],
       descrizione: ['', Validators.required],
       tipo: ['vendita', Validators.required],
@@ -26,10 +27,7 @@ export class AggiungiComponent {
       bagni: [0, Validators.required],
       anno: [0, Validators.required],
       etichetta: ['', Validators.required],
-      posizione: this.fb.group({
-        lat: [0, Validators.required],
-        lng: [0, Validators.required]
-      })
+      posizione: ['', Validators.required]
     });
 
     this.form.get('tipo')?.valueChanges.subscribe(value => {
@@ -44,19 +42,22 @@ export class AggiungiComponent {
   onFileChange(event: any) {
     const files: FileList = event.target.files;
     if (files.length > 0) {
-      this.anteprimaImmagini = [];  // Pulisce l'array
-      for (let i = 0; i < files.length; i++) {
+      const nuoviFiles = Array.from(files);
+      this.fotoFiles.push(...nuoviFiles);
+
+      // Aggiorna il form control con l'array di file
+      this.form.get('foto')?.setValue(this.fotoFiles);
+
+      // Anteprima
+      for (let file of nuoviFiles) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          //console.log("Anteprima immagine:", e.target.result);
-          this.anteprimaImmagini.push(e.target.result);  // Aggiungi l'immagine in base64 all'array
-          //console.log("Anteprima immagini:", this.anteprimaImmagini);  // Verifica l'array
+          this.anteprimaImmagini.push(e.target.result);
         };
-        reader.readAsDataURL(files[i]);  // Legge il file come base64
+        reader.readAsDataURL(file);
       }
     }
   }
-
 
 
   passaPasso() {
@@ -73,8 +74,27 @@ export class AggiungiComponent {
 
   aggiungiAnnuncio() {
     if (this.form.valid) {
-      const formData = this.form.value;
-      formData.foto = this.anteprimaImmagini; // Aggiungi le immagini all'oggetto
+      const formData = new FormData();
+
+      // Aggiungi tutti i campi del form al FormData
+      formData.append('nome', this.form.get('nome')?.value);
+      //formData.append('foto', this.form.get('foto')?.value);
+      formData.append('descrizione', this.form.get('descrizione')?.value);
+      formData.append('tipo', this.form.get('tipo')?.value);
+      formData.append('prezzo', this.form.get('prezzo')?.value);
+      formData.append('mq', this.form.get('mq')?.value);
+      formData.append('camere', this.form.get('camere')?.value);
+      formData.append('bagni', this.form.get('bagni')?.value);
+      formData.append('anno', this.form.get('anno')?.value);
+      formData.append('etichetta', this.form.get('etichetta')?.value);
+      formData.append('posizione', this.form.get('posizione')?.value);
+
+
+      if (this.fotoFiles && this.fotoFiles.length > 0) {
+        for (let i = 0; i < this.fotoFiles.length; i++) {
+          formData.append('foto', this.fotoFiles[i], this.fotoFiles[i].name);  // Aggiungi ogni file
+        }
+      }
 
       this.service.addAnnuncio(formData).subscribe({
         next: (response) => {
@@ -90,4 +110,5 @@ export class AggiungiComponent {
       alert('Per favore, completa tutti i campi.');
     }
   }
+
 }

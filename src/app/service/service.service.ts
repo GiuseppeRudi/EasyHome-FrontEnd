@@ -27,7 +27,10 @@ export class ServiceService {
   }
 
   addAnnuncio(annuncio: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/immobili/createImmobili`, annuncio);
+    return this.http.post(`${this.apiUrl}/auth/immobili/createImmobile`, annuncio ,{
+      withCredentials:true,
+      headers: {'Content-Type': 'multipart/form-data'},
+    });
   }
 
 }
