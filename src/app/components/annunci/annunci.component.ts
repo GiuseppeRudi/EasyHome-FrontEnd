@@ -13,12 +13,12 @@ export class AnnunciComponent {
     {
 
       foto: '/assets/appartamento.jpg',
-      descrizione: 'Appartamento moderno con vista sul mare',
-
+      nome: 'Appartamento moderno con vista sul mare',
+      descrizione:'ciao',
       prezzo: 200000,
       mq: 120,
       tipo: 'Appartamento', // Nuovo campo
-      posizione: { lat: 40.712776, lng: -74.005974 }, // New York
+      posizione: 'via giardini', // New York
       etichetta: 'A1', // Etichetta sul marker
       camere: 3, // Nuovo campo
       bagni: 2, // Nuovo campo

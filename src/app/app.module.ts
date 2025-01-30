@@ -25,6 +25,7 @@ import {provideHttpClient} from "@angular/common/http";
 import { AuthComponent } from './components/auth/auth.component';
 import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
+import { RecensioneComponent } from './components/recensione/recensione.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ErrorpageComponent } from './components/errorpage/errorpage.component';
     AuthComponent,
     AdminpageComponent,
     ErrorpageComponent,
+    RecensioneComponent,
 
 
 ],

@@ -33,6 +33,14 @@ export class ServiceService {
       withCredentials: true
     });
   }
+  addRecensione(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/createRecensione`, formData, {
+
+      withCredentials: true
+    });
+  }
+
+
 
 
 }
