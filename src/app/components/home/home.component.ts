@@ -128,9 +128,10 @@ export class HomeComponent {
   seeResults(): void {
     this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo)
       .subscribe({
-        next: () => {
+        next: (response) => {
           if (this.isSelectionComplete()) {
-            this.router.navigate(['/annunci']); // Sostituisci con il tuo path
+            console.log(response)
+            //this.router.navigate(['/']); // Sostituisci con il tuo path
           }
         },
         error: (err) => console.error("GetImmobili doesn't work", err),

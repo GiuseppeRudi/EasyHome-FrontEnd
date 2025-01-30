@@ -14,8 +14,8 @@ export class ServiceService {
   getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): Observable<Immobile[]> {
     const params = {
       tipo: tipo || '',
-      affitoVendita: affittoVendita || '',
-      luogo: luogo || ''
+      categoria: affittoVendita || '',
+      provincia: luogo || ''
     };
 
     // Usando query params anziché path params, che è una pratica più comune nelle chiamate API
@@ -39,8 +39,6 @@ export class ServiceService {
       withCredentials: true
     });
   }
-
-
 
 
 }

@@ -18,15 +18,16 @@ export class AggiungiComponent {
   constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
       nome:['',Validators.required],
-      tipo: ['vendita', Validators.required],
+      tipo: ['Vendita', Validators.required],
       descrizione: ['', Validators.required],
-      categoria: ['casa', Validators.required],
+      categoria: ['Casa', Validators.required],
       prezzo: [0, Validators.required],
       mq: [0, Validators.required],
       camere: [0, Validators.required],
       bagni: [0, Validators.required],
       anno: [0, Validators.required],
       etichetta: ['', Validators.required],
+      provincia: ['', Validators.required],
       indirizzo: ['', Validators.required],
       foto: [[], Validators.required]
     });
@@ -85,6 +86,7 @@ export class AggiungiComponent {
       formData.append('anno', this.form.get('anno')?.value.toString());
       formData.append('etichetta', this.form.get('etichetta')?.value);
       formData.append('indirizzo', this.form.get('indirizzo')?.value);
+      formData.append('provincia', this.form.get('provincia')?.value);
 
       if (this.fotoFiles.length > 0) {
         this.fotoFiles.forEach(file => {
