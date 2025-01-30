@@ -1,7 +1,7 @@
 <!-- Template per "Tipo Immobile" -->
 <ng-template #immobiliTemplate let-dialogRef="dialogRef">
   <div class="dialog-container">
-    <h2>Tipo Immobile</h2>
+    <h2>Seleziona Tipo</h2>
     <ul class="options-list">
       <li *ngFor="let option of ['Tutti', 'Casa', 'Appartamento', 'Villa']"
           class="option-item"
@@ -15,9 +15,9 @@
 <!-- Template per "Tipo Annuncio" -->
 <ng-template #annuncioTemplate let-dialogRef="dialogRef">
   <div class="dialog-container">
-    <h2>Tipo Annuncio</h2>
+    <h2>Seleziona Categoria</h2>
     <ul class="options-list">
-      <li *ngFor="let option of ['Affitto', 'Vendita']"
+      <li *ngFor="let option of ['Tutti', 'Affitto', 'Vendita']"
           class="option-item"
           (click)="selectOption(dialogRef, option)">
         {{ option }}
@@ -28,7 +28,7 @@
 <!-- Template per "Luogo" -->
 <ng-template #luogoTemplate let-dialogRef="dialogRef">
   <div class="dialog-container-luogo">
-    <h2>Seleziona Luogo</h2>
+    <h2>Seleziona Provincia</h2>
     <ul class="options-list">
       <li *ngFor="let city of places"
           class="option-item"
@@ -37,7 +37,6 @@
         {{ city.name }}
       </li>
     </ul>
-
 
     <!-- Aggiungi la mappa qui separatamente -->
     <google-map [center]="center" [zoom]="zoom">
