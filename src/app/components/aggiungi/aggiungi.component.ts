@@ -18,21 +18,17 @@ export class AggiungiComponent {
   constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
       nome:['',Validators.required],
-      foto: [[], Validators.required],
-      descrizione: ['', Validators.required],
       tipo: ['vendita', Validators.required],
+      descrizione: ['', Validators.required],
+      categoria: ['casa', Validators.required],
       prezzo: [0, Validators.required],
       mq: [0, Validators.required],
       camere: [0, Validators.required],
       bagni: [0, Validators.required],
       anno: [0, Validators.required],
       etichetta: ['', Validators.required],
-      posizione: ['', Validators.required]
-    });
-
-    this.form.get('tipo')?.valueChanges.subscribe(value => {
-      this.tipoAnnuncio = value;
-      this.passoAttuale = 1; // Reset dei passi quando cambia il tipo di annuncio
+      indirizzo: ['', Validators.required],
+      foto: [[], Validators.required]
     });
   }
 
@@ -79,15 +75,16 @@ export class AggiungiComponent {
       const formData = new FormData();
 
       formData.append('nome', this.form.get('nome')?.value);
-      formData.append('descrizione', this.form.get('descrizione')?.value);
       formData.append('tipo', this.form.get('tipo')?.value);
+      formData.append('descrizione', this.form.get('descrizione')?.value);
+      formData.append('categoria', this.form.get('categoria')?.value);
       formData.append('prezzo', this.form.get('prezzo')?.value.toString());
       formData.append('mq', this.form.get('mq')?.value.toString());
       formData.append('camere', this.form.get('camere')?.value.toString());
       formData.append('bagni', this.form.get('bagni')?.value.toString());
       formData.append('anno', this.form.get('anno')?.value.toString());
       formData.append('etichetta', this.form.get('etichetta')?.value);
-      formData.append('posizione', this.form.get('posizione')?.value);
+      formData.append('indirizzo', this.form.get('indirizzo')?.value);
 
       if (this.fotoFiles.length > 0) {
         this.fotoFiles.forEach(file => {

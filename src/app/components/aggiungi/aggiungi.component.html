@@ -16,13 +16,22 @@
         </div>
 
         <div class="form-field">
+          <label for="tipo">Tipo di Immobile</label>
+          <select id="tipo" formControlName="tipo">
+            <option value="casa">Casa</option>
+            <option value="appartamento">Appartamento</option>
+            <option value="villa">Villa</option>
+          </select>
+        </div>
+
+        <div class="form-field">
           <label for="descrizione">Descrizione</label>
           <textarea id="descrizione" formControlName="descrizione"  placeholder="Descrizione dell'annuncio"></textarea>
         </div>
 
         <div class="form-field">
-          <label for="tipo">Tipo di Annuncio</label>
-          <select id="tipo" formControlName="tipo">
+          <label for="categoria">Tipo di Annuncio</label>
+          <select id="categoria" formControlName="categoria">
             <option value="vendita">Vendita</option>
             <option value="affitto">Affitto</option>
           </select>
@@ -46,15 +55,15 @@
         <label for="mq">Metri Quadri</label>
         <input id="mq" formControlName="mq" type="number" placeholder="Metri quadri dell'immobile">
       </div>
-      <div *ngIf="tipoAnnuncio === 'vendita'" class="form-field">
+      <div class="form-field">
         <label for="anno">Anno di costruzione</label>
         <input id="anno" formControlName="anno" type="number" placeholder="Anno di costruzione">
       </div>
-      <div *ngIf="tipoAnnuncio === 'affitto'" class="form-field">
+      <div class="form-field">
         <label for="camere">Camere</label>
         <input id="camere" formControlName="camere" type="number" placeholder="Numero di camere">
       </div>
-      <div *ngIf="tipoAnnuncio === 'affitto'" class="form-field">
+      <div class="form-field">
         <label for="bagni">Bagni</label>
         <input id="bagni" formControlName="bagni" type="number" placeholder="Numero di bagni">
       </div>
@@ -75,17 +84,18 @@
         <label for="foto">Foto (Puoi caricare più immagini)</label>
         <input id="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
 
-        <!-- Mostra anteprima delle immagini caricate -->
+        <!--Mostra anteprima delle immagini caricate-->
         <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
           <div *ngFor="let file of anteprimaImmagini">
             <img [src]="file" alt="Anteprima immagine" class="preview-img">
           </div>
         </div>
+
       </div>
       <div class="form-field">
-        <label for="posizione">Posizione</label>
+        <label for="indirizzo">Indirizzo</label>
         <div>
-          <input id="posizione" formControlName="posizione" type="text" placeholder="Posizione">
+          <input id="indirizzo" formControlName="indirizzo" type="text" placeholder="Indirizzo">
         </div>
       </div>
       <div class="form-field">

@@ -17,9 +17,9 @@ interface LatLngLiteral {
 })
 
 export class HomeComponent {
-  selectedImmobili: string | null = 'Tipo Immobile';
-  selectedAffittoVendita: string | null = 'Tipo Annuncio';
-  selectedLuogo: string | null = 'Luogo';
+  selectedImmobili: string | null = 'Tipo';
+  selectedAffittoVendita: string | null = 'Categoria';
+  selectedLuogo: string | null = 'Provincia';
   hoveredCity: string | null = null;
   markers: { name: string; coordinates: LatLngLiteral }[] = [];
   center = { lat: 39.3042, lng: 16.2503 }; // Coordinate di Cosenza
@@ -27,6 +27,18 @@ export class HomeComponent {
 
   // Lista dei luoghi (places) con nomi e coordinate
   places: { name: string; coordinates: LatLngLiteral; locations?: { name: string; coordinates: LatLngLiteral }[] }[] = [
+    {
+      name: 'Tutte',
+      coordinates: { lat: 38.500, lng: 16.000 },
+      locations: [
+        { name: 'Piazza Bilotti', coordinates: { lat: 39.307, lng: 16.247 } },
+        { name: 'Piazza Loreto', coordinates: { lat: 39.308, lng: 16.249 } },
+        { name: 'Piazza Matteotti', coordinates: { lat: 38.910289,lng:16.5852798 } },
+        { name: 'Corso Mazzini', coordinates: { lat:38.90595,lng:16.5897705 } },
+        { name: 'Piazza Duomo', coordinates: { lat: 38.112, lng: 15.651 } },
+        { name: 'Corso Garibaldi', coordinates: { lat: 38.113, lng: 15.653 } },
+      ],
+    },
     {
       name: 'Cosenza',
       coordinates: { lat: 39.305, lng: 16.250 },
@@ -90,28 +102,27 @@ export class HomeComponent {
 
   // Funzione per aprire la mappa in un dialog
   openMap(templateRef: TemplateRef<any>, selectedField: 'selectedLuogo') {
-    const dialogRef: MatDialogRef<any> = this.dialog.open(templateRef, {
-      width: '800px',
-      height: '800px',
+    this.dialog.open(templateRef, {
+      width: '800px'
     });
   }
 
   // Gestisce il mouse hover su una città
   onMouseEnter(city: any) {
-    if (city.locations && Array.isArray(city.locations)) {
-      this.hoveredCity = city.name;
-      this.center = city.coordinates; // Aggiorna il centro
-      this.markers = city.locations.map((location: any) => ({
-        name: location.name,
-        coordinates: location.coordinates,
-      }));
-    }
+    this.hoveredCity = city.name;
+    this.center = city.coordinates; // Aggiorna il centro
+    if(this.hoveredCity=='Tutte' && this.zoom!=8) this.zoom=8;
+    else if(this.zoom!=14) this.zoom=14;
+    this.markers = city.locations.map((location: any) => ({
+      name: location.name,
+      coordinates: location.coordinates,
+    }));
   }
   isSelectionComplete(): boolean {
     return (
-      this.selectedImmobili !== 'Tipo Immobile' &&
-      this.selectedAffittoVendita !== 'Tipo Annuncio' &&
-      this.selectedLuogo !== 'Luogo'
+      this.selectedImmobili !== 'Tipo' &&
+      this.selectedAffittoVendita !== 'Categoria' &&
+      this.selectedLuogo !== 'Provincia'
     );
   }
   seeResults(): void {
