@@ -26,9 +26,10 @@ export class ServiceService {
     });
   }
 
-  addAnnuncio(formData: any): Observable<any> {
+  addAnnuncio(formData: FormData): Observable<any> {
 
     return this.http.post(`${this.apiUrl}/auth/immobili/createImmobile`, formData, {
+
       withCredentials: true
     });
   }
