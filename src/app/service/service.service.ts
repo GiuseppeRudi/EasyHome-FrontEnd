@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Immobile} from '../model/Immobile';
 
 @Injectable({
@@ -26,11 +26,12 @@ export class ServiceService {
     });
   }
 
-  addAnnuncio(annuncio: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/immobili/createImmobile`, annuncio ,{
-      withCredentials:true,
-      headers: {'Content-Type': 'multipart/form-data'},
+  addAnnuncio(formData: any): Observable<any> {
+
+    return this.http.post(`${this.apiUrl}/auth/immobili/createImmobile`, formData, {
+      withCredentials: true
     });
   }
+
 
 }

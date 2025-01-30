@@ -74,26 +74,25 @@ export class AggiungiComponent {
 
   aggiungiAnnuncio() {
     if (this.form.valid) {
+      console.log('Annuncio da inviare:', this.form.value);  // Verifica cosa stai inviando
+
       const formData = new FormData();
 
-      // Aggiungi tutti i campi del form al FormData
       formData.append('nome', this.form.get('nome')?.value);
-      //formData.append('foto', this.form.get('foto')?.value);
       formData.append('descrizione', this.form.get('descrizione')?.value);
       formData.append('tipo', this.form.get('tipo')?.value);
-      formData.append('prezzo', this.form.get('prezzo')?.value);
-      formData.append('mq', this.form.get('mq')?.value);
-      formData.append('camere', this.form.get('camere')?.value);
-      formData.append('bagni', this.form.get('bagni')?.value);
-      formData.append('anno', this.form.get('anno')?.value);
+      formData.append('prezzo', this.form.get('prezzo')?.value.toString());
+      formData.append('mq', this.form.get('mq')?.value.toString());
+      formData.append('camere', this.form.get('camere')?.value.toString());
+      formData.append('bagni', this.form.get('bagni')?.value.toString());
+      formData.append('anno', this.form.get('anno')?.value.toString());
       formData.append('etichetta', this.form.get('etichetta')?.value);
       formData.append('posizione', this.form.get('posizione')?.value);
 
-
-      if (this.fotoFiles && this.fotoFiles.length > 0) {
-        for (let i = 0; i < this.fotoFiles.length; i++) {
-          formData.append('foto', this.fotoFiles[i], this.fotoFiles[i].name);  // Aggiungi ogni file
-        }
+      if (this.fotoFiles.length > 0) {
+        this.fotoFiles.forEach(file => {
+          formData.append('foto', file, file.name);
+        });
       }
 
       this.service.addAnnuncio(formData).subscribe({
@@ -102,13 +101,14 @@ export class AggiungiComponent {
           this.router.navigate(['/']);
         },
         error: (error) => {
+          console.error('Errore:', error);
           alert("Errore durante l'invio dell'annuncio.");
-          console.error(error);
         }
       });
     } else {
       alert('Per favore, completa tutti i campi.');
     }
   }
+
 
 }
