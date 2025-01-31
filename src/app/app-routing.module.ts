@@ -7,6 +7,8 @@ import {AnnunciComponent} from './components/annunci/annunci.component';
 import {AggiungiComponent} from './components/aggiungi/aggiungi.component';
 import {AdminpageComponent} from './components/adminpage/adminpage.component';
 import {RecensioneComponent} from './components/recensione/recensione.component';
+import {AsteComponent} from './components/aste/aste.component';
+import {ContattavenditoreComponent} from './components/contattavenditore/contattavenditore.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // La home page
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'aggiungi_annuncio', component: AggiungiComponent },
   { path: 'admin', component:  AdminpageComponent},
   { path: 'recensione', component:  RecensioneComponent},
+  { path: 'aste', component:  AsteComponent},
+  { path: 'contattavenditore', component:  ContattavenditoreComponent},
 ];
 
 @NgModule({

@@ -52,6 +52,17 @@ export class ServiceService {
       withCredentials: true
     });
   }
+  addrichiesta(contatti: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/CreaRichiesta`, contatti, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+
+
 
   getUsernames(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/open/users`);  // Restituisce la lista degli utenti
@@ -59,3 +70,4 @@ export class ServiceService {
 
 
 }
+

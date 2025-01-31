@@ -71,6 +71,7 @@ export class AuthService {
       switchMap((user) => {
         // Se l'utente è autenticato, aggiorna il BehaviorSubject
         this.currentUserSubject.next(user);
+
         return of(user);
       }),
       catchError(() => {

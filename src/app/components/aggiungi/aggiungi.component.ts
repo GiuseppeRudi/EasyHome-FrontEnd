@@ -13,7 +13,6 @@ import {GeocodingService} from '../../service/GeocodingService/geocoding-service
 export class AggiungiComponent {
   form: FormGroup;
   passoAttuale: number = 1;
-  tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
   fotoFiles: any[] = [];
 
   latitudine: number | null = null;

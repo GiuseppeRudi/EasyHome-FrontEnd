@@ -26,6 +26,8 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { RecensioneComponent } from './components/recensione/recensione.component';
+import { AsteComponent } from './components/aste/aste.component';
+import { ContattavenditoreComponent } from './components/contattavenditore/contattavenditore.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { RecensioneComponent } from './components/recensione/recensione.componen
     AdminpageComponent,
     ErrorpageComponent,
     RecensioneComponent,
+    AsteComponent,
+    ContattavenditoreComponent,
 
 
 ],

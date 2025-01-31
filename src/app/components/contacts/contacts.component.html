@@ -18,8 +18,8 @@
     <h5>I tuoi dati personali:</h5>
     <div class="input-group mb-3">
       <span class="input-group-text bg-dark text-white">Persona</span>
-      <input type="text" formControlName="fname" class="form-control" placeholder="Nome" required />
-      <input type="text" formControlName="lname" class="form-control" placeholder="Cognome" required />
+      <input type="text" formControlName="nome" class="form-control" placeholder="Nome" required />
+      <input type="text" formControlName="cognome" class="form-control" placeholder="Cognome" required />
     </div>
 
     <div class="input-group mb-3">
@@ -31,45 +31,29 @@
     <h5>Privato/Azienda</h5>
     <div class="col-md-12">
       <div class="form-check">
-        <input type="radio" formControlName="radio_input_job" value="Hobbyist" class="form-check-input" required />
+        <input type="radio" formControlName="tipo" value="azienda" class="form-check-input" required />
         <label class="form-check-label">Azienda</label>
       </div>
       <div class="form-check">
-        <input type="radio" formControlName="radio_input_job" value="Expert" class="form-check-input" required />
+        <input type="radio" formControlName="tipo" value="privato" class="form-check-input" required />
         <label class="form-check-label">Privato</label>
 
         <div class="invalid-feedback">*Seleziona una opzione.</div>
       </div>
     </div>
 
-    <h5>Informazioni aggiuntive:</h5>
-    <div class="accordion" id="additionalInfoAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-            Carica il tuo file
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#additionalInfoAccordion">
-          <div class="accordion-body">
-            <label class="form-label">Carica Immagine/Video:</label>
-            <input type="file" formControlName="png" class="form-control" />
-            <div class="valid-feedback">Non obbligatorio.</div>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <h5>Aggiungi descrizione</h5>
     <div class="col-md-12">
       <label class="form-label">La tua domanda:</label>
-      <textarea formControlName="question" class="form-control" required></textarea>
+      <textarea formControlName="domanda" class="form-control" required></textarea>
       <div class="valid-feedback">Bella domanda.</div>
       <div class="invalid-feedback">*Questo campo non può essere vuoto.</div>
     </div>
 
     <div class="col-md-12 text-center mt-3">
-      <button type="submit" class="btn btn-primary me-2" [disabled]="contactForm.invalid">Invia</button>
+      <button type="submit" class="btn btn-primary me-2" (click)="aggiungiContatto()" [disabled]="contactForm.invalid">Invia</button>
       <button type="reset" class="btn btn-secondary">Pulisci</button>
     </div>
   </form>

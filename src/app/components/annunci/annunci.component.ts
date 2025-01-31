@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {Immobile} from '../../model/Immobile';
-import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-annunci',

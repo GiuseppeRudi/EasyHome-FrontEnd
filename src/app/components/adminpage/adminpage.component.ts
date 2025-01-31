@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import {NavbarComponent} from '../navbar/navbar.component';
+
 import { ServiceService } from '../../service/service.service';
 import { FormGroup, FormControl } from '@angular/forms';  // <-- Importa i moduli per i form
 
@@ -23,7 +25,7 @@ export class AdminpageComponent implements OnInit {
     private authService: AuthService,
     private service: ServiceService  // Inietta il servizio
   ) {
-    this.username = localStorage.getItem('username');
+    this.username = sessionStorage.getItem('username');
 
     // Inizializza i form
     this.changeUserTypeForm = new FormGroup({
@@ -42,8 +44,10 @@ export class AdminpageComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
+
+    this.authService.logout(); // Invalida l'autenticazione (se implementata)
+    sessionStorage.clear();
+    this.router.navigate(['/']); // Reindirizza alla home
   }
 
   loadUsernames(): void {
