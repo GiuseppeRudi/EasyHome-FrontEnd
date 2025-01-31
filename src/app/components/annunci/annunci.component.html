@@ -2,27 +2,38 @@
   <navbar></navbar>
 </header>
 
-<div class="annunci-container">
-  <mat-card *ngFor="let annuncio of annunci" class="annuncio-card">
-    <img mat-card-image [src]="annuncio.foto" alt="Foto casa">
-    <mat-card-content>
-      <h2>{{ annuncio.nome }}</h2>
-      <p><strong>Prezzo:</strong> {{ annuncio.prezzo }} €</p>
-      <p><strong>Metri Quadri:</strong> {{ annuncio.mq }} m²</p>
-      <!--<p><strong>Posizione:</strong></p>
-      <google-map
-        [height]="'200px'"
-        [width]="'100%'"
-        [center]="annuncio.posizione"
-        [zoom]="15">
-        <map-marker
-          [position]="annuncio.posizione"
-          [title]="annuncio.descrizione"
-          [label]="annuncio.etichetta">
-        </map-marker>
-      </google-map>-->
-    </mat-card-content>
-  </mat-card>
+<div class="container mt-4">
+  <h2 class="mb-4">Annunci Disponibili</h2>
+
+  <!-- Mostra un messaggio se non ci sono immobili -->
+  <div *ngIf="immobili.length === 0" class="alert alert-warning">
+    Nessun annuncio trovato. Prova a modificare i filtri di ricerca.
+  </div>
+
+  <!-- Lista degli immobili -->
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let immobile of immobili">
+      <div class="card shadow-sm">
+
+        <!-- Se hai immagini, puoi metterle qui
+        <img src="assets/no-image.png" class="card-img-top" alt="Immagine immobile" *ngIf="!immobile.immagineUrl">
+        <img [src]="immobile.immagineUrl" class="card-img-top" alt="Immagine immobile" *ngIf="immobile.immagineUrl">
+        -->
+
+        <div class="card-body">
+          <h5 class="card-title">{{ immobile.nome }}</h5>
+          <p class="card-text">{{ immobile.descrizione }}</p>
+          <p><strong>Prezzo:</strong> €{{ immobile.prezzo | number:'1.0-0' }}</p>
+          <p><strong>Tipo:</strong> {{ immobile.tipo }}</p>
+          <p><strong>Categoria:</strong> {{ immobile.categoria }}</p>
+          <p><strong>Provincia:</strong> {{ immobile.provincia }}</p>
+
+
+          <a href="#" class="btn btn-primary">Dettagli</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>

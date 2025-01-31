@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Immobile} from '../model/Immobile';
 
@@ -11,20 +11,33 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
   private apiUrl = 'api';
 
-  getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): Observable<Immobile[]> {
+  private immobiliSubject = new BehaviorSubject<Immobile[]>([]); // Memorizza gli immobili
+  immobili$ = this.immobiliSubject.asObservable(); // Espone gli immobili come Observable
+
+
+  getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): void {
     const params = {
       tipo: tipo || '',
       categoria: affittoVendita || '',
       provincia: luogo || ''
     };
 
-    // Usando query params anziché path params, che è una pratica più comune nelle chiamate API
-    return this.http.get<Immobile[]>(`${this.apiUrl}/open/immobili`, {
-      params: params, // Query params
+    this.http.get<Immobile[]>(`${this.apiUrl}/open/immobili`, {
+      params: params,
       headers: { 'Content-Type': 'application/json' },
-      withCredentials: true, // Se necessario inviare i cookie di sessione
+      withCredentials: true,
+    }).subscribe({
+      next: (immobili) => {
+        this.immobiliSubject.next(immobili); // Aggiorna il BehaviorSubject con i dati ricevuti
+      },
+      error: (err) => console.error("Errore nel caricamento degli immobili", err),
     });
   }
+
+  getImmobiliObservable(): Observable<Immobile[]> {
+    return this.immobili$; // Espone gli immobili come Observable
+  }
+
 
   addAnnuncio(formData: FormData): Observable<any> {
 
@@ -38,6 +51,10 @@ export class ServiceService {
 
       withCredentials: true
     });
+  }
+
+  getUsernames(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/open/users`);  // Restituisce la lista degli utenti
   }
 
 

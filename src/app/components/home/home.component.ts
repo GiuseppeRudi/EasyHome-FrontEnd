@@ -125,18 +125,13 @@ export class HomeComponent {
       this.selectedLuogo !== 'Provincia'
     );
   }
+
+
   seeResults(): void {
-    this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo)
-      .subscribe({
-        next: (response) => {
-          if (this.isSelectionComplete()) {
-            console.log(response)
-            //this.router.navigate(['/']); // Sostituisci con il tuo path
-          }
-        },
-        error: (err) => console.error("GetImmobili doesn't work", err),
-      });
+    this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
+    this.router.navigate(['/annunci']); // Naviga direttamente
   }
+
 
 
 }

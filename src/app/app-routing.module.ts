@@ -5,9 +5,7 @@ import { AboutComponent } from './components/about/about.component';
 import {ContactsComponent} from './components/contacts/contacts.component';
 import {AnnunciComponent} from './components/annunci/annunci.component';
 import {AggiungiComponent} from './components/aggiungi/aggiungi.component';
-import {AuthComponent} from './components/auth/auth.component';  // Importa il componente About
 import {AdminpageComponent} from './components/adminpage/adminpage.component';
-import {ErrorpageComponent} from './components/errorpage/errorpage.component';
 import {RecensioneComponent} from './components/recensione/recensione.component';
 
 const routes: Routes = [

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, ɵFormGroupRawValue, ɵGetProperty, ɵTypedOrUntyped} from '@angular/forms';
 import { Router } from '@angular/router';
 import {ServiceService} from '../../service/service.service';
+import {GeocodingService} from '../../service/GeocodingService/geocoding-service.service';
 
 @Component({
   selector: 'app-aggiungi',
@@ -15,7 +16,11 @@ export class AggiungiComponent {
   tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
   fotoFiles: any[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
+  latitudine: number | null = null;
+  longitudine: number | null = null;
+
+
+  constructor(private geocodingService: GeocodingService,private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
       nome:['',Validators.required],
       tipo: ['Vendita', Validators.required],
@@ -32,6 +37,30 @@ export class AggiungiComponent {
       foto: [[], Validators.required]
     });
   }
+
+
+  verificaIndirizzo(indirizzo: string) {
+    console.log(indirizzo)
+    if (indirizzo) {
+      this.geocodingService.getLatLng(indirizzo).subscribe({
+        next: (response) => {
+          if (response.status === 'OK' && response.results.length > 0) {
+            const location = response.results[0].geometry.location;
+            this.latitudine = location.lat;
+            this.longitudine = location.lng;
+
+            console.log('Latitudine:', this.latitudine);
+            console.log('Longitudine:', this.longitudine);
+          } else {
+            console.error('Indirizzo non valido o non trovato');
+          }
+        },
+        error: (err) => console.error('Errore nella geocodifica', err)
+      });
+    }
+  }
+
+
 
   // Funzione per gestire il caricamento dei file
   anteprimaImmagini: string[] = [];
