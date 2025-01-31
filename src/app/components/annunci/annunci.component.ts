@@ -28,7 +28,7 @@ export class AnnunciComponent {
 
   constructor() {
     // Recupera la lista degli annunci dal localStorage se presente
-    const annunciString = localStorage.getItem('annunci');
+    const annunciString = sessionStorage.getItem('annunci');
     if (annunciString) {
       this.annunci = JSON.parse(annunciString);
     }
@@ -38,3 +38,4 @@ export class AnnunciComponent {
     this.selectedAnnuncio = { ...annuncio }; // Clona l'annuncio
   }
 }
+

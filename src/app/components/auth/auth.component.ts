@@ -71,9 +71,9 @@ export class AuthComponent {
         next: (response: any) => {
           console.log('Login effettuato con successo:', response);
 
-          // Salva le informazioni dell'utente nel frontend (es. localStorage o variabili)
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('role', response.role);
+          // Salva le informazioni dell'utente nel frontend (es. sessionStorag o variabili)
+          sessionStorage.setItem('username', response.username);
+          sessionStorage.setItem('role', response.role);
           this.closeDialog();
           setTimeout(() => {
             // Reindirizza o ricarica la pagina

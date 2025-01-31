@@ -57,22 +57,25 @@ export class NavbarComponent implements OnInit{
 
   // Logout dell'utente
   logout(): void {
-    localStorage.clear(); // Resetta i dati dell'utente
+    sessionStorage.clear(); // Resetta i dati dell'utente
     this.logged = false;
     this.username = null;
     this.removeModifyItem();
     this.router.navigate(['/']); // Torna alla home
   }
 
-  // Navigazione tra le route
+  // Navigazione tra le route con ritardo
   navigateTo(route: string) {
-    this.closeDialog();
-    this.router.navigate([route]);
+    this.closeDialog(); // Chiudi il dialogo prima della navigazione
+    setTimeout(() => {
+      this.router.navigate([route]); // Naviga alla route dopo un ritardo
+    }, 150); // Ritardo di 500 millisecondi (0.5 secondi)
   }
+
 
   // ngOnInit per gestire lo stato di login al caricamento del componente
   ngOnInit(): void {
-    const storedUsername = localStorage.getItem('username');
+    const storedUsername = sessionStorage.getItem('username');
     if (storedUsername) {
       this.logged = true;
       this.username = storedUsername; // Imposta il nome utente
