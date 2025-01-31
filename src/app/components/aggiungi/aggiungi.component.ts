@@ -12,7 +12,6 @@ import {ServiceService} from '../../service/service.service';
 export class AggiungiComponent {
   form: FormGroup;
   passoAttuale: number = 1;
-  tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
   fotoFiles: any[] = [];
 
   constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {

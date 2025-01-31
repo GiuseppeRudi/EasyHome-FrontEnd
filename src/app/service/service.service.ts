@@ -39,6 +39,18 @@ export class ServiceService {
       withCredentials: true
     });
   }
+  addrichiesta(contatti: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/CreaRichiesta`, contatti, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+
+
 
 
 }
+
