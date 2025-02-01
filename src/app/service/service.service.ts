@@ -40,15 +40,18 @@ export class ServiceService {
 
 
   addAnnuncio(formData: FormData): Observable<any> {
-
     return this.http.post(`${this.apiUrl}/auth/immobili/createImmobile`, formData, {
-
       withCredentials: true
     });
   }
   addRecensione(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/createRecensione`, formData, {
+      withCredentials: true
+    });
+  }
 
+  getImmobiliUtente(username: string): Observable<Immobile[]> {
+    return this.http.get<Immobile[]>(`${this.apiUrl}/auth/${username}/immobili`, {
       withCredentials: true
     });
   }

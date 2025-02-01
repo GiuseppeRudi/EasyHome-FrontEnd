@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators, ɵFormGroupRawValue, ɵGetProperty, 
 import { Router } from '@angular/router';
 import {ServiceService} from '../../service/service.service';
 import {GeocodingService} from '../../service/GeocodingService/geocoding-service.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-aggiungi',
@@ -13,6 +14,7 @@ import {GeocodingService} from '../../service/GeocodingService/geocoding-service
 export class AggiungiComponent {
   form: FormGroup;
   passoAttuale: number = 1;
+  tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
   fotoFiles: any[] = [];
 
   latitudine: number | null = null;
@@ -97,9 +99,10 @@ export class AggiungiComponent {
     }
   }
 
+  username: string | null = '';
+
   aggiungiAnnuncio() {
     if (this.form.valid) {
-      console.log('Annuncio da inviare:', this.form.value);  // Verifica cosa stai inviando
 
       const formData = new FormData();
 
@@ -115,12 +118,16 @@ export class AggiungiComponent {
       formData.append('etichetta', this.form.get('etichetta')?.value);
       formData.append('indirizzo', this.form.get('indirizzo')?.value);
       formData.append('provincia', this.form.get('provincia')?.value);
+      this.username = sessionStorage.getItem('username');
+      console.log(sessionStorage.getItem('username'));
+      if(this.username!=null) formData.append('user', this.username);
 
       if (this.fotoFiles.length > 0) {
         this.fotoFiles.forEach(file => {
           formData.append('foto', file, file.name);
         });
       }
+      console.log('Annuncio da inviare:', formData);
 
       this.service.addAnnuncio(formData).subscribe({
         next: (response) => {

@@ -26,17 +26,25 @@ export class HomeComponent {
   zoom = 14; // Livello di zoom
 
   // Lista dei luoghi (places) con nomi e coordinate
-  places: { name: string; coordinates: LatLngLiteral; locations?: { name: string; coordinates: LatLngLiteral }[] }[] = [
+  places: {
+    name: string;
+    coordinates: LatLngLiteral;
+    locations?: { name: string; coordinates: LatLngLiteral }[]
+  }[] = [
     {
       name: 'Tutte',
       coordinates: { lat: 38.500, lng: 16.000 },
       locations: [
         { name: 'Piazza Bilotti', coordinates: { lat: 39.307, lng: 16.247 } },
         { name: 'Piazza Loreto', coordinates: { lat: 39.308, lng: 16.249 } },
-        { name: 'Piazza Matteotti', coordinates: { lat: 38.910289,lng:16.5852798 } },
-        { name: 'Corso Mazzini', coordinates: { lat:38.90595,lng:16.5897705 } },
+        { name: 'Piazza Matteotti', coordinates: { lat: 38.910289, lng: 16.5852798 } },
+        { name: 'Corso Mazzini', coordinates: { lat: 38.90595, lng: 16.5897705 } },
         { name: 'Piazza Duomo', coordinates: { lat: 38.112, lng: 15.651 } },
         { name: 'Corso Garibaldi', coordinates: { lat: 38.113, lng: 15.653 } },
+        { name: 'Piazza Umberto I', coordinates: { lat: 39.0793432, lng: 17.1256827 } },
+        { name: 'Lungomare', coordinates: { lat: 39.0791923, lng: 17.130112 } },
+        { name: 'Piazza del Popolo', coordinates: { lat: 38.6743606, lng: 16.0951011 } },
+        { name: 'Corso Garibaldi', coordinates: { lat: 38.6763613, lng: 16.1050419 } },
       ],
     },
     {
@@ -49,10 +57,10 @@ export class HomeComponent {
     },
     {
       name: 'Catanzaro',
-      coordinates: { lat: 38.9092366,lng:16.585428 },
+      coordinates: { lat: 38.9092366, lng: 16.585428 },
       locations: [
-        { name: 'Piazza Matteotti', coordinates: { lat: 38.910289,lng:16.5852798 } },
-        { name: 'Corso Mazzini', coordinates: { lat:38.90595,lng:16.5897705 } },
+        { name: 'Piazza Matteotti', coordinates: { lat: 38.910289, lng: 16.5852798 } },
+        { name: 'Corso Mazzini', coordinates: { lat: 38.90595, lng: 16.5897705 } },
       ],
     },
     {
@@ -63,9 +71,25 @@ export class HomeComponent {
         { name: 'Corso Garibaldi', coordinates: { lat: 38.113, lng: 15.653 } },
       ],
     },
+    {
+      name: 'Vibo Valentia',
+      coordinates: { lat: 38.679, lng: 16.108 },
+      locations: [
+        { name: 'Piazza del Popolo', coordinates: { lat: 38.6743606, lng: 16.0951011 } },
+        { name: 'Corso Garibaldi', coordinates: { lat: 38.6763613, lng: 16.1050419 } },
+      ],
+    },
+    {
+      name: 'Crotone',
+      coordinates: { lat: 39.083, lng: 17.133 },
+      locations: [
+        { name: 'Piazza Umberto I', coordinates: { lat: 39.0793432, lng: 17.1256827 } },
+        { name: 'Lungomare', coordinates: { lat: 39.0791923, lng: 17.130112 } },
+      ],
+    },
   ];
 
-  constructor(public dialog: MatDialog ,private router: Router, private service: ServiceService) {}
+  constructor(public dialog: MatDialog ,private service: ServiceService) {}
 
   // Apre il dialog per selezionare un campo (Tipo Immobile, Tipo Annuncio, Luogo)
   openSelectDialog(
@@ -73,7 +97,7 @@ export class HomeComponent {
     selectedField: 'selectedImmobili' | 'selectedAffittoVendita' | 'selectedLuogo'
   ) {
     const dialogRef: MatDialogRef<any> = this.dialog.open(templateRef, {
-      width: '300px',
+      width: '100px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
