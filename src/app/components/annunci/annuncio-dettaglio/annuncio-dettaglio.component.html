@@ -1,0 +1,48 @@
+<navbar></navbar>
+
+<div class="container">
+  <div class="annuncio-card">
+    <!-- Immagine principale accanto alla descrizione -->
+    <div class="immagine-principale">
+      <img [src]="form.value.foto[0]" alt="Immagine immobile" class="main-img">
+    </div>
+
+    <div class="annuncio-info">
+      <h2 class="titolo">{{ form.value.nome }}</h2>
+      <p class="descrizione">{{ form.value.descrizione }}</p>
+      <ul class="dettagli">
+        <li><strong>Tipo:</strong> {{ form.value.tipo }}</li>
+        <li><strong>Categoria:</strong> {{ form.value.categoria }}</li>
+        <li><strong>Prezzo:</strong> €{{ form.value.prezzo | number:'1.0-0' }}</li>
+        <li><strong>Metri quadri:</strong> {{ form.value.mq }} m²</li>
+        <li><strong>Camere:</strong> {{ form.value.camere }}</li>
+        <li><strong>Bagni:</strong> {{ form.value.bagni }}</li>
+        <li><strong>Anno di costruzione:</strong> {{ form.value.anno }}</li>
+        <li><strong>Provincia:</strong> {{ form.value.provincia }}</li>
+        <li><strong>Indirizzo:</strong> {{ form.value.indirizzo }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mappa Google -->
+  <div class="mappa-container" *ngIf="latitudine && longitudine">
+    <h3>Posizione</h3>
+    <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
+      <map-marker [position]="markerPosition"></map-marker>
+    </google-map>
+  </div>
+
+  <app-contattavenditore></app-contattavenditore>
+
+  <!-- Galleria immagini -->
+  <div class="galleria">
+    <h3>Galleria Immagini</h3>
+    <div class="immagini">
+      <img *ngFor="let img of form.value.foto.slice(1)" [src]="img" class="galleria-img">
+    </div>
+  </div>
+</div>
+
+<app-recensione></app-recensione>
+
+<app-footer></app-footer>

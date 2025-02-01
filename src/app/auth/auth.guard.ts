@@ -3,12 +3,15 @@ import { AuthService } from './auth.service';
 import { inject } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {UserRole} from './user-role';
+import {NavbarComponent} from '../components/navbar/navbar.component';
+import {DialogService} from '../service/dialog.service';
+import {AuthComponent} from '../components/auth/auth.component';
 
 export const authGuard: CanActivateFn = (route, state) => {
 
   const authService = inject(AuthService);
   const router = inject(Router);
-
+  const dialogservice = inject(DialogService);
   const expectedRole:UserRole[] = route.data['requiredRoles']
 
   return firstValueFrom(authService.getUser())
@@ -16,7 +19,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
       if(!user){
         // if not logged go to login page
-        router.navigate([  "/login" ]);
+        router.navigate(["home"]);
+        dialogservice.openDialog(AuthComponent);
       }
 
 

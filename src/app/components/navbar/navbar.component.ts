@@ -74,6 +74,7 @@ export class NavbarComponent implements OnInit{
 
   }
 
+
   // Logout dell'utente
   logout(): void {
     sessionStorage.clear(); // Resetta i dati dell'utente

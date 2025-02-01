@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, ɵFormGroupRawValue, ɵGetProperty, ɵTypedOrUntyped} from '@angular/forms';
 import { Router } from '@angular/router';
 import {ServiceService} from '../../service/service.service';
@@ -14,11 +14,18 @@ import {AuthService} from '../../auth/auth.service';
 export class AggiungiComponent {
   form: FormGroup;
   passoAttuale: number = 1;
-  tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
-  fotoFiles: any[] = [];
 
+  fotoFiles: any[] = [];
+  googleMapsUrl: string = '';
   latitudine: number | null = null;
   longitudine: number | null = null;
+  lat: number = 0;  // Inizializzato a 0
+  lng: number = 0;  // Inizializzato a 0
+
+
+  markerPosition: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 }; // Centro mappa
+  zoom: number = 14; // Zoom della mappa
 
 
   constructor(private geocodingService: GeocodingService,private fb: FormBuilder, private router: Router, private service: ServiceService) {
@@ -39,27 +46,36 @@ export class AggiungiComponent {
     });
   }
 
-
+  // Funzione per verificare l'indirizzo
   verificaIndirizzo(indirizzo: string) {
-    console.log(indirizzo)
+    console.log(indirizzo);
     if (indirizzo) {
       this.geocodingService.getLatLng(indirizzo).subscribe({
         next: (response) => {
           if (response.status === 'OK' && response.results.length > 0) {
             const location = response.results[0].geometry.location;
-            this.latitudine = location.lat;
-            this.longitudine = location.lng;
 
-            console.log('Latitudine:', this.latitudine);
-            console.log('Longitudine:', this.longitudine);
-          } else {
-            console.error('Indirizzo non valido o non trovato');
+            if (location && location.lat && location.lng) {
+              // Impostiamo latitudine e longitudine
+              this.latitudine = location.lat;
+              this.longitudine = location.lng;
+
+              // Impostiamo la posizione del marker e il centro della mappa
+              this.markerPosition = { lat: this.latitudine || 0, lng: this.longitudine || 0 };
+              this.center = { lat: this.latitudine || 0, lng: this.longitudine || 0 };
+
+              console.log('Latitudine:', this.latitudine);
+              console.log('Longitudine:', this.longitudine);
+            } else {
+              console.error('Indirizzo non valido o non trovato');
+            }
           }
         },
         error: (err) => console.error('Errore nella geocodifica', err)
       });
     }
   }
+
 
 
 
@@ -102,6 +118,7 @@ export class AggiungiComponent {
   username: string | null = '';
 
   aggiungiAnnuncio() {
+
     if (this.form.valid) {
 
       const formData = new FormData();
@@ -143,6 +160,10 @@ export class AggiungiComponent {
       alert('Per favore, completa tutti i campi.');
     }
   }
+
+
+
+
 
 
 }

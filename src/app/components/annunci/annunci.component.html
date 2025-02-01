@@ -2,40 +2,47 @@
   <navbar></navbar>
 </header>
 
-<div class="container mt-4">
-  <h2 class="mb-4">Annunci Disponibili</h2>
+<!-- Titolo Pagina -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">🏡 Annunci Disponibili</h2>
 
-  <!-- Mostra un messaggio se non ci sono immobili -->
-  <div *ngIf="immobili.length === 0" class="alert alert-warning">
+  <!-- Mostra un messaggio se non ci sono annunci -->
+  <div *ngIf="immobili.length === 0" class="alert alert-warning text-center">
     Nessun annuncio trovato. Prova a modificare i filtri di ricerca.
   </div>
 
   <!-- Lista degli immobili -->
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let immobile of immobili">
-      <div class="card shadow-sm">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let immobile of immobili">
+      <div class="card shadow-lg h-100">
 
-        <!-- Se hai immagini, puoi metterle qui
-        <img src="assets/no-image.png" class="card-img-top" alt="Immagine immobile" *ngIf="!immobile.immagineUrl">
-        <img [src]="immobile.immagineUrl" class="card-img-top" alt="Immagine immobile" *ngIf="immobile.immagineUrl">
-        -->
+        <!-- Immagine Annuncio -->
+        <img [src]="immobile ? immobile : 'assets/no-image.png'"
+             class="card-img-top immagine-annuncio"
+             alt="Immagine immobile">
 
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ immobile.nome }}</h5>
           <p class="card-text">{{ immobile.descrizione }}</p>
-          <p><strong>Prezzo:</strong> €{{ immobile.prezzo | number:'1.0-0' }}</p>
-          <p><strong>Tipo:</strong> {{ immobile.tipo }}</p>
-          <p><strong>Categoria:</strong> {{ immobile.categoria }}</p>
-          <p><strong>Provincia:</strong> {{ immobile.provincia }}</p>
 
+          <ul class="dettagli-annuncio">
+            <li><strong>Prezzo:</strong> €{{ immobile.prezzo | number:'1.0-0' }}</li>
+            <li><strong>Tipo:</strong> {{ immobile.tipo }}</li>
+            <li><strong>Categoria:</strong> {{ immobile.categoria }}</li>
+            <li><strong>Provincia:</strong> {{ immobile.provincia }}</li>
+          </ul>
 
-          <a href="#" class="btn btn-primary">Dettagli</a>
+          <!-- Pulsante Dettagli -->
+          <div class="mt-auto text-center">
+            <a [routerLink]="['/annunci', immobile.id]" class="btn btn-primary">Dettagli</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<footer>
+<!-- Footer -->
+<footer class="footer mt-5">
   <app-footer></app-footer>
 </footer>

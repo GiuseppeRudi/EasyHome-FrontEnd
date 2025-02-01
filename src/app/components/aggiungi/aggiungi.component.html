@@ -74,20 +74,24 @@
 
     <!-- Passo 3: Posizione e conferma -->
     <div *ngIf="passoAttuale === 3" class="step">
-      <h2 class="step-title">Passo 3: Posizione e conferma</h2>
+      <h2 class="step-title">Passo 3: Posizione e Conferma</h2>
+
       <form [formGroup]="form">
+        <!-- Upload Immagini -->
         <div class="form-field">
-          <label for="foto">Foto (Puoi caricare più immagini)</label>
+          <label for="foto">Foto
+            <span class="warning-text">Attenzione: la prima immagine caricata sarà quella predefinita</span>
+          </label>
           <input id="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
 
-          <!--Mostra anteprima delle immagini caricate-->
+          <!-- Anteprima delle immagini -->
           <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
-            <div *ngFor="let file of anteprimaImmagini">
+            <div *ngFor="let file of anteprimaImmagini" class="preview-container">
               <img [src]="file" alt="Anteprima immagine" class="preview-img">
             </div>
           </div>
-
         </div>
+
         <div class="form-field">
           <label for="provincia">Provincia</label>
           <div>
@@ -96,20 +100,33 @@
         </div>
 
         <div class="form-field">
-          <label for="indirizzo">Indirizzo</label>
+          <label for="indirizzo">Indirizzo (Es. Via dei Giardini 186, Marina di Gioiosa)</label>
           <div>
-            <input id="indirizzo" formControlName="indirizzo" type="text" placeholder="Indirizzo">
-            <button type="button" (click)="verificaIndirizzo(form.get('indirizzo')?.value)">Verifica Indirizzo</button>
+            <input id="indirizzo" formControlName="indirizzo" type="text" placeholder="Indirizzo" >
+            <button type="button" (click)="verificaIndirizzo(form.get('indirizzo')?.value)" >Verifica Indirizzo</button>
           </div>
         </div>
 
-        <!-- Mostra latitudine e longitudine dopo la verifica -->
-        <div *ngIf="latitudine && longitudine">
-          <p><strong>Latitudine:</strong> {{ latitudine }}</p>
-          <p><strong>Longitudine:</strong> {{ longitudine }}</p>
+        <div *ngIf="latitudine && longitudine" class="google-map-container">
+          <google-map
+            height="400px"
+            width="100%"
+            [center]="center"
+            [zoom]="zoom"
+          >
+            <map-marker
+              [position]="markerPosition">
+            </map-marker>
+          </google-map>
         </div>
 
-        <div class="form-field">
+
+
+
+
+
+
+      <div class="form-field">
           <label for="etichetta">Etichetta</label>
           <input id="etichetta" formControlName="etichetta" type="text" placeholder="Etichetta dell'immobile">
         </div>
