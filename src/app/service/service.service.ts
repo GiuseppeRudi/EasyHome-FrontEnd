@@ -83,7 +83,7 @@ export class ServiceService {
 
 
   deleteUser(username: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/open/users/${username}`).pipe(
+    return this.http.delete(`${this.apiUrl}/admin/users/${username}`).pipe(
       catchError((error) => {
         console.error('Errore nella risposta HTTP:', error);
         if (error.status === 404) {

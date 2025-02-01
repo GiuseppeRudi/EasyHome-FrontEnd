@@ -65,8 +65,8 @@ export class AdminpageComponent implements OnInit {
       next: (response) => {
         // Successo nella cancellazione
         console.log('Utente eliminato:', response);
+        window.location.reload();  // Ricarica la pagina
         // Aggiorna la lista degli utenti, ricaricando da API
-        this.loadUsernames();
         this.errorMessage = ''; // Pulisce eventuali messaggi di errore
       },
       error: (err) => {
