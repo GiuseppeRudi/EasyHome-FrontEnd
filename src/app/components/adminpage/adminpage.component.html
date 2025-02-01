@@ -57,12 +57,15 @@
     <div class="banUserSection">
       <h3>Banna utente</h3>
       <div class="banUserContainer">
-        <form [formGroup]="banUserForm" (ngSubmit)="onBanUser()">
-          <input type="text" formControlName="user_id_2" placeholder="ID User" required>
-          <button type="submit" class="submit-btn">Applica</button>
-        </form>
+
+          <input type="text" [(ngModel)]="usernameToBan"  placeholder="ID User" required>
+        <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+          {{ errorMessage }}
+        </div>
+          <button type="submit" class="submit-btn" (click)="deleteUser(usernameToBan)">Banna</button>
       </div>
     </div>
+
   </div>
 </div>
 </body>

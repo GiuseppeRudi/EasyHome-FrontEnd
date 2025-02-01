@@ -12,6 +12,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AdminpageComponent implements OnInit {
   username: string | null = '';
+  usernameToBan: string = '';
+ // Array per contenere gli username
   userList: { username: string; role: string }[] = [];  // Ora include sia username che ruolo
 
   // Form per cambiare il ruolo e per il ban
@@ -56,6 +58,30 @@ export class AdminpageComponent implements OnInit {
       error: (err) => console.error('Errore nel recupero degli utenti:', err),
     });
   }
+  errorMessage: string = ''; // Variabile per il messaggio di errore
+
+  deleteUser(username: string): void {
+    this.service.deleteUser(username).subscribe({
+      next: (response) => {
+        // Successo nella cancellazione
+        console.log('Utente eliminato:', response);
+        // Aggiorna la lista degli utenti, ricaricando da API
+        this.loadUsernames();
+        this.errorMessage = ''; // Pulisce eventuali messaggi di errore
+      },
+      error: (err) => {
+        // Gestione errori
+        console.error('Errore nell\'eliminazione dell\'utente:', err);
+        if (err.status === 404) {
+          this.errorMessage = 'L\'utente non esiste';
+        } else {
+          this.errorMessage = 'Si è verificato un errore nell\'eliminazione dell\'utente';
+        }
+      }
+    });
+    this.usernameToBan = ''; // Reset username
+  }
+
 
 
   onChangeUserType() {
