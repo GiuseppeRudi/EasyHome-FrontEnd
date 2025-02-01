@@ -28,6 +28,7 @@ import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { RecensioneComponent } from './components/recensione/recensione.component';
 import { AsteComponent } from './components/aste/aste.component';
 import { ContattavenditoreComponent } from './components/contattavenditore/contattavenditore.component';
+import { MessaggiComponent } from './components/messaggi/messaggi.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ContattavenditoreComponent } from './components/contattavenditore/conta
     RecensioneComponent,
     AsteComponent,
     ContattavenditoreComponent,
+    MessaggiComponent,
 
 
 ],
