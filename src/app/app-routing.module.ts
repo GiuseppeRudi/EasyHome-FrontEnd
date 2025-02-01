@@ -13,6 +13,8 @@ import {ErrorpageComponent} from './components/errorpage/errorpage.component';
 import {authGuard} from './auth/auth.guard';
 import {AuthComponent} from './components/auth/auth.component';
 import {MessaggiComponent} from './components/messaggi/messaggi.component';
+import {AnnuncioDettaglioComponent} from './components/annunci/annuncio-dettaglio/annuncio-dettaglio.component';
+import {UserRole} from './auth/user-role';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // La home page
@@ -23,11 +25,14 @@ const routes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'messaggi', component: MessaggiComponent },
 
-  { path: 'admin', component:  AdminpageComponent},
+  { path: 'admin', component:  AdminpageComponent, canActivate :[authGuard] , data: { requiredRoles: [UserRole.ADMIN] }},
   { path: 'recensione', component:  RecensioneComponent},
   { path: 'aste', component:  AsteComponent},
   { path: 'contattavenditore', component:  ContattavenditoreComponent},
+  { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
+  { path: 'annunci/:id', component: AnnuncioDettaglioComponent },
   { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } },
+  { path: '403', component: ErrorpageComponent, data: { errorCode: 404 } }
 
 ];
 

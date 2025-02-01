@@ -137,7 +137,9 @@ export class ServiceService {
   }
 
 
-
+  getAnnuncioById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 
 
 
