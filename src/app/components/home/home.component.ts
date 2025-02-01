@@ -65,7 +65,7 @@ export class HomeComponent {
     },
   ];
 
-  constructor(public dialog: MatDialog ,private router: Router, private service: ServiceService) {}
+  constructor(public dialog: MatDialog ,private service: ServiceService) {}
 
   // Apre il dialog per selezionare un campo (Tipo Immobile, Tipo Annuncio, Luogo)
   openSelectDialog(
@@ -73,7 +73,7 @@ export class HomeComponent {
     selectedField: 'selectedImmobili' | 'selectedAffittoVendita' | 'selectedLuogo'
   ) {
     const dialogRef: MatDialogRef<any> = this.dialog.open(templateRef, {
-      width: '300px',
+      width: '100px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

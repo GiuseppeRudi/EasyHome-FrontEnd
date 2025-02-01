@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {AuthComponent} from '../auth/auth.component';
 
 import { DialogService} from '../../service/dialog.service';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'navbar',
@@ -22,7 +23,7 @@ export class NavbarComponent {
   logged = false;
   @ViewChild('authOptionsDialog') authOptionsDialog!: TemplateRef<any>;
 
-  constructor(private dialog: MatDialog, private router: Router, private dialogService: DialogService) {
+  constructor(private dialog: MatDialog, private router: Router, private dialogService: DialogService, private service: ServiceService) {
   }
   username: string | null = null;
 
@@ -49,6 +50,15 @@ export class NavbarComponent {
   navigateTo(route: string) {
     this.closeDialog(); // Chiude il popup
     this.router.navigate([route]); // Cambia la route
+  }
+
+  modificaAnnuncio() {
+    if(this.username!=null) this.service.getImmobiliUtente(this.username).subscribe({
+      next: (response) => {
+          console.log(response)
+      },
+      error: (err) => console.error("GetImmobiliUtente doesn't work", err),
+    });
   }
 
   openLoginDialog(): void {

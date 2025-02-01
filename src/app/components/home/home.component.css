@@ -7,6 +7,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 header {
   position: fixed;
   top: 0;
@@ -238,13 +239,19 @@ body {
 }
 .dialog-container-luogo {
   background-color: #ffffff;
-
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: scale(0.9);
   opacity: 0;
   animation: scaleUp 0.3s ease-out forwards;
+}
+
+.map-container {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  align-items: center;
 }
 
 @keyframes scaleUp {
