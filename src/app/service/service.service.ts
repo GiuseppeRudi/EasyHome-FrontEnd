@@ -44,6 +44,7 @@ export class ServiceService {
       withCredentials: true,
     }).subscribe({
       next: (immobili) => {
+        console.log(immobili)
         this.immobiliSubject.next(immobili); // Aggiorna il BehaviorSubject con i dati ricevuti
       },
       error: (err) => console.error("Errore nel caricamento degli immobili", err),

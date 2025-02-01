@@ -14,9 +14,25 @@ export class AnnunciComponent  implements  OnInit{
   constructor(private service: ServiceService) {}
 
   ngOnInit() {
+    // Controllo se ci sono dati salvati in LocalStorage
+    const cachedImmobili = localStorage.getItem('immobili');
+    if (cachedImmobili) {
+      this.immobili = JSON.parse(cachedImmobili);
+      console.log('Dati caricati da LocalStorage:', this.immobili);
+    }
+
+    // Chiamata al servizio per ottenere gli immobili
     this.service.getImmobiliObservable().subscribe(data => {
-      this.immobili = data;
+      console.log('Dati ricevuti dal backend:', data);
+
+      if (data && data.length > 0) {
+        this.immobili = data;
+        localStorage.setItem('immobili', JSON.stringify(this.immobili));
+        console.log('Dati salvati in LocalStorage:', localStorage.getItem('immobili'));
+      }
     });
   }
+
+
 
 }
