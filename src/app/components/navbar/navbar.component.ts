@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -15,7 +15,8 @@ import { DialogService} from '../../service/dialog.service';
 export class NavbarComponent implements OnInit{
   logged = false; // Stato di login
   username: string | null = null;
-
+  userRole: string | null = null;
+  isVenditore = false;
   @ViewChild('authOptionsDialog') authOptionsDialog!: TemplateRef<any>;
 
   menuItems = [
@@ -25,7 +26,10 @@ export class NavbarComponent implements OnInit{
     { label: 'Contatti', icon: 'contact_mail', route: '/contacts' },
   ];
 
-  constructor(private dialog: MatDialog, private router: Router, private dialogService: DialogService) {}
+  constructor(private cdRef: ChangeDetectorRef , private dialog: MatDialog, private router: Router, private dialogService: DialogService) {}
+
+
+  // Metodo per cambiare il ruolo
 
   // Metodo per aprire il dialogo di login o registrazione
   openDialogWithPrevent(event: Event, dialogTemplate: TemplateRef<any>) {
@@ -35,6 +39,7 @@ export class NavbarComponent implements OnInit{
       width: '400px',
     });
   }
+
 
   closeDialog() {
     this.dialog.closeAll();
@@ -58,6 +63,7 @@ export class NavbarComponent implements OnInit{
   // Logout dell'utente
   logout(): void {
     sessionStorage.clear(); // Resetta i dati dell'utente
+    this.userRole = null;
     this.logged = false;
     this.username = null;
     this.removeModifyItem();
@@ -73,12 +79,27 @@ export class NavbarComponent implements OnInit{
   }
 
 
-  // ngOnInit per gestire lo stato di login al caricamento del componente
+
+  toggleRole() {
+    this.isVenditore = !this.isVenditore; // Cambia il ruolo
+    this.userRole = this.isVenditore ? 'venditore' : 'acquirente'; // Salva il nuovo ruolo
+    sessionStorage.setItem('userRole', this.userRole); // Salva il ruolo in sessionStorage
+    console.log(this.isVenditore ? 'Venditore' : 'Acquirente');
+
+    this.updateMenuItems();  // Aggiorna i menu
+    this.cdRef.detectChanges(); // Forza l'aggiornamento della vista
+  }
+
+
+
+
+
   ngOnInit(): void {
-    const storedUsername = sessionStorage.getItem('username');
-    if (storedUsername) {
+    this.userRole = sessionStorage.getItem('userRole');
+    this.username = sessionStorage.getItem('username');
+    if (this.username) {
       this.logged = true;
-      this.username = storedUsername; // Imposta il nome utente
+      this.isVenditore = this.userRole === 'venditore'; // Imposta il ruolo iniziale
       this.updateMenuItems();
     }
   }
@@ -92,8 +113,8 @@ export class NavbarComponent implements OnInit{
 
   // Metodo per aggiornare i menu dinamicamente
   updateMenuItems(): void {
-    if (this.logged) {
-      // Aggiungi "Modifica/Aggiungi Annuncio" solo se loggato
+    this.removeModifyItem();
+    if (this.logged && this.isVenditore) {
       this.menuItems.push({ label: 'Modifica/Aggiungi Annuncio', icon: 'build', route: '/services' });
     }
 

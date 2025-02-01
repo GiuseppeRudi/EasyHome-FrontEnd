@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, catchError, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Immobile} from '../model/Immobile';
 
@@ -62,11 +62,27 @@ export class ServiceService {
   }
 
 
-
-
   getUsernames(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/open/users`);  // Restituisce la lista degli utenti
   }
+
+  deleteUser(username: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/open/users/${username}`).pipe(
+      catchError((error) => {
+        console.error('Errore nella risposta HTTP:', error);
+        if (error.status === 404) {
+          console.error('Utente non trovato');
+        } else {
+          console.error('Errore imprevisto:', error);
+        }
+        return throwError(() => new Error('Errore nella richiesta'));
+      })
+    );
+  }
+
+
+
+
 
 
 }

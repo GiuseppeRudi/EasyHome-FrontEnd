@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -8,15 +8,13 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './errorpage.component.html',
   styleUrl: './errorpage.component.css'
 })
-export class ErrorpageComponent {
+export class ErrorpageComponent implements OnInit{
   errorCode: number | null = null;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // Ottieni il codice di errore dalla route
-    this.route.params.subscribe(params => {
-      this.errorCode = +params['errorCode']; // "+" converte il parametro in un numero
-    });
+    this.errorCode = this.route.snapshot.data['errorCode']; // Recupera l'errorCode passato nella route
   }
 }

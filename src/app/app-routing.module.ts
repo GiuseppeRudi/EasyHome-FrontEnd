@@ -9,6 +9,9 @@ import {AdminpageComponent} from './components/adminpage/adminpage.component';
 import {RecensioneComponent} from './components/recensione/recensione.component';
 import {AsteComponent} from './components/aste/aste.component';
 import {ContattavenditoreComponent} from './components/contattavenditore/contattavenditore.component';
+import {ErrorpageComponent} from './components/errorpage/errorpage.component';
+import {authGuard} from './auth/auth.guard';
+import {AuthComponent} from './components/auth/auth.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // La home page
@@ -16,10 +19,14 @@ const routes: Routes = [
   { path: 'contacts', component: ContactsComponent },  //pagina contatti
   { path: 'annunci', component: AnnunciComponent },
   { path: 'aggiungi_annuncio', component: AggiungiComponent },
+  { path: 'login', component: AuthComponent },
+
   { path: 'admin', component:  AdminpageComponent},
   { path: 'recensione', component:  RecensioneComponent},
   { path: 'aste', component:  AsteComponent},
   { path: 'contattavenditore', component:  ContattavenditoreComponent},
+  { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } },
+
 ];
 
 @NgModule({

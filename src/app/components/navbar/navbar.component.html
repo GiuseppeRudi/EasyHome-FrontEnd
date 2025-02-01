@@ -4,6 +4,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <mat-toolbar color="primary">
+
   <!-- Logo -->
   <a (click)="navigateTo('/')">
     <img class="logo" src="assets/logo1.jpg" alt="Logo">
@@ -11,17 +12,17 @@
 
   <!-- Menu items -->
   <div class="menu">
+    <!-- Menu item -->
     <ng-container *ngFor="let item of menuItems">
-      <!-- Comportamento speciale per Modifica/Aggiungi Annuncio -->
-      <button
-        mat-button
-        *ngIf="item.label === 'Modifica/Aggiungi Annuncio'; else normalButton"
-        (click)="openDialogWithPrevent($event, editAddDialog)"
-      >
-        <mat-icon>{{ item.icon }}</mat-icon>
-        <span>{{ item.label }}</span>
-      </button>
-      <!-- Comportamento normale per gli altri bottoni -->
+      <!-- Se l'elemento è "Modifica/Aggiungi Annuncio" e l'utente è venditore, apri il dialog -->
+      <ng-container *ngIf="item.label === 'Modifica/Aggiungi Annuncio' && isVenditore; else normalButton">
+        <button mat-button (click)="openDialogWithPrevent($event, editAddDialog)">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </ng-container>
+
+      <!-- Template alternativo per tutti gli altri casi -->
       <ng-template #normalButton>
         <button mat-button (click)="navigateTo(item.route)">
           <mat-icon>{{ item.icon }}</mat-icon>
@@ -29,6 +30,7 @@
         </button>
       </ng-template>
     </ng-container>
+
   </div>
 
   <!-- Template per Modifica/Aggiungi Annuncio -->
@@ -51,7 +53,9 @@
           Aggiungi Annuncio
         </button>
       </div>
+
     </mat-dialog-content>
+
   </ng-template>
 
   <!-- Azione a destra (login/logout con nome utente) -->
@@ -61,5 +65,27 @@
     </button>
     <span *ngIf="logged" class="username">{{ username }}</span>
   </div>
+  <!-- From Uiverse.io by Bodyhc -->
+  <div *ngIf="logged" class="checkbox-wrapper-35">
+    <input
+      type="checkbox"
+      class="switch"
+      id="switch"
+      [checked]="isVenditore"
+      (change)="toggleRole()"
+    />
+    <label for="switch">
+      <span class="switch-x-toggletext">
+        <span class="switch-x-unchecked" *ngIf="!isVenditore" style="font-size: 17px">Acquirente</span>
+        <span class="switch-x-checked" *ngIf="isVenditore" style="font-size: 17px">Venditore</span>
+      </span>
+    </label>
+  </div>
+
+
+
+
+
+
 
 </mat-toolbar>
