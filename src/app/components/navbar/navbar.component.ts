@@ -110,4 +110,14 @@ export class NavbarComponent implements OnInit{
 
   }
 
+  toggleRole() {
+    this.isVenditore = !this.isVenditore; // Cambia il ruolo
+    this.userRole = this.isVenditore ? 'venditore' : 'acquirente'; // Salva il nuovo ruolo
+    sessionStorage.setItem('userRole', this.userRole); // Salva il ruolo in sessionStorage
+    console.log(this.isVenditore ? 'Venditore' : 'Acquirente');
+
+    this.updateMenuItems();  // Aggiorna i menu
+    this.cdRef.detectChanges(); // Forza l'aggiornamento della vista
+  }
+
 }

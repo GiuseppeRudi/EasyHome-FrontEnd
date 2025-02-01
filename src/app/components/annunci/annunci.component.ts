@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Immobile} from '../../model/Immobile';
 import {ServiceService} from '../../service/service.service';
 
@@ -8,7 +8,7 @@ import {ServiceService} from '../../service/service.service';
   templateUrl: './annunci.component.html',
   styleUrls: ['./annunci.component.css'] // Nota: il nome corretto è style**s**Url
 })
-export class AnnunciComponent {
+export class AnnunciComponent  implements  OnInit{
   immobili: Immobile[] = [];
 
   constructor(private service: ServiceService) {}

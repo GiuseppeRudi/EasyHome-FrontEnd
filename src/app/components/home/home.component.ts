@@ -89,7 +89,7 @@ export class HomeComponent {
     },
   ];
 
-  constructor(public dialog: MatDialog ,private service: ServiceService) {}
+  constructor(public dialog: MatDialog ,private service: ServiceService,private router : Router) {}
 
   // Apre il dialog per selezionare un campo (Tipo Immobile, Tipo Annuncio, Luogo)
   openSelectDialog(
@@ -150,11 +150,25 @@ export class HomeComponent {
     );
   }
 
+ /* seeResults(): void {
+    this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo)
+      .subscribe({
+        next: (response) => {
+          if (this.isSelectionComplete()) {
+            console.log(response)
+            //this.router.navigate(['/']); // Sostituisci con il tuo path
+          }
+        },
+        error: (err) => console.error("GetImmobili doesn't work", err),
+      });
+  }*/
+
 
   seeResults(): void {
     this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
     this.router.navigate(['/annunci']); // Naviga direttamente
   }
+
 
 
 
