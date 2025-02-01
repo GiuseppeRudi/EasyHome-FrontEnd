@@ -21,11 +21,13 @@
         <thead class="table-dark">
         <tr>
           <th>Username</th>
+          <th>Ruolo</th> <!-- Aggiunta colonna per il ruolo -->
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let username of userList">
-          <td>{{ username }}</td>
+        <tr *ngFor="let user of userList">
+          <td>{{ user.username }}</td>
+          <td>{{ user.role }}</td> <!-- Mostra il ruolo -->
         </tr>
         </tbody>
       </table>
@@ -41,8 +43,8 @@
           <input type="text" formControlName="user_id_1" id="user_id" placeholder="ID User" required>
           <select formControlName="user_type" id="user_type" required>
             <option value="" selected disabled>-- Seleziona ruolo --</option>
-            <option value="seller">Utente</option>
-            <option value="admin">Amministratore</option>
+            <option value="ROLE_USER">Utente</option>
+            <option value="ROLE_ADMIN">Amministratore</option>
           </select>
           <button type="submit" class="submit-btn">Applica</button>
         </form>

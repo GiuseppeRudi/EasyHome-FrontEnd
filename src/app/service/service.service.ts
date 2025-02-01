@@ -52,6 +52,7 @@ export class ServiceService {
       withCredentials: true
     });
   }
+
   addrichiesta(contatti: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/CreaRichiesta`, contatti, {
       withCredentials: true,
@@ -64,9 +65,22 @@ export class ServiceService {
 
 
 
-  getUsernames(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/open/users`);  // Restituisce la lista degli utenti
+  getUsers(): Observable<{ username: string; role: string }[]> {
+    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/open/users`);
   }
+
+  changeUserRole(username: string, newRole: string): Observable<any> {
+    const body = { username, newRole };
+
+    return this.http.post(`${this.apiUrl}/admin/change_role`, body, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+      responseType: 'text'
+    });
+  }
+
+
+
 
 
 }

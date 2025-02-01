@@ -1,33 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
-import {NavbarComponent} from '../navbar/navbar.component';
-
 import { ServiceService } from '../../service/service.service';
-import { FormGroup, FormControl } from '@angular/forms';  // <-- Importa i moduli per i form
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-adminpage',
-  standalone: false,
   templateUrl: './adminpage.component.html',
-  styleUrl: './adminpage.component.css'
+  styleUrl: './adminpage.component.css',
+  standalone:false
 })
 export class AdminpageComponent implements OnInit {
   username: string | null = '';
-  userList: string[] = [];  // Array per contenere gli username
+  userList: { username: string; role: string }[] = [];  // Ora include sia username che ruolo
 
-  // Aggiungi i FormGroup per gestire i form
+  // Form per cambiare il ruolo e per il ban
   changeUserTypeForm: FormGroup;
   banUserForm: FormGroup;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private service: ServiceService  // Inietta il servizio
+    private service: ServiceService
   ) {
     this.username = sessionStorage.getItem('username');
 
-    // Inizializza i form
     this.changeUserTypeForm = new FormGroup({
       user_id_1: new FormControl(''),
       user_type: new FormControl('')
@@ -40,37 +37,53 @@ export class AdminpageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("prova");
-    this.loadUsernames();  // Carica gli username al caricamento del componente
+    this.loadUserList();  // Carica la lista degli utenti
   }
 
   logout() {
-
-    this.authService.logout(); // Invalida l'autenticazione (se implementata)
+    this.authService.logout();
     sessionStorage.clear();
-    this.router.navigate(['/']); // Reindirizza alla home
+    this.router.navigate(['/']);
   }
 
-  loadUsernames(): void {
-    this.service.getUsernames().subscribe({
+  // Carica la lista utenti con ruoli
+  loadUserList(): void {
+    this.service.getUsers().subscribe({
       next: (users) => {
-        console.log("Dati ricevuti dal server:", users); // Stampa i dati ricevuti
-        this.userList = users; // Assegna direttamente l'array se è già un array di stringhe
+        console.log("Dati ricevuti dal server:", users);
+        this.userList = users;  // Ora la lista contiene sia username che ruolo
       },
       error: (err) => console.error('Errore nel recupero degli utenti:', err),
     });
   }
 
 
-
-  // Metodo per gestire il cambio di ruolo
   onChangeUserType() {
-    console.log(this.changeUserTypeForm.value);
-    // Qui puoi fare una chiamata al backend per aggiornare il ruolo dell'utente
+    const username = this.changeUserTypeForm.value.user_id_1;
+    const newRole = this.changeUserTypeForm.value.user_type;
+
+    if (!username || !newRole) {
+      console.error("Errore: username e ruolo sono obbligatori!");
+      return;
+    }
+
+    this.service.changeUserRole(username, newRole).subscribe({
+      next: (response) => {
+        console.log("Ruolo cambiato con successo:", response);
+        alert("Ruolo aggiornato con successo!");
+        window.location.reload();  // Ricarica la pagina
+      },
+      error: (error) => {
+        console.error("Errore nel cambiare il ruolo:", error);
+        alert("Errore nel cambio ruolo");
+      }
+    });
   }
 
-  // Metodo per gestire il ban dell'utente
+
+  // Metodo per bannare un utente
   onBanUser() {
-    console.log(this.banUserForm.value);
-    // Qui puoi fare una chiamata al backend per bannare l'utente
+    console.log("Ban utente:", this.banUserForm.value);
+    // Qui puoi chiamare un'API per bannare l'utente
   }
 }
