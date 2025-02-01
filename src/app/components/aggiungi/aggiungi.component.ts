@@ -14,7 +14,6 @@ import {AuthService} from '../../auth/auth.service';
 export class AggiungiComponent {
   form: FormGroup;
   passoAttuale: number = 1;
-
   fotoFiles: any[] = [];
   googleMapsUrl: string = '';
   latitudine: number | null = null;
@@ -42,6 +41,8 @@ export class AggiungiComponent {
       etichetta: ['', Validators.required],
       provincia: ['', Validators.required],
       indirizzo: ['', Validators.required],
+      latitudine: [null, Validators.required],
+      longitudine: [null, Validators.required],
       foto: [[], Validators.required]
     });
   }
@@ -59,6 +60,11 @@ export class AggiungiComponent {
               // Impostiamo latitudine e longitudine
               this.latitudine = location.lat;
               this.longitudine = location.lng;
+
+            this.form.patchValue({
+              latitudine: location.lat,
+              longitudine: location.lng,
+            });
 
               // Impostiamo la posizione del marker e il centro della mappa
               this.markerPosition = { lat: this.latitudine || 0, lng: this.longitudine || 0 };
@@ -133,7 +139,8 @@ export class AggiungiComponent {
       formData.append('bagni', this.form.get('bagni')?.value.toString());
       formData.append('anno', this.form.get('anno')?.value.toString());
       formData.append('etichetta', this.form.get('etichetta')?.value);
-      formData.append('indirizzo', this.form.get('indirizzo')?.value);
+      formData.append('latitudine', this.form.get('latitudine')?.value);
+      formData.append('longitudine', this.form.get('longitudine')?.value);
       formData.append('provincia', this.form.get('provincia')?.value);
       this.username = sessionStorage.getItem('username');
       console.log(sessionStorage.getItem('username'));

@@ -4,39 +4,30 @@ import { inject } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {UserRole} from './user-role';
 import {NavbarComponent} from '../components/navbar/navbar.component';
-import {DialogService} from '../service/dialog.service';
-import {AuthComponent} from '../components/auth/auth.component';
 
 export const authGuard: CanActivateFn = (route, state) => {
 
   const authService = inject(AuthService);
   const router = inject(Router);
-  const dialogservice = inject(DialogService);
+  const navbar = inject(NavbarComponent)
+
   const expectedRole:UserRole[] = route.data['requiredRoles']
 
   return firstValueFrom(authService.getUser())
     .then(user => {
-
-      if(!user){
-        // if not logged go to login page
-        router.navigate(["home"]);
-        dialogservice.openDialog(AuthComponent);
+      if(!user) {
+        router.navigate([  "/" ]);
+        navbar.openLoginDialog()
       }
 
-
       if (user) {
-
-        //check if is not required a specific role:
         if(!expectedRole){
           return true;
         }
 
-        //check has the same role
-        //TODO format the user model
         if(expectedRole[0]==user.authorities[0].authority){
           return true;
         }
-
         router.navigate([  "/403" ]);
       }
 

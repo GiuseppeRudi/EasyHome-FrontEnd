@@ -15,6 +15,7 @@ import {AuthComponent} from './components/auth/auth.component';
 import {MessaggiComponent} from './components/messaggi/messaggi.component';
 import {AnnuncioDettaglioComponent} from './components/annunci/annuncio-dettaglio/annuncio-dettaglio.component';
 import {UserRole} from './auth/user-role';
+import {UserRole} from './auth/user-role';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // La home page
@@ -31,6 +32,8 @@ const routes: Routes = [
   { path: 'contattavenditore', component:  ContattavenditoreComponent},
   { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
   { path: 'annunci/:id', component: AnnuncioDettaglioComponent }
+  { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } },
+  { path: '403', component: ErrorpageComponent, data: { errorCode: 404 } }
 
 ];
 
