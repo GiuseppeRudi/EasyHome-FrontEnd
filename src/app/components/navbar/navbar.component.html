@@ -81,8 +81,8 @@
       </span>
     </label>
   </div>
-  <div>
-    <!-- From Uiverse.io by elijahgummer -->
+  <!-- Icona Notifiche visibile solo se loggato e se è venditore -->
+  <div *ngIf="logged && isVenditore">
     <ul>
       <li style="--i:#616768;--j:#0b1217;">
         <span class="icon">💬</span>
@@ -90,6 +90,7 @@
       </li>
     </ul>
   </div>
+
 
 
 
