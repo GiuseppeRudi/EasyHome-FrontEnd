@@ -104,9 +104,9 @@
         </div>
 
         <!-- Mostra latitudine e longitudine dopo la verifica -->
-        <div *ngIf="latitudine && longitudine">
-          <p><strong>Latitudine:</strong> {{ latitudine }}</p>
-          <p><strong>Longitudine:</strong> {{ longitudine }}</p>
+        <div *ngIf="this.form.get('latitudine')?.value!=null && this.form.get('longitudine')?.value!=null">
+          <p><strong>Latitudine:</strong> <p>{{ this.form.get('latitudine')?.value }} </p>
+          <p><strong>Longitudine:</strong> <p> {{ this.form.get('longitudine')?.value }}</p>
         </div>
 
         <div class="form-field">

@@ -14,12 +14,7 @@ import {AuthService} from '../../auth/auth.service';
 export class AggiungiComponent {
   form: FormGroup;
   passoAttuale: number = 1;
-  tipoAnnuncio: string = 'vendita'; // Impostato come "vendita" di default
   fotoFiles: any[] = [];
-
-  latitudine: number | null = null;
-  longitudine: number | null = null;
-
 
   constructor(private geocodingService: GeocodingService,private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
@@ -35,6 +30,8 @@ export class AggiungiComponent {
       etichetta: ['', Validators.required],
       provincia: ['', Validators.required],
       indirizzo: ['', Validators.required],
+      latitudine: [null, Validators.required],
+      longitudine: [null, Validators.required],
       foto: [[], Validators.required]
     });
   }
@@ -47,11 +44,13 @@ export class AggiungiComponent {
         next: (response) => {
           if (response.status === 'OK' && response.results.length > 0) {
             const location = response.results[0].geometry.location;
-            this.latitudine = location.lat;
-            this.longitudine = location.lng;
+            this.form.patchValue({
+              latitudine: location.lat,
+              longitudine: location.lng,
+            });
 
-            console.log('Latitudine:', this.latitudine);
-            console.log('Longitudine:', this.longitudine);
+            console.log('Latitudine:', this.form.get('latitudine')?.value);
+            console.log('Longitudine:', this.form.get('longitudine')?.value);
           } else {
             console.error('Indirizzo non valido o non trovato');
           }
@@ -116,10 +115,11 @@ export class AggiungiComponent {
       formData.append('bagni', this.form.get('bagni')?.value.toString());
       formData.append('anno', this.form.get('anno')?.value.toString());
       formData.append('etichetta', this.form.get('etichetta')?.value);
-      formData.append('indirizzo', this.form.get('indirizzo')?.value);
+      formData.append('latitudine', this.form.get('latitudine')?.value);
+      formData.append('longitudine', this.form.get('longitudine')?.value);
       formData.append('provincia', this.form.get('provincia')?.value);
       this.username = sessionStorage.getItem('username');
-      console.log(sessionStorage.getItem('username'));
+      //console.log(sessionStorage.getItem('username'));
       if(this.username!=null) formData.append('user', this.username);
 
       if (this.fotoFiles.length > 0) {

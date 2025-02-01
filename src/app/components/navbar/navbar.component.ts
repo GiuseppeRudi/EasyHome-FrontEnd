@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Injectable, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -7,11 +7,15 @@ import {AuthComponent} from '../auth/auth.component';
 import { DialogService} from '../../service/dialog.service';
 import {ServiceService} from '../../service/service.service';
 
+
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
   standalone: false,
   styleUrl: './navbar.component.css'
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class NavbarComponent implements OnInit{
   logged = false; // Stato di login
@@ -27,7 +31,7 @@ export class NavbarComponent implements OnInit{
     { label: 'Contatti', icon: 'contact_mail', route: '/contacts' },
   ];
 
-  constructor(private cdRef: ChangeDetectorRef , private dialog: MatDialog, private router: Router, private dialogService: DialogService,private service: ServiceService) {}
+  constructor( private dialog: MatDialog, private router: Router, private dialogService: DialogService,private service: ServiceService) {}
 
 
 
@@ -117,7 +121,7 @@ export class NavbarComponent implements OnInit{
     console.log(this.isVenditore ? 'Venditore' : 'Acquirente');
 
     this.updateMenuItems();  // Aggiorna i menu
-    this.cdRef.detectChanges(); // Forza l'aggiornamento della vista
+    //this.cdRef.detectChanges(); // Forza l'aggiornamento della vista
   }
 
 }
