@@ -13,7 +13,6 @@ import {NgOptimizedImage} from '@angular/common';
 import { GoogleMapsModule  } from '@angular/google-maps';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MapComponent } from './components/map/map.component';
 import {MatFormField} from "@angular/material/form-field";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ContactsComponent } from './components/contacts/contacts.component';
@@ -34,7 +33,6 @@ import { RecensioneComponent } from './components/recensione/recensione.componen
     NavbarComponent,
     AboutComponent,
     FooterComponent,
-    MapComponent,
     ContactsComponent,
     AnnunciComponent,
     AggiungiComponent,
