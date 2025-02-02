@@ -68,24 +68,11 @@ h2 {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.text-center button {
-  background: linear-gradient(90deg, #4caf50, #81c784); /* Colore gradiente verde */
-  border: none;
-  color: white; /* Testo bianco */
-  font-weight: 600;
-  font-size: 14px;
-  padding: 10px 20px; /* Spaziatura interna */
-  border-radius: 8px; /* Angoli arrotondati */
-  cursor: pointer;
-  transition: all 0.3s ease; /* Transizione per hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+.ng-invalid.ng-touched:not(form) {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
 
-.text-center button:hover {
-  background: linear-gradient(90deg, #388e3c, #66bb6a); /* Gradiente scuro al passaggio del mouse */
-  transform: translateY(-3px); /* Sollevamento del bottone */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombra più intensa */
-}
 
 .text-center button:active {
   transform: translateY(0); /* Torna alla posizione originale */

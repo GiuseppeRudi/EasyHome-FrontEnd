@@ -101,9 +101,6 @@ export class ServiceService {
     });
   }
 
-
-
-
   getUsers(): Observable<{ username: string; role: string }[]> {
     return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/open/users`);
   }
@@ -118,9 +115,6 @@ export class ServiceService {
     });
   }
 
-
-
-
   deleteUser(username: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/admin/users/${username}`).pipe(
       catchError((error) => {
@@ -134,11 +128,10 @@ export class ServiceService {
       })
     );
   }
-
-
-
-
-
-
+  contattaVenditore(form: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/createMessaggio`, form, {
+      withCredentials: true
+    })
+  }
 }
 

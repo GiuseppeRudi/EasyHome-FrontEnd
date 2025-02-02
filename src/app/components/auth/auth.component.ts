@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {DialogService} from '../../service/dialog.service';
 import {UserRole} from '../../auth/user-role';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -17,12 +18,12 @@ export class AuthComponent {
   @ViewChild('authOptionsDialog') authOptionsDialog!: TemplateRef<any>;
   @ViewChild('registerDialog') registerDialog!: TemplateRef<any>;
 
-  constructor(private dialogService: DialogService, private dialog: MatDialog, private http: HttpClient, private router: Router, private authService: AuthService) {
+  constructor(private dialogService: DialogService,private fb: FormBuilder, private dialog: MatDialog, private router: Router, private authService: AuthService) {
   }
 
   errorMessage: string = '';
 
-  user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '',gender:'' };
+user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '', confirmPassword: '', gender:'', acceptedTerms: '' };
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -43,22 +44,39 @@ export class AuthComponent {
     this.dialog.closeAll();
   }
 
-  register() {
-    this.authService.register(this.user.firstName, this.user.lastName, this.user.birthdate, this.user.country,this.user.username, this.user.email,this.user.password)
+  passwordMismatch(): boolean {
+    return this.user.password !== this.user.confirmPassword;
+  }
+
+  register(form: NgForm) {
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+      return;
+    }
+
+    if (this.user.password !== this.user.confirmPassword) {
+      alert('Le password non coincidono!');
+      return;
+    }
+    console.log('Form da inviare:', this.user);
+
+    this.authService.register(this.user)
       .subscribe({
         next: (response: any) => {
           console.log('Registrazione effettuata con successo:', response);
 
           this.closeDialog();
+          /*
           setTimeout(() => {
             this.router.navigate(['/']).then(() => {
               window.location.reload(); // Ricarica la pagina per aggiornare i dati
             });
           }, 500);
+           */
         },
         error: (err) => {
           console.error('Errore durante la registrazione:', err);
-          this.resetForm();
+          this.initializeForm();
         }
       });
   }
@@ -96,11 +114,11 @@ export class AuthComponent {
           } else {
             this.errorMessage = "Si è verificato un errore. Riprova più tardi.";
           }
-          this.resetForm();
+          this.initializeForm();
         }
       });
   }
-  resetForm() {
-    this.user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '',gender:'' };
+initializeForm() {
+    this.user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:'',cap:'',id:'',phoneNumber:'',address:'', username: '', email: '', password: '', confirmPassword: '',gender:'', acceptedTerms: '' };
   }
 }
