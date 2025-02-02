@@ -29,6 +29,9 @@ import { AsteComponent } from './components/aste/aste.component';
 import { ContattavenditoreComponent } from './components/contattavenditore/contattavenditore.component';
 import { MessaggiComponent } from './components/messaggi/messaggi.component';
 import { AnnuncioDettaglioComponent } from './components/annunci/annuncio-dettaglio/annuncio-dettaglio.component';
+import { CookiesComponent } from './components/cookies/cookies.component';
+import { TerminiecondizioniComponent } from './components/terminiecondizioni/terminiecondizioni.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { AnnuncioDettaglioComponent } from './components/annunci/annuncio-dettag
     ContattavenditoreComponent,
     MessaggiComponent,
     AnnuncioDettaglioComponent,
+    CookiesComponent,
+    TerminiecondizioniComponent,
+    PrivacyComponent,
 
 
 ],

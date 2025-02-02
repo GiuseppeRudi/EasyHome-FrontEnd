@@ -100,7 +100,7 @@ export class NavbarComponent implements OnInit{
   }
 
   removeModifyItem() {
-    const modifyItemIndex = this.menuItems.findIndex(item => item.label === 'Modifica/Aggiungi Annuncio');
+    const modifyItemIndex = this.menuItems.findIndex(item => item.label === 'Gestisci Annunci');
     if (modifyItemIndex !== -1) {
       this.menuItems.splice(modifyItemIndex, 1); // Rimuove l'elemento
     }
@@ -110,7 +110,7 @@ export class NavbarComponent implements OnInit{
   updateMenuItems(): void {
     this.removeModifyItem();
     if (this.logged && this.isVenditore) {
-      this.menuItems.push({ label: 'Modifica/Aggiungi Annuncio', icon: 'build', route: '/services' });
+      this.menuItems.push({ label: 'Gestisci Annunci', icon: 'build', route: '/services' });
     }
 
   }

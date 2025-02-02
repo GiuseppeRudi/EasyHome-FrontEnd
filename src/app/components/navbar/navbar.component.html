@@ -15,7 +15,7 @@
     <!-- Menu item -->
     <ng-container *ngFor="let item of menuItems">
       <!-- Se l'elemento è "Modifica/Aggiungi Annuncio" e l'utente è venditore, apri il dialog -->
-      <ng-container *ngIf="item.label === 'Modifica/Aggiungi Annuncio' && isVenditore; else normalButton">
+      <ng-container *ngIf="item.label === 'Gestisci Annunci' && isVenditore; else normalButton">
         <button mat-button (click)="openDialogWithPrevent($event, editAddDialog)">
           <mat-icon>{{ item.icon }}</mat-icon>
           <span>{{ item.label }}</span>

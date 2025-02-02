@@ -15,6 +15,9 @@ import {AuthComponent} from './components/auth/auth.component';
 import {MessaggiComponent} from './components/messaggi/messaggi.component';
 import {AnnuncioDettaglioComponent} from './components/annunci/annuncio-dettaglio/annuncio-dettaglio.component';
 import {UserRole} from './auth/user-role';
+import {CookiesComponent} from './components/cookies/cookies.component';
+import {PrivacyComponent} from './components/privacy/privacy.component';
+import {TerminiecondizioniComponent} from './components/terminiecondizioni/terminiecondizioni.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // La home page
@@ -24,7 +27,9 @@ const routes: Routes = [
   { path: 'aggiungi_annuncio', component: AggiungiComponent },
   { path: 'login', component: AuthComponent },
   { path: 'messaggi', component: MessaggiComponent },
-
+  { path: 'cookies', component: CookiesComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'termini', component: TerminiecondizioniComponent },
   { path: 'admin', component:  AdminpageComponent, canActivate :[authGuard] , data: { requiredRoles: [UserRole.ADMIN] }},
   { path: 'recensione', component:  RecensioneComponent},
   { path: 'aste', component:  AsteComponent},
