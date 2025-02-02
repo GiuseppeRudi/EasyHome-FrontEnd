@@ -29,19 +29,10 @@ export class AuthService {
     });
   }
 
-  register(firstName: string, lastName: string, birthdate: string, country: string, username: string, email: string, password: string): Observable<void> {
-    const body = {
-      nome: firstName,
-      cognome: lastName,
-      data_nascita: birthdate,
-      nazionalita: country,
-      username: username,
-      email: email,
-      password: password,
-    };
-
-    return this.http.post<void>(`${this.apiUrl}/open/createUser`, body, {
-      headers: {'Content-Type': 'application/json'},
+  register(form: any): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/open/createUser`, form, {
+      headers: {'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200'},
       withCredentials: true, // Per inviare i cookie di sessione
     });
   }
