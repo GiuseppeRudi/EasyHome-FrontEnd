@@ -12,13 +12,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class AnnuncioDettaglioComponent implements OnInit {
   form: FormGroup;
+  immobileId!: number;
   latitudine: number | null = null;
   longitudine: number | null = null;
   markerPosition: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 }; // Centro mappa
   zoom: number = 14; // Zoom della mappa
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private route:ActivatedRoute) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       tipo: ['Vendita', Validators.required],
@@ -37,6 +38,10 @@ export class AnnuncioDettaglioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.immobileId = Number(params.get('id'));
+      console.log('ID immobile ricevuto:', this.immobileId);});
+
     // Questo metodo viene chiamato ogni volta che il componente viene caricato o aggiornato
     this.latitudine = parseFloat(this.form.value.latitudine);
     this.longitudine = parseFloat(this.form.value.longitudine);
