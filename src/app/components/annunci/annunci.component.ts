@@ -1,39 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {Immobile} from '../../model/Immobile';
-import {ServiceService} from '../../service/service.service';
+import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../../service/service.service';
+import {ImmobileMinimal} from '../../model/ImmobileMinimal';
 
 @Component({
   selector: 'app-annunci',
   standalone: false,
   templateUrl: './annunci.component.html',
-  styleUrls: ['./annunci.component.css'] // Nota: il nome corretto è style**s**Url
+  styleUrls: ['./annunci.component.css']
 })
-export class AnnunciComponent  implements  OnInit{
-  immobili: Immobile[] = [];
+export class AnnunciComponent implements OnInit {
+  immobiliminimal: ImmobileMinimal[] = [];
 
   constructor(private service: ServiceService) {}
 
   ngOnInit() {
-    // Controllo se ci sono dati salvati in LocalStorage
     const cachedImmobili = localStorage.getItem('immobili');
     if (cachedImmobili) {
-      this.immobili = JSON.parse(cachedImmobili);
-      console.log('Dati caricati da LocalStorage:', this.immobili);
+      this.immobiliminimal = JSON.parse(cachedImmobili);
+      console.log('Dati caricati da LocalStorage:', this.immobiliminimal);
     }
 
-    // Chiamata al servizio per ottenere gli immobili
     this.service.getImmobiliObservable().subscribe(data => {
       console.log('Dati ricevuti dal backend:', data);
 
       if (data && data.length > 0) {
-        this.immobili = data;
-        localStorage.setItem('immobili', JSON.stringify(this.immobili));
-        console.log('Dati salvati in LocalStorage:', localStorage.getItem('immobili'));
+        this.immobiliminimal = data;
+        localStorage.setItem('immobili', JSON.stringify(this.immobiliminimal));
       }
     });
   }
 
-
-
-
+  getImageSrc(immobile: ImmobileMinimal): string {
+    return immobile.immagine ? `data:image/jpeg;base64,${immobile.immagine}` : 'assets/no-image.png';
+  }
 }

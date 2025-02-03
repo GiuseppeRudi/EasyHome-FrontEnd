@@ -165,7 +165,7 @@ export class HomeComponent {
 
 
   seeResults(): void {
-    this.service.getImmobili(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
+    this.service.getImmobiliMinimal(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
     this.router.navigate(['/annunci']); // Naviga direttamente
   }
 

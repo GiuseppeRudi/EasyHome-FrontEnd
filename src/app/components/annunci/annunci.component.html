@@ -7,29 +7,28 @@
   <h2 class="text-center mb-4">🏡 Annunci Disponibili</h2>
 
   <!-- Mostra un messaggio se non ci sono annunci -->
-  <div *ngIf="immobili.length === 0" class="alert alert-warning text-center">
+  <div *ngIf="immobiliminimal.length === 0" class="alert alert-warning text-center">
     Nessun annuncio trovato. Prova a modificare i filtri di ricerca.
   </div>
 
   <!-- Lista degli immobili -->
   <div class="row justify-content-center">
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let immobile of immobili">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let immobile of immobiliminimal">
       <div class="card shadow-lg h-100">
 
         <!-- Immagine Annuncio -->
-        <img [src]="immobile ? immobile : 'assets/no-image.png'"
+        <img [src]="getImageSrc(immobile)"
              class="card-img-top immagine-annuncio"
              alt="Immagine immobile">
 
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ immobile.nome }}</h5>
-          <p class="card-text">{{ immobile.descrizione }}</p>
+          <p class="card-text">Prezzo: €{{ immobile.prezzo | number:'1.0-0' }}</p>
 
           <ul class="dettagli-annuncio">
-            <li><strong>Prezzo:</strong> €{{ immobile.prezzo | number:'1.0-0' }}</li>
             <li><strong>Tipo:</strong> {{ immobile.tipo }}</li>
             <li><strong>Categoria:</strong> {{ immobile.categoria }}</li>
-            <li><strong>Provincia:</strong> {{ immobile.provincia }}</li>
+            <li><strong>Superficie:</strong> {{ immobile.mq }} m²</li>
           </ul>
 
           <!-- Pulsante Dettagli -->

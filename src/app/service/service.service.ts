@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, catchError, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Immobile} from '../model/Immobile';
+import {ImmobileMinimal} from '../model/ImmobileMinimal';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
   private apiUrl = 'api';
 
-  private immobiliSubject = new BehaviorSubject<Immobile[]>([]); // Memorizza gli immobili
+  private immobiliSubject = new BehaviorSubject<ImmobileMinimal[]>([]); // Memorizza gli immobili
   immobili$ = this.immobiliSubject.asObservable(); // Espone gli immobili come Observable
 
   //CRISTINA
@@ -31,25 +32,26 @@ export class ServiceService {
   }*/
 
   //MODIFICATO
-  getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): void {
+  getImmobiliMinimal(tipo: string | null, affittoVendita: string | null, luogo: string | null): void {
     const params = {
       tipo: tipo || '',
       categoria: affittoVendita || '',
       provincia: luogo || ''
     };
 
-    this.http.get<Immobile[]>(`${this.apiUrl}/open/immobili`, {
+    this.http.get<ImmobileMinimal[]>(`${this.apiUrl}/open/immobili`, {
       params: params,
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     }).subscribe({
       next: (immobili) => {
-        console.log(immobili)
-        this.immobiliSubject.next(immobili); // Aggiorna il BehaviorSubject con i dati ricevuti
+        console.log("Dati ricevuti dal backend:", immobili);
+        this.immobiliSubject.next(immobili);
       },
       error: (err) => console.error("Errore nel caricamento degli immobili", err),
     });
   }
+
 
   //MIO
   /*getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): void {
@@ -71,7 +73,7 @@ export class ServiceService {
     });
   } */
 
-  getImmobiliObservable(): Observable<Immobile[]> {
+  getImmobiliObservable(): Observable<ImmobileMinimal[]> {
     return this.immobili$; // Espone gli immobili come Observable
   }
 
