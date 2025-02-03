@@ -1,10 +1,7 @@
 /* Contenitore principale con colori scuri e transizioni fluide */
 
 main{
-  background-image: url("/assets/agg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+ background-color: white;
 
 }
 /* Testo di avviso in rosso e più piccolo */
@@ -82,11 +79,10 @@ input:focus {
 
 
 .wizard-container {
-  max-width: 800px;
-  height: 80vh; /* Altezza responsive */
-  margin: 100px auto 100px auto  ;
-  padding: 40px;
-
+  max-width: 900px;
+  height: 100vh; /* Altezza responsive */
+  margin: 70px auto 70px auto  ;
+  padding: 30px;
   background: #121212; /* Colore di sfondo scuro */
   border-radius: 10px;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.6); /* Ombra più marcata */
