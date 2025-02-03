@@ -33,8 +33,6 @@ export class NavbarComponent implements OnInit{
 
   constructor( private dialog: MatDialog, private router: Router, private dialogService: DialogService,private service: ServiceService) {}
 
-
-
   openDialogWithPrevent(event: Event, dialogTemplate: TemplateRef<any>) {
     event.preventDefault();
     this.closeDialog();
@@ -72,6 +70,11 @@ export class NavbarComponent implements OnInit{
     });
   }
 
+  notifiche() {
+    if(this.username!=null) this.service.getMessaggiById(this.username);
+    this.router.navigate(['/messaggi']);
+  }
+
   openLoginDialog(): void {
     this.dialog.closeAll();
     this.dialogService.openDialog(AuthComponent);
@@ -81,7 +84,8 @@ export class NavbarComponent implements OnInit{
 
   // Logout dell'utente
   logout(): void {
-    sessionStorage.clear(); // Resetta i dati dell'utente
+    sessionStorage.clear();
+    localStorage.clear();
     this.userRole = null;
     this.logged = false;
     this.username = null;

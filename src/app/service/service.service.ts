@@ -14,6 +14,9 @@ export class ServiceService {
   private immobiliSubject = new BehaviorSubject<Immobile[]>([]); // Memorizza gli immobili
   immobili$ = this.immobiliSubject.asObservable(); // Espone gli immobili come Observable
 
+  private messaggiSubject = new BehaviorSubject<any[]>([]);
+  messaggi$ = this.messaggiSubject.asObservable();
+
   //CRISTINA
   /*getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): Observable<Immobile[]> {
     const params = {
@@ -75,6 +78,10 @@ export class ServiceService {
     return this.immobili$; // Espone gli immobili come Observable
   }
 
+  getMessaggiObservable(): Observable<any[]> {
+    return this.messaggi$; // Espone gli immobili come Observable
+  }
+
 
   addAnnuncio(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/immobili/createImmobile`, formData, {
@@ -82,7 +89,7 @@ export class ServiceService {
     });
   }
   addRecensione(formData: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/createRecensione`, formData, {
+    return this.http.post(`${this.apiUrl}/auth/recensioni/createRecensione`, formData, {
       withCredentials: true
     });
   }
@@ -101,9 +108,6 @@ export class ServiceService {
       }
     });
   }
-
-
-
 
   getUsers(): Observable<{ username: string; role: string }[]> {
     return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/open/users`);
@@ -135,8 +139,10 @@ export class ServiceService {
       })
     );
   }
+
+
   contattaVenditore(form: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/createMessaggio`, form, {
+    return this.http.post(`${this.apiUrl}/auth/messaggi/createMessaggio`, form, {
       withCredentials: true
     })
   }
@@ -146,7 +152,16 @@ export class ServiceService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-
-
+  getMessaggiById(username: string): void {
+    this.http.get<any>(`${this.apiUrl}/auth/${username}/messaggi`, {
+      withCredentials: true
+    }).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.messaggiSubject.next(response);
+      },
+      error: (err) => console.error("GetMessaggiById doesn't work", err),
+    });
+  }
 }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceService } from '../../service/service.service';
@@ -10,8 +10,9 @@ import { ServiceService } from '../../service/service.service';
   standalone: false
 })
 export class RecensioneComponent {
+  @Input() immobileId!: number;
+  username: string | null = '';
   form: FormGroup;
-  passoAttuale: number = 1;
   rating: number = 0; // Valore del rating delle stelle
   descrizione: string = ''; // Descrizione della recensione
 
@@ -34,6 +35,12 @@ export class RecensioneComponent {
       const formData = new FormData();
       formData.append('rating', this.form.get('rating')?.value.toString());
       formData.append('descrizione', this.form.get('descrizione')?.value);
+      formData.append('idImmobile', this.immobileId.toString());
+
+      this.username = sessionStorage.getItem('username');
+
+      if(this.username!=null) formData.append('acquirente', this.username);
+      console.log('Form Submitted', formData.keys());
 
       // Chiamata al servizio per inviare la recensione
       this.service.addRecensione(formData).subscribe({

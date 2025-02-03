@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-messaggi',
@@ -7,29 +8,30 @@ import { Component } from '@angular/core';
   templateUrl: './messaggi.component.html',
   styleUrl: './messaggi.component.css'
 })
-export class MessaggiComponent {
+export class MessaggiComponent implements OnInit {
+  constructor(private service: ServiceService) {}
 
+  messages: any[] = [];
 
-  messages: any[] = [
-    {
-      title: 'Messaggio 1',
-      username: 'utente1',
-      propertyName: 'Villa Mare',
-      description: 'Messaggio relativo alla villa',
-      email: 'utente1@example.com',
-      phone: '123456789',
-      expanded: false
-    },
-    {
-      title: 'Messaggio 2',
-      username: 'utente2',
-      propertyName: 'Appartamento Città',
-      description: 'Messaggio relativo all\'appartamento',
-      email: 'utente2@example.com',
-      phone: '987654321',
-      expanded: false
+  ngOnInit() {
+    // Controllo se ci sono dati salvati in LocalStorage
+    const cachedMessaggi = localStorage.getItem('messaggi');
+    if (cachedMessaggi) {
+      this.messages = JSON.parse(cachedMessaggi);
+      console.log('Dati caricati da LocalStorage:', this.messages);
     }
-    ];
+
+    this.service.getMessaggiObservable().subscribe(data => {
+      console.log('Dati ricevuti dal backend:', data);
+
+      if (data && data.length > 0) {
+        this.messages = data;
+        localStorage.setItem('messaggi', JSON.stringify(this.messages));
+        console.log('Dati salvati in LocalStorage:', localStorage.getItem('messaggi'));
+      }
+    });
+  }
+
   toggleExpand(message: any) {
     message.expanded = !message.expanded;
   }
