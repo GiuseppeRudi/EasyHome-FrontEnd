@@ -25,7 +25,6 @@
     </ul>
   </div>
 </ng-template>
-<!-- Template per "Luogo" -->
 <ng-template #luogoTemplate let-dialogRef="dialogRef">
   <div class="dialog-map-container">
     <div class="dialog-container-luogo">
@@ -33,22 +32,29 @@
       <ul class="options-list">
         <li *ngFor="let city of places"
             class="option-item"
-            (click)="selectLuogo(dialogRef, city.name, city.coordinates)"
-            (mouseenter)="onMouseEnter(city)">
+            (click)="selectLuogo(city.name, city.coordinates,city.zoom)"
+            [class.selected]="selectedLuogoTemp === city.name">
           {{ city.name }}
         </li>
       </ul>
+
       <div class="map-container">
-        <!-- Aggiungi la mappa qui separatamente -->
         <google-map [center]="center" [zoom]="zoom">
-          <map-marker *ngFor="let marker of markers"
+          <map-marker *ngFor="let marker of filteredMarkers"
                       [position]="marker.coordinates">
           </map-marker>
         </google-map>
       </div>
+
+      <!-- Bottone per confermare la selezione -->
+      <button mat-button (click)="confirmSelection(dialogRef)">Conferma</button>
     </div>
   </div>
 </ng-template>
+
+
+
+
 
 
 
