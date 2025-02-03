@@ -34,10 +34,11 @@ const routes: Routes = [
   { path: 'recensione', component:  RecensioneComponent},
   { path: 'aste', component:  AsteComponent},
   { path: 'contattavenditore', component:  ContattavenditoreComponent},
+  { path: '403', component: ErrorpageComponent, data: { errorCode: 403 } },
   { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
   { path: 'annunci/:id', component: AnnuncioDettaglioComponent },
   { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } },
-  { path: '403', component: ErrorpageComponent, data: { errorCode: 404 } }
+
 
 ];
 

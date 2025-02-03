@@ -10,7 +10,20 @@ main{
   font-size: 12px;
   font-weight: bold;
   margin-left: 10px;
+}.remove-button {
+   background-color: red;
+   color: white;
+   border: none;
+   padding: 5px;
+   cursor: pointer;
+   font-size: 14px;
+   margin-top: 5px;
+ }
+
+.remove-button:hover {
+  background-color: darkred;
 }
+
 /* Stile generale per la mappa */
 .google-map-container {
   position: relative;

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ServiceService } from '../../service/service.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-adminpage',
@@ -20,7 +21,7 @@ export class AdminpageComponent implements OnInit {
   changeUserTypeForm: FormGroup;
   banUserForm: FormGroup;
 
-  constructor(
+  constructor(private navbar: NavbarComponent,
     private router: Router,
     private authService: AuthService,
     private service: ServiceService
@@ -43,9 +44,8 @@ export class AdminpageComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    sessionStorage.clear();
-    this.router.navigate(['/']);
+
+    this.navbar.logout();
   }
 
   // Carica la lista utenti con ruoli
@@ -106,10 +106,4 @@ export class AdminpageComponent implements OnInit {
     });
   }
 
-
-  // Metodo per bannare un utente
-  onBanUser() {
-    console.log("Ban utente:", this.banUserForm.value);
-    // Qui puoi chiamare un'API per bannare l'utente
-  }
 }
