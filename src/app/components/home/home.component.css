@@ -120,7 +120,7 @@ body {
 .search-section form {
   display: flex;
   flex-direction: column;
-  width: 300px;  /* Larghezza del form */
+  width: 400px;
   align-items: center;
 }
 
@@ -227,29 +227,21 @@ body {
 }
 
 
-/* Aggiungiamo un'animazione per il dialog */
-.dialog-container {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transform: scale(0.9);
-  opacity: 0;
-  animation: scaleUp 0.3s ease-out forwards;
-}
+
+
 .dialog-container-luogo {
   background-color: #ffffff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transform: scale(0.9);
   opacity: 0;
   animation: scaleUp 0.3s ease-out forwards;
 }
 
+
 .map-container {
-  display: flex;
-  margin-top: 10px;
+  max-height: 500px;
   flex-direction: column;
   align-items: center;
 }
@@ -275,12 +267,10 @@ h2 {
 
 .options-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .option-item {
-  padding: 10px;
+  padding: 8px;
   margin: 5px 0;
   background-color: #f1f1f1;
   border-radius: 5px;
@@ -529,5 +519,51 @@ footer {
   .menu-group {
     text-align: center;
   }
+}
+
+/* Stile di base per il bottone */
+.bottone {
+  padding: 12px;
+  font-size: 13px;
+  text-transform: uppercase;
+  background-color: black; /* colore di base */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: block; /* Assicura che il bottone prenda tutta la larghezza disponibile */
+  margin-left: auto; /* Allinea il bottone a destra */
+  margin-right: 0; /* Assicura che il bottone sia allineato a destra */
+  text-align: right; /* Allineamento del testo a destra */
+}
+
+/* Animazione hover */
+.bottone:hover {
+  background-color: white; /* cambia colore di sfondo quando il mouse è sopra */
+  color: black; /* cambia il colore del testo quando hover */
+  transform: translateY(-3px); /* sposta il bottone verso l'alto */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* effetto ombra più pronunciato */
+  transition: all 0.3s ease;
+}
+
+/* Animazione al focus per l'accessibilità */
+.bottone:focus {
+  outline: none; /* rimuove il bordo di default del focus */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* effetto focus con ombra bianca */
+}
+
+/* Stile per il bottone disabilitato */
+.bottone:disabled {
+  background-color: #b0bec5; /* colore grigio per i bottoni disabilitati */
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Aggiunta di un effetto pulsante durante il clic */
+.bottone:active {
+  transform: scale(0.95); /* effetto di riduzione per il clic */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
