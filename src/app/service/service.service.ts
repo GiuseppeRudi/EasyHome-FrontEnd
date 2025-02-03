@@ -137,10 +137,19 @@ export class ServiceService {
       })
     );
   }
+  contattaVenditore(form: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/createMessaggio`, form, {
+      withCredentials: true
+    })
+  }
 
 
   getAnnuncioById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  getMarkers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/markers`);
   }
 
 

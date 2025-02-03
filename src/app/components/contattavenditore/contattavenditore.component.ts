@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-contattavenditore',
@@ -8,19 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   standalone:false
 })
 export class ContattavenditoreComponent {
-  @Input() codiceAnnuncio: string = '';
-  @Input() nomeVenditore: string = '';
-
+  @Input() immobileId!: number;
   contactForm: FormGroup;
   showModal: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private service: ServiceService) {
     this.contactForm = this.fb.group({
-      messaggio: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required]],
-      nome: ['', [Validators.required]],
-      cognome: ['', [Validators.required]],
+      oggetto: ['', [Validators.required]],
+      descrizione: ['']
     });
   }
 
@@ -33,9 +29,30 @@ export class ContattavenditoreComponent {
     this.contactForm.reset()
   }
 
+  username: string | null = '';
+
   onSubmit(): void {
     if (this.contactForm.valid) {
+      const formData = new FormData();
+
+      formData.append('oggetto', this.contactForm.get('oggetto')?.value);
+      formData.append('descrizione', this.contactForm.get('descrizione')?.value);
+      formData.append('idImmobile', this.immobileId.toString());
+
+      this.username = sessionStorage.getItem('username');
+
+      if(this.username!=null) formData.append('acquirente', this.username);
       console.log('Form Submitted', this.contactForm.value);
+
+      this.service.contattaVenditore(formData).subscribe({
+        next: (response) => {
+          alert('Annuncio aggiunto con successo!');
+        },
+        error: (error) => {
+          console.error('Errore:', error);
+          alert("Errore durante l'invio del messaggio.");
+        }
+      })
       this.closeModal();  // Chiude la modale dopo l'invio
     } else {
       console.log('Form is invalid');

@@ -20,6 +20,7 @@ export class AnnunciComponent implements OnInit {
       console.log('Dati caricati da LocalStorage:', this.immobiliminimal);
     }
 
+    // Chiamata al servizio per ottenere gli immobili
     this.service.getImmobiliObservable().subscribe(data => {
       console.log('Dati ricevuti dal backend:', data);
 
