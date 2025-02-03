@@ -28,7 +28,7 @@
 <ng-template #luogoTemplate let-dialogRef="dialogRef">
   <div class="dialog-map-container">
     <div class="dialog-container-luogo">
-      <h2>Seleziona Provincia</h2>
+
       <ul class="options-list">
         <li *ngFor="let city of places"
             class="option-item"
@@ -37,7 +37,7 @@
           {{ city.name }}
         </li>
       </ul>
-
+      <button class="bottone" (click)="confirmSelection(dialogRef)">Conferma</button>
       <div class="map-container">
         <google-map [center]="center" [zoom]="zoom">
           <map-marker *ngFor="let marker of filteredMarkers"
@@ -46,8 +46,7 @@
         </google-map>
       </div>
 
-      <!-- Bottone per confermare la selezione -->
-      <button mat-button (click)="confirmSelection(dialogRef)">Conferma</button>
+
     </div>
   </div>
 </ng-template>
