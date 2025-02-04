@@ -18,6 +18,8 @@ import {UserRole} from './auth/user-role';
 import {CookiesComponent} from './components/cookies/cookies.component';
 import {PrivacyComponent} from './components/privacy/privacy.component';
 import {TerminiecondizioniComponent} from './components/terminiecondizioni/terminiecondizioni.component';
+import {ModificaComponent} from './components/modifica/modifica.component';
+import {ModificaDettaglioComponent} from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // La home page
@@ -25,6 +27,7 @@ const routes: Routes = [
   { path: 'contacts', component: ContactsComponent },  //pagina contatti
   { path: 'annunci', component: AnnunciComponent },
   { path: 'aggiungi_annuncio', component: AggiungiComponent, canActivate :[authGuard], data: { type: ["venditore"] } },
+  { path: 'modifica', component: ModificaComponent, canActivate :[authGuard], data: { type: ["venditore"] } },
   { path: 'login', component: AuthComponent },
   { path: 'messaggi', component: MessaggiComponent, canActivate :[authGuard], data: { type: ["venditore"] } },
   { path: 'cookies', component: CookiesComponent },
@@ -37,6 +40,7 @@ const routes: Routes = [
   { path: '403', component: ErrorpageComponent, data: { errorCode: 403 } },
   { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
   { path: 'annunci/:id', component: AnnuncioDettaglioComponent, canActivate :[authGuard] },
+  { path: 'modifica-dettaglio/:id', component: ModificaDettaglioComponent, canActivate :[authGuard] },
   { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } }
 
 ];

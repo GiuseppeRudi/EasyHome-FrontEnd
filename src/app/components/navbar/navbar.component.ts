@@ -62,12 +62,8 @@ export class NavbarComponent implements OnInit{
   }
 
   modificaAnnuncio() {
-    if(this.username!=null) this.service.getImmobiliUtente(this.username).subscribe({
-      next: (response) => {
-          console.log(response)
-      },
-      error: (err) => console.error("GetImmobiliUtente doesn't work", err),
-    });
+    if(this.username!=null) this.service.getImmobiliMinimalByUsername(this.username);
+    this.navigateTo('/modifica');
   }
 
   notifiche() {

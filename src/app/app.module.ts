@@ -32,6 +32,8 @@ import { AnnuncioDettaglioComponent } from './components/annunci/annuncio-dettag
 import { CookiesComponent } from './components/cookies/cookies.component';
 import { TerminiecondizioniComponent } from './components/terminiecondizioni/terminiecondizioni.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
+import { ModificaComponent } from './components/modifica/modifica.component';
+import { ModificaDettaglioComponent } from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
     CookiesComponent,
     TerminiecondizioniComponent,
     PrivacyComponent,
+    ModificaComponent,
+    ModificaDettaglioComponent,
 
 
 ],

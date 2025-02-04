@@ -1,0 +1,46 @@
+<header>
+  <navbar></navbar>
+</header>
+
+<!-- Titolo Pagina -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">🏡 Annunci Disponibili</h2>
+
+  <!-- Mostra un messaggio se non ci sono annunci -->
+  <div *ngIf="modificaMinimal.length === 0" class="alert alert-warning text-center">
+    Nessun annuncio trovato. Prova a modificare i filtri di ricerca.
+  </div>
+
+  <!-- Lista degli immobili -->
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let immobile of modificaMinimal">
+      <div class="card shadow-lg h-100">
+
+        <div class="galleria">
+          <img class="galleria-img" [src]="getImageSrc(immobile.immagine)" alt="Immagine immobile" (error)="onImageError($event)">
+        </div>
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ immobile.nome }}</h5>
+          <p class="card-text">Prezzo: €{{ immobile.prezzo | number:'1.0-0' }}</p>
+
+          <ul class="dettagli-annuncio">
+            <li><strong>Tipo:</strong> {{ immobile.tipo }}</li>
+            <li><strong>Categoria:</strong> {{ immobile.categoria }}</li>
+            <li><strong>Superficie:</strong> {{ immobile.mq }} m²</li>
+          </ul>
+
+          <!-- Pulsante Dettagli -->
+          <div class="mt-auto text-center">
+            <a [routerLink]="['/modifica-dettaglio', immobile.id]"  class="btn btn-primary">Dettagli</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-5">
+  <app-footer></app-footer>
+</footer>
