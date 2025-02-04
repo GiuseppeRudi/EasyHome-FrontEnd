@@ -1,0 +1,122 @@
+/* Stile di base per il container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Stile per il form */
+form {
+  display: grid;
+  gap: 20px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #007bff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+button[type="submit"]:focus {
+  outline: none;
+}
+
+/* Stile per la sezione immagini */
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #0056b3;
+}
+
+/* Messaggi di errore */
+.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.ng-valid.ng-touched {
+  border-color: green;
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

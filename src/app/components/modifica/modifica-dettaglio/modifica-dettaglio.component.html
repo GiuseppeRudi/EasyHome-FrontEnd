@@ -1,0 +1,78 @@
+<navbar></navbar>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Modifica Immobile</h2>
+
+  <form [formGroup]="modificaForm" (ngSubmit)="modificaAnnuncio()">
+    <div>
+      <label for="nome">Nome</label>
+      <input id="nome" formControlName="nome" />
+    </div>
+
+    <div>
+      <label for="tipo">Tipo</label>
+      <input id="tipo" formControlName="tipo" />
+    </div>
+
+    <div>
+      <label for="descrizione">Descrizione</label>
+      <textarea id="descrizione" formControlName="descrizione"></textarea>
+    </div>
+
+    <div>
+      <label for="prezzo">Prezzo</label>
+      <input id="prezzo" formControlName="prezzo" type="number" />
+    </div>
+
+    <div>
+      <label for="mq">Metri quadri</label>
+      <input id="mq" formControlName="mq" type="number" />
+    </div>
+
+    <div>
+      <label for="camere">Camere</label>
+      <input id="camere" formControlName="camere" type="number" />
+    </div>
+
+    <div>
+      <label for="bagni">Bagni</label>
+      <input id="bagni" formControlName="bagni" type="number" />
+    </div>
+
+    <div>
+      <label for="anno">Anno</label>
+      <input id="anno" formControlName="anno" type="number" />
+    </div>
+
+    <div>
+      <label for="etichetta">Etichetta</label>
+      <input id="etichetta" formControlName="etichetta" />
+    </div>
+
+    <div>
+      <label for="provincia">Provincia</label>
+      <input id="provincia" formControlName="provincia" />
+    </div>
+
+    <!-- Sezione immagini -->
+    <!-- Sezione immagini -->
+    <div *ngIf="immobileDetails?.immagini?.length > 0">
+      <label>Immagini attuali:</label>
+      <div *ngFor="let immagine of immobileDetails.immagini">
+        <img [src]="getImageSrc(immagine)" alt="Immobile immagine" class="immagine-preview" />
+      </div>
+    </div>
+
+
+    <div>
+      <label for="fileInput">Modifica immagini</label>
+      <input id="fileInput" type="file" (change)="onFileSelected($event)" multiple />
+    </div>
+
+    <button type="submit">Salva modifiche</button>
+  </form>
+</div>
+
+  <footer>
+    <app-footer></app-footer>
+  </footer>

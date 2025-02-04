@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, catchError, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Immobile} from '../model/Immobile';
 import {ImmobileMinimal} from '../model/ImmobileMinimal';
@@ -19,6 +19,9 @@ export class ServiceService {
   aste$ = this.asteSubject.asObservable(); // Espone gli immobili come Observable
 
 
+  private modificaSubject = new BehaviorSubject<ImmobileMinimal[]>([]); // Memorizza gli immobili
+  modifica$ = this.modificaSubject.asObservable(); // Espone gli immobili come Observable
+
   private messaggiSubject = new BehaviorSubject<any[]>([]);
   messaggi$ = this.messaggiSubject.asObservable();
 
@@ -26,7 +29,7 @@ export class ServiceService {
     const params = {
       tipo: tipo || '',
       categoria: affittoVendita || '',
-      provincia: luogo || '',
+      provincia: luogo || ''
     };
 
     this.http.get<ImmobileMinimal[]>(`${this.apiUrl}/open/immobili`, {
@@ -52,6 +55,10 @@ export class ServiceService {
 
   getMessaggiObservable(): Observable<any[]> {
     return this.messaggi$; // Espone gli immobili come Observable
+  }
+
+  getModificaObservable(): Observable<any[]> {
+    return this.modifica$; // Espone gli immobili come Observable
   }
 
 
@@ -153,5 +160,25 @@ export class ServiceService {
       error: (err) => console.error("GetMessaggiById doesn't work", err),
     });
   }
+
+  updateImmobile(immobileId: number, formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/immobili/updateImmobile/${immobileId}`, formData, {
+      withCredentials: true
+    });
+  }
+
+  getImmobiliMinimalByUsername(username: string): void {
+    this.http.get<ImmobileMinimal[]>(`${this.apiUrl}/auth/immobili/${username}`, {
+      withCredentials: true
+    }).subscribe({
+      next: (immobili) => {
+        console.log("Dati ricevuti dal backend:", immobili);
+        this.modificaSubject.next(immobili);
+      },
+      error: (err) => console.error("Errore nel caricamento degli immobili", err),
+    });
+  }
+
+
 }
 

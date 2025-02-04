@@ -1,4 +1,5 @@
 export interface Immobile {
+  immagine: string;
   id: number;
   nome: string;
   tipo?: string;         // Può essere null
