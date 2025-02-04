@@ -31,12 +31,12 @@ export class HomeComponent implements  OnInit{
     zoom: number;
     coordinates: LatLngLiteral;
   }[] = [
-    { name: 'Tutte', zoom:8, coordinates: { lat: 38.500, lng: 16.000 } },
-    { name: 'Cosenza', zoom:12,coordinates: { lat: 39.305, lng: 16.250 } },
-    { name: 'Catanzaro',zoom:12, coordinates: { lat: 38.9092366, lng: 16.585428 } },
-    { name: 'Reggio Calabria',zoom:12 ,coordinates: { lat: 38.110, lng: 15.650 } },
-    { name: 'Vibo Valentia',zoom:12, coordinates: { lat: 38.679, lng: 16.108 } },
-    { name: 'Crotone',zoom:12, coordinates: { lat: 39.083, lng: 17.133 } },
+    { name: 'Tutte', zoom:8, coordinates: { lat: 38.950, lng: 16.400 } },
+    { name: 'Cosenza', zoom:10,coordinates: { lat: 39.305, lng: 16.250 } },
+    { name: 'Catanzaro',zoom:10, coordinates: { lat: 38.9092366, lng: 16.585428 } },
+    { name: 'Reggio Calabria',zoom:10 ,coordinates: { lat: 38.110, lng: 15.650 } },
+    { name: 'Vibo Valentia',zoom:10, coordinates: { lat: 38.679, lng: 16.108 } },
+    { name: 'Crotone',zoom:10, coordinates: { lat: 39.083, lng: 17.133 } },
   ];
 
 
@@ -88,8 +88,6 @@ export class HomeComponent implements  OnInit{
       width: '800px'
     });
   }
-
-
 
 
   // Controlla che la selezione sia completa

@@ -38,15 +38,15 @@
           {{ city.name }}
         </li>
       </ul>
-      <button class="bottone" (click)="confirmSelection(dialogRef)">Conferma</button>
-      <div class="map-container">
+
+      <div class="map-container mt-2">
         <google-map [center]="center" [zoom]="zoom">
           <map-marker *ngFor="let marker of filteredMarkers"
                       [position]="marker.coordinates">
           </map-marker>
         </google-map>
       </div>
-
+      <button class="bottone mt-2" (click)="confirmSelection(dialogRef)">Conferma</button>
 
     </div>
   </div>

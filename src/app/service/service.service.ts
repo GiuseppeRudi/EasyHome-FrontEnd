@@ -119,7 +119,7 @@ export class ServiceService {
 
 
   getMarkers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/markers`);
+    return this.http.get<any[]>(`${this.apiUrl}/open/markers`);
   }
 
   getImageSrc(imagePath: string): string {
