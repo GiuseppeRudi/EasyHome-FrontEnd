@@ -10,6 +10,7 @@ import {ServiceService} from '../../service/service.service';
 })
 export class ContattavenditoreComponent {
   @Input() immobileId!: number;
+  @Input() venditore!: string;
   contactForm: FormGroup;
   showModal: boolean = false;
 
@@ -32,14 +33,14 @@ export class ContattavenditoreComponent {
   username: string | null = '';
 
   onSubmit(): void {
-    if (this.contactForm.valid) {
+    this.username = sessionStorage.getItem('username');
+    if (this.contactForm.valid && this.username!=this.venditore) {
       const formData = new FormData();
 
       formData.append('oggetto', this.contactForm.get('oggetto')?.value);
       formData.append('descrizione', this.contactForm.get('descrizione')?.value);
       formData.append('idImmobile', this.immobileId.toString());
 
-      this.username = sessionStorage.getItem('username');
 
       if(this.username!=null) formData.append('acquirente', this.username);
       console.log('Form Submitted', this.contactForm.value);
