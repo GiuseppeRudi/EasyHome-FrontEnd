@@ -1,72 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ServiceService } from '../../service/service.service';
+import { ImmobileMinimal } from '../../model/ImmobileMinimal';
 
 @Component({
   selector: 'app-aste',
+  standalone: false,
   templateUrl: './aste.component.html',
-  styleUrls: ['./aste.component.css'],
-  standalone:false
+  styleUrls: ['./aste.component.css']
 })
 export class AsteComponent implements OnInit {
+  aste: ImmobileMinimal[] = [];
 
-  auctions = [
-    {
-      id: 1,
-      title: 'Villa sul Mare',
-      location: 'Calabria, Italia',
-      image: 'https://via.placeholder.com/300x200?text=Villa+Mare',
-      description: 'Una bellissima villa fronte mare, con giardino e piscina.',
-      oldPrice: 800000,
-      currentPrice: 750000,
-    },
-    {
-      id: 2,
-      title: 'Appartamento in Città',
-      location: 'Cosenza, Italia',
-      image: 'https://via.placeholder.com/300x200?text=Appartamento+In+Città',
-      description: 'Appartamento moderno nel centro di Cosenza, con 3 camere e 2 bagni.',
-      oldPrice: 300000,
-      currentPrice: 290000,
-    },
-    {
-      id: 3,
-      title: 'Rustico in Montagna',
-      location: 'Sila, Calabria',
-      image: 'https://via.placeholder.com/300x200?text=Rustico+Montagna',
-      description: 'Rustico in montagna, ideale per gli amanti della natura e della tranquillità.',
-      oldPrice: 120000,
-      currentPrice: 115000,
+  constructor(private service: ServiceService) {}
+
+  ngOnInit() {
+
+    this.service.getImmobiliMinimal('Tutti','Aste','Tutte');
+
+    const cachedAste = sessionStorage.getItem('aste');
+    if (cachedAste) {
+      this.aste = JSON.parse(cachedAste);
+      console.log('Dati caricati da sessionStorage:', this.aste);
     }
-  ];
-  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    // Recupera i dati delle aste dal backend
-    this.getAuctions();
-  }
+    // Chiamata al servizio per ottenere gli immobili
+    this.service.getImmobiliObservable().subscribe(data => {
+      console.log('Dati ricevuti dal backend:', data);
 
-  getAuctions(): void {
-    this.http.get<any[]>('http://your-backend-api/open/aste').subscribe((data) => {
-      this.auctions = data;
+      if (data && data.length > 0) {
+        this.aste = data;
+        sessionStorage.setItem('immobili', JSON.stringify(this.aste));
+      }
     });
   }
 
-  placeBid(auction: any): void {
-    const bidData = {
-      auctionId: auction.id,
-      currentBid: auction.currentPrice,
-    };
+  getImageSrc(imagePath: string): string {
+    return this.service.getImageSrc(imagePath);
+  }
 
-
-    this.http.post('http://your-backend-api/open/aste', bidData).subscribe(
-      (response) => {
-        console.log('Asta partecipata', response);
-        alert('Hai partecipato all\'asta!');
-      },
-      (error) => {
-        console.error('Errore durante l\'invio dei dati', error);
-        alert('Errore nel partecipare all\'asta');
-      }
-    );
+  onImageError(event: Event) {
+    (event.target as HTMLImageElement).src = 'assets/no-image.png';
   }
 }

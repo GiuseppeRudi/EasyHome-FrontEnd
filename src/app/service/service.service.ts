@@ -15,6 +15,10 @@ export class ServiceService {
   private immobiliSubject = new BehaviorSubject<ImmobileMinimal[]>([]); // Memorizza gli immobili
   immobili$ = this.immobiliSubject.asObservable(); // Espone gli immobili come Observable
 
+  private asteSubject = new BehaviorSubject<ImmobileMinimal[]>([]); // Memorizza gli immobili
+  aste$ = this.asteSubject.asObservable(); // Espone gli immobili come Observable
+
+
   private messaggiSubject = new BehaviorSubject<any[]>([]);
   messaggi$ = this.messaggiSubject.asObservable();
 
@@ -22,7 +26,7 @@ export class ServiceService {
     const params = {
       tipo: tipo || '',
       categoria: affittoVendita || '',
-      provincia: luogo || ''
+      provincia: luogo || '',
     };
 
     this.http.get<ImmobileMinimal[]>(`${this.apiUrl}/open/immobili`, {
@@ -41,6 +45,11 @@ export class ServiceService {
   getImmobiliObservable(): Observable<ImmobileMinimal[]> {
     return this.immobili$; // Espone gli immobili come Observable
   }
+
+  getAsteObservable(): Observable<ImmobileMinimal[]> {
+    return this.aste$; // Espone gli immobili come Observable
+  }
+
   getMessaggiObservable(): Observable<any[]> {
     return this.messaggi$; // Espone gli immobili come Observable
   }

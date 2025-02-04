@@ -99,6 +99,7 @@ export class HomeComponent implements  OnInit{
     );
   }
   seeResults(): void {
+    console.log(this.selectedAffittoVendita);
     this.service.getImmobiliMinimal(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
     this.router.navigate(['/annunci']); // Naviga direttamente
   }
