@@ -1,3 +1,24 @@
+/* Contenitore delle immagini */
+.galleria {
+  display: flex;
+  justify-content: center; /* Centra le immagini orizzontalmente */
+}
+
+/* Immagine */
+.galleria-img {
+  width: 415px; /* Larghezza fissa per ogni immagine */
+  height: 400px; /* Altezza fissa per ogni immagine */
+  object-fit: cover; /* Assicura che l'immagine copra completamente l'area senza deformarsi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiungi ombra per un effetto più visibile */
+}
+
+/* Optional: Aggiungi un hover effect */
+.galleria-img:hover {
+  transform: scale(1.05); /* Aumenta leggermente l'immagine al passaggio del mouse */
+  transition: transform 0.3s ease;
+}
+
+
 /* Stile per il contenitore degli annunci */
 .annunci-container {
   max-width: 800px;

@@ -46,7 +46,7 @@ export class RecensioneComponent {
       this.service.addRecensione(formData).subscribe({
         next: (response) => {
           alert('Recensione inviata con successo!');
-          this.router.navigate(['/']);
+
         },
         error: (error) => {
           console.error('Errore durante l\'invio della recensione', error);
