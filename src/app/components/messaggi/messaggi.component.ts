@@ -15,10 +15,10 @@ export class MessaggiComponent implements OnInit {
 
   ngOnInit() {
     // Controllo se ci sono dati salvati in LocalStorage
-    const cachedMessaggi = localStorage.getItem('messaggi');
+    const cachedMessaggi = sessionStorage.getItem('messaggi');
     if (cachedMessaggi) {
       this.messages = JSON.parse(cachedMessaggi);
-      console.log('Dati caricati da LocalStorage:', this.messages);
+      console.log('Dati caricati da sessionStorage:', this.messages);
     }
 
     this.service.getMessaggiObservable().subscribe(data => {
@@ -26,8 +26,8 @@ export class MessaggiComponent implements OnInit {
 
       if (data && data.length > 0) {
         this.messages = data;
-        localStorage.setItem('messaggi', JSON.stringify(this.messages));
-        console.log('Dati salvati in LocalStorage:', localStorage.getItem('messaggi'));
+        sessionStorage.setItem('messaggi', JSON.stringify(this.messages));
+        console.log('Dati salvati in sessionStorage:', sessionStorage.getItem('messaggi'));
       }
     });
   }

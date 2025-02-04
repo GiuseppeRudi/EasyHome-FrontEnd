@@ -12,6 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const navbar = inject(NavbarComponent)
 
   const expectedRole:UserRole[] = route.data['requiredRoles']
+  const expectedType:string[] = route.data['type']
 
   return firstValueFrom(authService.getUser())
     .then(user => {
@@ -21,20 +22,22 @@ export const authGuard: CanActivateFn = (route, state) => {
       }
 
       if (user) {
-        if(!expectedRole){
+        if(!expectedRole && !expectedType){
           return true;
         }
 
-        if(expectedRole[0]==user.authorities[0].authority){
+        if(expectedRole && expectedRole[0]==user.authorities[0].authority){
           return true;
         }
+
+        if(expectedType && expectedType[0] == sessionStorage.getItem('userRole')){
+          return true;
+        }
+
         router.navigate([  "/403" ]);
       }
 
-      // never used
       return false;
     })
-    .catch(() => router.navigate([  "/login" ])
-    ); // Blocca l'accesso in caso di error
-
+    .catch(() => router.navigate([  "/" ])); // Blocca l'accesso in caso di error
 };

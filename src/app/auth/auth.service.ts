@@ -38,14 +38,14 @@ export class AuthService {
   }
 
 
-  logout(): Observable<void> {
-    console.log("performing logout");
-
-    return this.http.post<void>(`${this.apiUrl}/logout`, {}, {withCredentials: true})
-      .pipe(tap(() => {
-          this.currentUserSubject.next(null);
-        }
-      ));
+  logout() {
+    return this.http.post<void>(`${this.apiUrl}/logout`, {}, {withCredentials: true}).pipe(
+      switchMap(() => {
+        console.log("performing logout");
+        this.currentUserSubject.next(null);
+        return of(null);
+      })
+    );
   }
 
 
@@ -53,16 +53,17 @@ export class AuthService {
     if (this.currentUserSubject.value) {
       // Se l'utente è già presente, restituisci il valore
       return of(this.currentUserSubject.value);
-    }
 
+    }
 // Altrimenti, effettua una chiamata HTTP per recuperare l'utente
-    return this.http.get<any>(`/api/auth/v1/check-user`, {
+    return this.http.get<any>(`/${this.apiUrl}/open/check-user`, {
       withCredentials: true,
     }).pipe(
       switchMap((user) => {
+        console.log("AFF");
         // Se l'utente è autenticato, aggiorna il BehaviorSubject
         this.currentUserSubject.next(user);
-
+        console.log(this.currentUserSubject.value);
         return of(user);
       }),
       catchError(() => {

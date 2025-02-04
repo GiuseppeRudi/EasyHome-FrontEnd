@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ServiceService } from '../../service/service.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-adminpage',
@@ -23,7 +24,8 @@ export class AdminpageComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private service: ServiceService
+    private service: ServiceService,
+    private navbar: NavbarComponent
   ) {
     this.username = sessionStorage.getItem('username');
 
@@ -38,14 +40,17 @@ export class AdminpageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("prova");
     this.loadUserList();  // Carica la lista degli utenti
   }
 
   logout() {
-    this.authService.logout();
-    sessionStorage.clear();
-    this.router.navigate(['/']);
+    this.authService.logout().subscribe({
+      next: () => {
+        sessionStorage.clear();
+        this.router.navigate(['/']);
+      },
+      error: (err) => console.error('Errore nel recupero degli utenti:', err),
+    });
   }
 
   // Carica la lista utenti con ruoli
