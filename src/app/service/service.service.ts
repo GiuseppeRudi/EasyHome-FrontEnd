@@ -15,23 +15,7 @@ export class ServiceService {
   private immobiliSubject = new BehaviorSubject<ImmobileMinimal[]>([]); // Memorizza gli immobili
   immobili$ = this.immobiliSubject.asObservable(); // Espone gli immobili come Observable
 
-  //CRISTINA
-  /*getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): Observable<Immobile[]> {
-    const params = {
-      tipo: tipo || '',
-      categoria: affittoVendita || '',
-      provincia: luogo || ''
-    };
 
-    // Usando query params anziché path params, che è una pratica più comune nelle chiamate API
-    return this.http.get<Immobile[]>(`${this.apiUrl}/open/immobili`, {
-      params: params, // Query params
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true, // Se necessario inviare i cookie di sessione
-    });
-  }*/
-
-  //MODIFICATO
   getImmobiliMinimal(tipo: string | null, affittoVendita: string | null, luogo: string | null): void {
     const params = {
       tipo: tipo || '',
@@ -51,27 +35,6 @@ export class ServiceService {
       error: (err) => console.error("Errore nel caricamento degli immobili", err),
     });
   }
-
-
-  //MIO
-  /*getImmobili(tipo: string | null, affittoVendita: string | null, luogo: string | null): void {
-    const params = {
-      tipo: tipo || '',
-      categoria: affittoVendita || '',
-      provincia: luogo || ''
-    };
-
-    this.http.get<Immobile[]>(`${this.apiUrl}/open/immobili`, {
-      params: params,
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    }).subscribe({
-      next: (immobili) => {
-        this.immobiliSubject.next(immobili); // Aggiorna il BehaviorSubject con i dati ricevuti
-      },
-      error: (err) => console.error("Errore nel caricamento degli immobili", err),
-    });
-  } */
 
   getImmobiliObservable(): Observable<ImmobileMinimal[]> {
     return this.immobili$; // Espone gli immobili come Observable
@@ -143,10 +106,13 @@ export class ServiceService {
     })
   }
 
-
-  getAnnuncioById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  // Metodo per ottenere i dettagli di un immobile tramite ID
+  getImmobileById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/auth/dettaglio/${id}`, {
+      withCredentials:true
+    });
   }
+
 
   getMarkers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/markers`);
