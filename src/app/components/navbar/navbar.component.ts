@@ -87,6 +87,7 @@ export class NavbarComponent implements OnInit{
     this.username = null;
     this.removeModifyItem();
     this.router.navigate(['/']); // Torna alla home
+
   }
 
   ngOnInit(): void {

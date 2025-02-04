@@ -168,6 +168,20 @@ export class AggiungiComponent {
     }
   }
 
+  // Dentro il componente AggiungiComponent
+  rimuoviFoto(index: number) {
+    // Rimuove la foto dall'array fotoFiles
+    this.fotoFiles.splice(index, 1);
+
+    // Rimuove l'anteprima dell'immagine
+    this.anteprimaImmagini.splice(index, 1);
+
+
+    // Rimuove la foto dal controllo del form
+    this.form.get('foto')?.setValue(this.fotoFiles);
+  }
+
+
 
 
 

@@ -88,9 +88,11 @@
           <input id="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
 
           <!-- Anteprima delle immagini -->
+          <!-- Anteprima delle immagini -->
           <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
-            <div *ngFor="let file of anteprimaImmagini" class="preview-container">
+            <div *ngFor="let file of anteprimaImmagini; let i = index" class="preview-container">
               <img [src]="file" alt="Anteprima immagine" class="preview-img">
+              <button type="button" class="remove-button" (click)="rimuoviFoto(i)">Rimuovi</button>
             </div>
           </div>
         </div>

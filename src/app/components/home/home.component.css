@@ -120,7 +120,7 @@ body {
 .search-section form {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 300px;  /* Larghezza del form */
   align-items: center;
 }
 
@@ -227,21 +227,30 @@ body {
 }
 
 
-
-
-.dialog-container-luogo {
+/* Aggiungiamo un'animazione per il dialog */
+.dialog-container {
   background-color: #ffffff;
-  padding: 30px;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(0.9);
+  opacity: 0;
+  animation: scaleUp 0.3s ease-out forwards;
+}
+.dialog-container-luogo {
+
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: scale(0.9);
   opacity: 0;
   animation: scaleUp 0.3s ease-out forwards;
 }
 
-
 .map-container {
-  max-height: 500px;
+
+  margin-top: 5px;
   flex-direction: column;
   align-items: center;
 }
@@ -267,10 +276,11 @@ h2 {
 
 .options-list {
   list-style: none;
+
 }
 
 .option-item {
-  padding: 8px;
+  padding: 2px;
   margin: 5px 0;
   background-color: #f1f1f1;
   border-radius: 5px;
@@ -520,6 +530,7 @@ footer {
     text-align: center;
   }
 }
+
 
 /* Stile di base per il bottone */
 .bottone {
