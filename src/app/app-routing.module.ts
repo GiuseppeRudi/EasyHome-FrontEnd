@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },  // Pagina About
   { path: 'contacts', component: ContactsComponent },  //pagina contatti
   { path: 'annunci', component: AnnunciComponent },
-  { path: 'aggiungi_annuncio', component: AggiungiComponent },
+  { path: 'aggiungi_annuncio', component: AggiungiComponent, canActivate :[authGuard], data: { type: ["venditore"] } },
   { path: 'login', component: AuthComponent },
   { path: 'messaggi', component: MessaggiComponent },
   { path: 'cookies', component: CookiesComponent },
@@ -36,9 +36,8 @@ const routes: Routes = [
   { path: 'contattavenditore', component:  ContattavenditoreComponent},
   { path: '403', component: ErrorpageComponent, data: { errorCode: 403 } },
   { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
-  { path: 'annunci/:id', component: AnnuncioDettaglioComponent },
-  { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } },
-
+  { path: 'annunci/:id', component: AnnuncioDettaglioComponent, canActivate :[authGuard] },
+  { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } }
 
 ];
 

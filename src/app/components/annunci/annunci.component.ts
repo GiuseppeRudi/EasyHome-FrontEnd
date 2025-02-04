@@ -14,10 +14,10 @@ export class AnnunciComponent implements OnInit {
   constructor(private service: ServiceService) {}
 
   ngOnInit() {
-    const cachedImmobili = localStorage.getItem('immobili');
+    const cachedImmobili = sessionStorage.getItem('immobili');
     if (cachedImmobili) {
       this.immobiliminimal = JSON.parse(cachedImmobili);
-      console.log('Dati caricati da LocalStorage:', this.immobiliminimal);
+      console.log('Dati caricati da sessionStorage:', this.immobiliminimal);
     }
 
     // Chiamata al servizio per ottenere gli immobili
@@ -26,7 +26,7 @@ export class AnnunciComponent implements OnInit {
 
       if (data && data.length > 0) {
         this.immobiliminimal = data;
-        localStorage.setItem('immobili', JSON.stringify(this.immobiliminimal));
+        sessionStorage.setItem('immobili', JSON.stringify(this.immobiliminimal));
       }
     });
   }

@@ -39,13 +39,17 @@ export class AdminpageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("prova");
     this.loadUserList();  // Carica la lista degli utenti
   }
 
   logout() {
-
-    this.navbar.logout();
+    this.authService.logout().subscribe({
+      next: () => {
+        sessionStorage.clear();
+        this.router.navigate(['/']);
+      },
+      error: (err) => console.error('Errore nel recupero degli utenti:', err),
+    });
   }
 
   // Carica la lista utenti con ruoli

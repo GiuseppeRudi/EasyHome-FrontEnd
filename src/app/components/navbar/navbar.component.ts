@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, Injectable, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Injectable, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 import {AuthComponent} from '../auth/auth.component';
 
 import { DialogService} from '../../service/dialog.service';
 import {ServiceService} from '../../service/service.service';
+import {AuthService} from '../../auth/auth.service';
 
 
 @Component({
@@ -31,9 +31,7 @@ export class NavbarComponent implements OnInit{
     { label: 'Contatti', icon: 'contact_mail', route: '/contacts' },
   ];
 
-  constructor( private dialog: MatDialog, private router: Router, private dialogService: DialogService,private service: ServiceService) {}
-
-
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router, private dialogService: DialogService,private service: ServiceService) {}
 
   openDialogWithPrevent(event: Event, dialogTemplate: TemplateRef<any>) {
     event.preventDefault();
@@ -72,22 +70,30 @@ export class NavbarComponent implements OnInit{
     });
   }
 
+  notifiche() {
+    if(this.username!=null) this.service.getMessaggiById(this.username);
+    this.router.navigate(['/messaggi']);
+  }
+
   openLoginDialog(): void {
     this.dialog.closeAll();
     this.dialogService.openDialog(AuthComponent);
-
   }
 
 
   // Logout dell'utente
   logout(): void {
-    sessionStorage.clear(); // Resetta i dati dell'utente
-    this.userRole = null;
-    this.logged = false;
-    this.username = null;
-    this.removeModifyItem();
-    this.router.navigate(['/']); // Torna alla home
-
+    this.authService.logout().subscribe({
+      next: () => {
+        sessionStorage.clear();
+        this.userRole = null;
+        this.logged = false;
+        this.username = null;
+        this.removeModifyItem();
+        this.router.navigate(['/']);
+      },
+      error: (err) => console.error('Errore nel recupero degli utenti:', err),
+    });
   }
 
   ngOnInit(): void {
@@ -119,9 +125,9 @@ export class NavbarComponent implements OnInit{
   toggleRole() {
     this.isVenditore = !this.isVenditore; // Cambia il ruolo
     this.userRole = this.isVenditore ? 'venditore' : 'acquirente'; // Salva il nuovo ruolo
-    sessionStorage.setItem('userRole', this.userRole); // Salva il ruolo in sessionStorage
+    sessionStorage.setItem('userRole', this.userRole); // Salva il ruolo in localStorage
     console.log(this.isVenditore ? 'Venditore' : 'Acquirente');
-
+    window.location.reload();
     this.updateMenuItems();  // Aggiorna i menu
     //this.cdRef.detectChanges(); // Forza l'aggiornamento della vista
   }
