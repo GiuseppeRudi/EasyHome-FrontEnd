@@ -33,22 +33,8 @@ export class AnnunciComponent implements OnInit {
 
 
 
-  getImageSrc(immobile: ImmobileMinimal): string {
-    console.log(immobile.immagine);
-
-    if (immobile.immagine) {
-      // Estrai il folder e imageName dalla stringa immagine
-      const parts = immobile.immagine.split('/');
-      const folder = parts[0];
-      const folder1 = parts[1];   // La parte "36" (folder)
-      const imageName = parts[2]; // La parte "1737447259840.jpg" (imageName)
-
-      // Restituisci l'URL per la richiesta al back-end
-      return `/api/open/images/${folder}/${folder1}/${imageName}`;
-    } else {
-      // Restituisci un'immagine di fallback
-      return 'assets/no-image.png';
-    }
+  getImageSrc(imagePath: string): string {
+    return this.service.getImageSrc(imagePath);
   }
 
 

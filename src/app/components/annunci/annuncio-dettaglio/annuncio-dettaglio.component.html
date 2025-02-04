@@ -4,7 +4,7 @@
   <div class="annuncio-card">
     <!-- Immagine principale accanto alla descrizione -->
     <div class="immagine-principale">
-      <img [src]="form.value.foto[0]" alt="Immagine immobile" class="main-img">
+      <img [src]="getImageSrc(form.value.fotoPaths[0])" alt="Immagine immobile" class="main-img">
     </div>
 
     <div class="annuncio-info">
@@ -19,9 +19,17 @@
         <li><strong>Bagni:</strong> {{ form.value.bagni }}</li>
         <li><strong>Anno di costruzione:</strong> {{ form.value.anno }}</li>
         <li><strong>Provincia:</strong> {{ form.value.provincia }}</li>
-        <li><strong>Indirizzo:</strong> {{ form.value.indirizzo }}</li>
       </ul>
     </div>
+  </div>
+
+  <!-- Dati venditore -->
+  <div class="venditore-info" *ngIf="immobileDetails.utente">
+    <h3>Dettagli venditore</h3>
+    <p><strong>Nome:</strong> {{ immobileDetails.utente.firstName || 'N/D' }}</p>
+    <p><strong>Cognome:</strong> {{ immobileDetails.utente.lastName || 'N/D' }}</p>
+    <p><strong>Username:</strong> {{ immobileDetails.utente.username }}</p>
+    <p><strong>Telefono:</strong> {{ immobileDetails.utente.phoneNumber || 'N/D' }}</p>
   </div>
 
   <!-- Mappa Google -->
@@ -38,7 +46,7 @@
   <div class="galleria">
     <h3>Galleria Immagini</h3>
     <div class="immagini">
-      <img *ngFor="let img of form.value.foto.slice(1)" [src]="img" class="galleria-img">
+      <img *ngFor="let img of form.value.fotoPaths.slice(1)" [src]="getImageSrc(img)" class="galleria-img">
     </div>
   </div>
 </div>

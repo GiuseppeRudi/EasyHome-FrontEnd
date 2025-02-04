@@ -5,5 +5,5 @@ export interface ImmobileMinimal {
     tipo: string;
     categoria: string;
     mq: number;
-    immagine?: string;  // Base64 image string
+    immagine: string;  // Base64 image string
 }

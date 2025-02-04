@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ServiceService} from '../../../service/service.service';
+import { ServiceService } from '../../../service/service.service';
+
 
 @Component({
   selector: 'app-annuncio-dettaglio',
@@ -9,21 +10,20 @@ import {ServiceService} from '../../../service/service.service';
   styleUrls: ['./annuncio-dettaglio.component.css'],
   standalone: false
 })
-
 export class AnnuncioDettaglioComponent implements OnInit {
   form: FormGroup;
   immobileId!: number;
-  immobileDetails: any;  // Aggiungi una variabile per salvare i dettagli dell'immobile
+  immobileDetails: any;
   latitudine: number | null = null;
   longitudine: number | null = null;
   markerPosition: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
-  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 }; // Centro mappa
-  zoom: number = 14; // Zoom della mappa
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  zoom: number = 14;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private service: ServiceService  // Inietta il servizio
+    private service: ServiceService
   ) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
@@ -35,23 +35,21 @@ export class AnnuncioDettaglioComponent implements OnInit {
       camere: [0, Validators.required],
       bagni: [0, Validators.required],
       anno: [0, Validators.required],
-      etichetta: ['', Validators.required],
       provincia: ['', Validators.required],
-      indirizzo: ['', Validators.required],
-      foto: [[], Validators.required]
+      fotoPaths: [[]] // Array di immagini
     });
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.immobileId = Number(params.get('id'));  // Ottieni l'ID dall'URL
+      this.immobileId = Number(params.get('id'));
       console.log('ID immobile ricevuto:', this.immobileId);
 
       // Chiama il servizio per ottenere i dettagli dell'immobile
       this.service.getImmobileById(this.immobileId).subscribe((data) => {
         console.log(data);
-        this.immobileDetails = data;  // Salva i dettagli dell'immobile
-        this.form.patchValue(this.immobileDetails);  // Riempi il form con i dati ricevuti
+        this.immobileDetails = data;
+        this.form.patchValue(this.immobileDetails);
         this.latitudine = this.immobileDetails.latitudine;
         this.longitudine = this.immobileDetails.longitudine;
 
@@ -63,4 +61,9 @@ export class AnnuncioDettaglioComponent implements OnInit {
       });
     });
   }
+
+  getImageSrc(imagePath: string): string {
+    return this.service.getImageSrc(imagePath);
+  }
+
 }

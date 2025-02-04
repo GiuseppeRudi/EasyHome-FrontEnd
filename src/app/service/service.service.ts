@@ -118,6 +118,17 @@ export class ServiceService {
     return this.http.get<any[]>(`${this.apiUrl}/markers`);
   }
 
+  getImageSrc(imagePath: string): string {
+    if (imagePath) {
+      const parts = imagePath.split('/');
+      if (parts.length === 3) {
+        return `/api/open/images/${parts[0]}/${parts[1]}/${parts[2]}`;
+      }
+    }
+    return 'assets/no-image.png';
+  }
+
+
 
 
 }
