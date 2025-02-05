@@ -179,6 +179,9 @@ export class ServiceService {
     });
   }
 
+  getRecensioniByVenditore(venditore: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${venditore}`);
+  }
 
 }
 
