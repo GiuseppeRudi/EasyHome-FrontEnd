@@ -25,38 +25,46 @@
     </ul>
   </div>
 </ng-template>
-
 <ng-template #luogoTemplate let-dialogRef="dialogRef">
   <div class="dialog-map-container">
     <div class="dialog-container-luogo">
 
+      <!-- Lista dei luoghi con due colonne per riga -->
       <ul class="options-list">
-        <li *ngFor="let city of places"
-            class="option-item"
-            (click)="selectLuogo(city.name, city.coordinates,city.zoom)"
-            [class.selected]="selectedLuogoTemp === city.name">
-          {{ city.name }}
-        </li>
+        <ng-container *ngFor="let city of places; let i = index">
+          <!-- Apre una riga ogni due elementi -->
+          <div class="options-row" *ngIf="i % 2 === 0">
+            <li *ngIf="places[i]"
+                class="option-item"
+                (click)="selectLuogo(places[i].name, places[i].coordinates, places[i].zoom)"
+                [class.selected]="selectedLuogoTemp === places[i].name">
+              {{ places[i].name }}
+            </li>
+            <li *ngIf="places[i + 1]"
+                class="option-item"
+                (click)="selectLuogo(places[i + 1].name, places[i + 1].coordinates, places[i + 1].zoom)"
+                [class.selected]="selectedLuogoTemp === places[i + 1].name">
+              {{ places[i + 1].name }}
+            </li>
+          </div>
+        </ng-container>
       </ul>
 
-      <div class="map-container mt-2">
+      <!-- Mappa -->
+      <div class="map-container">
         <google-map [center]="center" [zoom]="zoom">
           <map-marker *ngFor="let marker of filteredMarkers"
                       [position]="marker.coordinates">
           </map-marker>
         </google-map>
       </div>
+
+      <!-- Bottone di conferma -->
       <button class="bottone mt-2" (click)="confirmSelection(dialogRef)">Conferma</button>
 
     </div>
   </div>
 </ng-template>
-
-
-
-
-
-
 
 <header>
   <navbar></navbar>

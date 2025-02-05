@@ -34,6 +34,7 @@ import { TerminiecondizioniComponent } from './components/terminiecondizioni/ter
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ModificaComponent } from './components/modifica/modifica.component';
 import { ModificaDettaglioComponent } from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ModificaDettaglioComponent } from './components/modifica/modifica-detta
     PrivacyComponent,
     ModificaComponent,
     ModificaDettaglioComponent,
+    LoadingComponent,
 
 
 ],

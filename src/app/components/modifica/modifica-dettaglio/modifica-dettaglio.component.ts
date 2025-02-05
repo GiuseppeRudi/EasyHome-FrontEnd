@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../../../service/service.service';
@@ -9,11 +9,12 @@ import { ServiceService } from '../../../service/service.service';
   styleUrls: ['./modifica-dettaglio.component.css'],
   standalone: false
 })
-export class ModificaDettaglioComponent {
+export class ModificaDettaglioComponent implements OnInit{
   modificaForm: FormGroup;
   immobileId: number | null = null;
   immobileDetails: any;
   fotoFiles: File[] = [];
+  anteprimaImmagini: string[] = [];
   username: string | null = null;
 
   constructor(
@@ -49,10 +50,16 @@ export class ModificaDettaglioComponent {
       this.service.getImmobileById(this.immobileId).subscribe((data) => {
         console.log(data);
         this.immobileDetails = data;
+
         this.modificaForm.patchValue(this.immobileDetails);
       });
     });
   }
+
+  rimuoviImmagine(index: number) {
+    this.immobileDetails.fotoPaths.splice(index, 1);
+  }
+
 
   // Metodo per la modifica dell'annuncio
   modificaAnnuncio() {
@@ -103,13 +110,30 @@ export class ModificaDettaglioComponent {
     }
   }
 
-  // Gestione file selezionati per l'immagine
+
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
+    if (input.files) {
       this.fotoFiles = Array.from(input.files);
+
+      // Creazione anteprime
+      this.anteprimaImmagini = [];
+      for (let file of this.fotoFiles) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.anteprimaImmagini.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   }
+
+// Metodo per rimuovere un'immagine selezionata
+  rimuoviFoto(index: number) {
+    this.fotoFiles.splice(index, 1);
+    this.anteprimaImmagini.splice(index, 1);
+  }
+
 
   getImageSrc(imagePath: string): string {
     console.log(imagePath)

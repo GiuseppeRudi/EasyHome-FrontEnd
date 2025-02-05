@@ -27,6 +27,7 @@ export class AuthService {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       withCredentials: true, // Per inviare il cookie di sessione
     });
+
   }
 
   register(form: any): Observable<void> {

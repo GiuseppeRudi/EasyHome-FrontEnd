@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServiceService} from '../../service/service.service';
 import {ImmobileMinimal} from '../../model/ImmobileMinimal';
 
 @Component({
   selector: 'app-modifica',
-  standalone: false,
-
   templateUrl: './modifica.component.html',
-  styleUrl: './modifica.component.css'
+  styleUrl: './modifica.component.css',
+  standalone: false,
 })
-export class ModificaComponent {
+
+export class ModificaComponent implements OnInit{
 
 
   modificaMinimal: ImmobileMinimal[] = [];
@@ -17,14 +17,13 @@ export class ModificaComponent {
 
   ngOnInit() {
 
-    const cachedModifica = sessionStorage.getItem('modifica');
-    console.log('Session Storage:', cachedModifica);
+    let username = sessionStorage.getItem('username');
+    if (username) {
+      this.service.getImmobiliMinimalByUsername(username);
+    }
 
 
-    if (cachedModifica) {
-      this.modificaMinimal = JSON.parse(cachedModifica);
-      console.log('Dati caricati da sessionStorage:', this.modificaMinimal);
-    } else {
+
       this.service.getModificaObservable().subscribe(data => {
         console.log('Dati ricevuti dal backend:', data);
         if (data && data.length > 0) {
@@ -33,7 +32,7 @@ export class ModificaComponent {
         }
       });
     }
-  }
+
 
 
   getImageSrc(imagePath: string): string {

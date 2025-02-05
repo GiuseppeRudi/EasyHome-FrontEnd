@@ -10,7 +10,8 @@ main{
   font-size: 12px;
   font-weight: bold;
   margin-left: 10px;
-}.remove-button {
+}
+.remove-button {
    background-color: red;
    color: white;
    border: none;

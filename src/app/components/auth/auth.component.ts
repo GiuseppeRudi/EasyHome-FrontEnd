@@ -92,6 +92,7 @@ user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:''
           // Salva le informazioni dell'utente nel frontend (es. sessionStorag o variabili)
           sessionStorage.setItem('username', response.username);
           sessionStorage.setItem('role', response.role);
+          sessionStorage.setItem('userRole', 'acquirente');
           this.closeDialog();
           setTimeout(() => {
             // Reindirizza o ricarica la pagina

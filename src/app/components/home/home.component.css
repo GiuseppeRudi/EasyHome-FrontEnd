@@ -1,4 +1,69 @@
+/* Contenitore della lista */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+  margin: 0; /* Rimuove ogni spazio tra le righe */
+}
 
+/* Ogni riga contiene due elementi */
+.options-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0; /* Rimuove ogni spazio tra le righe */
+  padding: 0;
+}
+
+/* Stile dei singoli elementi */
+.option-item {
+  flex: 1;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 0; /* Rimuove ogni spazio tra gli elementi */
+  border: 1px solid #ddd;
+}
+
+/* Effetto hover */
+.option-item:hover {
+  background-color: #ddd;
+}
+
+/* Selezione attiva */
+.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+/* Contenitore della mappa - OCCUPA TUTTO LO SPAZIO DISPONIBILE */
+.map-container {
+  flex-grow: 1;
+  width: 100%;
+  height: calc(100vh - 200px); /* Occupa tutto lo schermo tranne lo spazio necessario per la lista */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Bottone di conferma */
+.bottone {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.bottone:hover {
+  background-color: #218838;
+}
 
 
 /* Reset di base per margini e padding */

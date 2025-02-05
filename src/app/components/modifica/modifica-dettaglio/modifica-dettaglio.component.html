@@ -54,20 +54,31 @@
       <input id="provincia" formControlName="provincia" />
     </div>
 
-    <!-- Sezione immagini -->
-    <!-- Sezione immagini -->
-    <div *ngIf="immobileDetails?.immagini?.length > 0">
+
+    <!-- Sezione per immagini esistenti -->
+    <div *ngIf="immobileDetails.fotoPaths.length > 0" class="immagini-container">
       <label>Immagini attuali:</label>
-      <div *ngFor="let immagine of immobileDetails.immagini">
+      <div class="immagine-wrapper" *ngFor="let immagine of immobileDetails.fotoPaths; let i = index">
         <img [src]="getImageSrc(immagine)" alt="Immobile immagine" class="immagine-preview" />
       </div>
     </div>
 
 
-    <div>
-      <label for="fileInput">Modifica immagini</label>
-      <input id="fileInput" type="file" (change)="onFileSelected($event)" multiple />
+    <div class="form-field">
+      <label for="foto">
+        <span class="warning-text">Attenzione: Se si intende modificare le immagini dell'annuncio, bisogna ricaricarle tutte da capo</span>
+      </label>
+      <input id="foto" type="file" (change)="onFileSelected($event)" multiple accept="image/*">
+
+      <!-- Anteprima immagini selezionate -->
+      <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
+        <div *ngFor="let file of anteprimaImmagini; let i = index" class="preview-container">
+          <img [src]="file" alt="Anteprima immagine" class="preview-img">
+          <button type="button" class="remove-button" (click)="rimuoviFoto(i)">X</button>
+        </div>
+      </div>
     </div>
+
 
     <button type="submit">Salva modifiche</button>
   </form>

@@ -37,10 +37,10 @@ const routes: Routes = [
   { path: 'recensione', component:  RecensioneComponent},
   { path: 'aste', component:  AsteComponent},
   { path: 'contattavenditore', component:  ContattavenditoreComponent, canActivate :[authGuard], data: { type: ["acquirente"] }},
+  { path: 'annunci/:id', component: AnnuncioDettaglioComponent, canActivate :[authGuard], data: { type: ["acquirente"] }},
+  { path: 'modifica-dettaglio/:id', component: ModificaDettaglioComponent, canActivate :[authGuard], data: { type: ["venditore"] }},
   { path: '403', component: ErrorpageComponent, data: { errorCode: 403 } },
   { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
-  { path: 'annunci/:id', component: AnnuncioDettaglioComponent, canActivate :[authGuard], data: { type: ["acquirente"] }},
-  { path: 'modifica-dettaglio/:id', component: ModificaDettaglioComponent, canActivate :[authGuard] },
   { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } }
 
 ];
