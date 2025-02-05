@@ -1,4 +1,3 @@
-/* Stile globale */
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +18,6 @@ body {
   text-align: center;
 }
 
-/* Box dell'errore */
 .error-box {
   background: #333;
   padding: 40px;

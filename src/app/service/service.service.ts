@@ -154,7 +154,7 @@ export class ServiceService {
       withCredentials: true
     }).subscribe({
       next: (response) => {
-        console.log(response)
+
         this.messaggiSubject.next(response);
       },
       error: (err) => console.error("GetMessaggiById doesn't work", err),
@@ -180,7 +180,7 @@ export class ServiceService {
   }
 
   getRecensioniByVenditore(venditore: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/${venditore}`);
+    return this.http.get<any[]>(`${this.apiUrl}/auth/${venditore}/recensioni`);
   }
 
   createAd(adName: string, adsetId: string, creativeId: string) {

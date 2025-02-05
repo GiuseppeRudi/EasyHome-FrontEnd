@@ -1,25 +1,25 @@
-/* Contenitore delle immagini */
+
 .galleria {
   display: flex;
-  justify-content: center; /* Centra le immagini orizzontalmente */
+  justify-content: center;
 }
 
 /* Immagine */
 .galleria-img {
-  width: 415px; /* Larghezza fissa per ogni immagine */
-  height: 400px; /* Altezza fissa per ogni immagine */
-  object-fit: cover; /* Assicura che l'immagine copra completamente l'area senza deformarsi */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiungi ombra per un effetto più visibile */
+  width: 335px;
+  height: 335px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: Aggiungi un hover effect */
+
 .galleria-img:hover {
-  transform: scale(1.05); /* Aumenta leggermente l'immagine al passaggio del mouse */
+  transform: scale(1.05);
   transition: transform 0.3s ease;
 }
 
 
-/* Stile per il contenitore degli annunci */
+
 .annunci-container {
   max-width: 800px;
   margin: 0 auto;
@@ -30,13 +30,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effetto per il contenitore */
 .annunci-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Stile per le card */
+
 .mat-card {
   margin-bottom: 20px;
   border-radius: 15px;
@@ -44,18 +43,17 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effetto per le card */
+
 .mat-card:hover {
   transform: scale(1.03);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Stile per il contenuto delle card */
+
 .mat-card-content {
   padding: 20px;
 }
 
-/* Stile per il titolo (descrizione dell'annuncio) */
 .mat-card-content h2 {
   font-size: 1.8rem;
   font-weight: bold;
@@ -68,26 +66,22 @@
   color: #0056b3;
 }
 
-/* Stile per i paragrafi e i dettagli */
 .mat-card-content p {
   font-size: 1rem;
   margin-bottom: 10px;
   color: #333;
 }
 
-/* Stile per i paragrafi che mostrano i dettagli specifici (Tipo, Prezzo, etc.) */
 .mat-card-content p strong {
   font-weight: bold;
   color: #007bff;
 }
 
-/* Stile per la mappa */
 google-map {
   border-radius: 8px;
   margin-top: 15px;
 }
 
-/* Pulsante di azione (opzionale, se ci sono pulsanti) */
 button {
   width: 100%;
   padding: 12px;

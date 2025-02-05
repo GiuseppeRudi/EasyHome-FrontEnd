@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ServiceService} from '../../service/service.service';
+import {SuccessErrorDialogComponent} from '../success-error-dialog/success-error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contattavenditore',
@@ -11,10 +13,11 @@ import {ServiceService} from '../../service/service.service';
 export class ContattavenditoreComponent {
   @Input() immobileId!: number;
   @Input() venditore!: string;
+  @Input() buttonText: string = "Contatta il venditore";
   contactForm: FormGroup;
   showModal: boolean = false;
 
-  constructor(private fb: FormBuilder, private service: ServiceService) {
+  constructor(private dialog: MatDialog,private fb: FormBuilder, private service: ServiceService) {
     this.contactForm = this.fb.group({
       oggetto: ['', [Validators.required]],
       descrizione: ['']
@@ -47,11 +50,24 @@ export class ContattavenditoreComponent {
 
       this.service.contattaVenditore(formData).subscribe({
         next: (response) => {
-          alert('Annuncio aggiunto con successo!');
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Successo',
+              message: 'Annuncio aggiunto con successo!'
+            }
+          });
+
+
         },
         error: (error) => {
           console.error('Errore:', error);
-          alert("Errore durante l'invio del messaggio.");
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Errore',
+              message: 'Errore durante l\'invio del messaggio'
+            }
+          });
+
         }
       })
       this.closeModal();

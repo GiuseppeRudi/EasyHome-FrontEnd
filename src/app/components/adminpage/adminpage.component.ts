@@ -4,6 +4,8 @@ import { AuthService } from '../../auth/auth.service';
 import { ServiceService } from '../../service/service.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import {NavbarComponent} from '../navbar/navbar.component';
+import {SuccessErrorDialogComponent} from '../success-error-dialog/success-error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-adminpage',
@@ -22,8 +24,8 @@ export class AdminpageComponent implements OnInit {
   constructor(private navbar: NavbarComponent,
     private router: Router,
     private authService: AuthService,
-    private service: ServiceService
-  ) {
+    private service: ServiceService,
+    private dialog: MatDialog  ) {
     this.username = sessionStorage.getItem('username');
 
     this.changeUserTypeForm = new FormGroup({
@@ -95,12 +97,22 @@ export class AdminpageComponent implements OnInit {
     this.service.changeUserRole(username, newRole).subscribe({
       next: (response) => {
         console.log("Ruolo cambiato con successo:", response);
-        alert("Ruolo aggiornato con successo!");
+        this.dialog.open(SuccessErrorDialogComponent, {
+          data: {
+            title: 'Successo',
+            message: 'Ruolo cambiato con successo!'
+          }
+        });
         window.location.reload();
       },
       error: (error) => {
         console.error("Errore nel cambiare il ruolo:", error);
-        alert("Errore nel cambio ruolo");
+        this.dialog.open(SuccessErrorDialogComponent, {
+          data: {
+            title: 'Errore',
+            message: 'Errore nel cambiare il ruolo.'
+          }
+        });
       }
     });
   }

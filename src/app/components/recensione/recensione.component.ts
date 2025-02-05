@@ -2,6 +2,8 @@ import {Component, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceService } from '../../service/service.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SuccessErrorDialogComponent} from '../success-error-dialog/success-error-dialog.component';
 
 @Component({
   selector: 'app-recensione',
@@ -16,7 +18,7 @@ export class RecensioneComponent {
   rating: number = 0;
   descrizione: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
+  constructor(private dialog : MatDialog,private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
       rating: [0, Validators.required],
       descrizione: ['', Validators.required]
@@ -43,16 +45,36 @@ export class RecensioneComponent {
 
       this.service.addRecensione(formData).subscribe({
         next: (response) => {
-          alert('Recensione inviata con successo!');
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Successo',
+              message: 'Recensione inviata con successo!'
+            }
+          });
+
+          window.location.reload();
+
 
         },
         error: (error) => {
           console.error('Errore durante l\'invio della recensione', error);
-          alert('Errore durante l\'invio della recensione.');
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Errore',
+              message: "Errore durante l'invio della recensione."
+            }
+          });
+
         }
       });
     } else {
-      alert('Per favore, completa tutti i campi.');
+      this.dialog.open(SuccessErrorDialogComponent, {
+        data: {
+          title: 'Info',
+          message: 'Per favore, completa tutti i campi.'
+        }
+      });
+
     }
   }
 }

@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../../../service/service.service';
 
 
 @Component({
-  selector: 'app-annuncio-dettaglio',
-  templateUrl: './annuncio-dettaglio.component.html',
-  styleUrls: ['./annuncio-dettaglio.component.css'],
+  selector: 'app-aste-dettaglio',
+  templateUrl: './aste-dettaglio.component.html',
+  styleUrls: ['./aste-dettaglio.component.css'],
   standalone: false
 })
-export class AnnuncioDettaglioComponent implements OnInit {
+export class AsteDettaglioComponent implements OnInit {
   immobileId!: number;
-  immobileDetails: any;
+  asteDetails: any;
   latitudine: number | null = null;
   longitudine: number | null = null;
   markerPosition: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
@@ -22,11 +21,9 @@ export class AnnuncioDettaglioComponent implements OnInit {
   recensioni: any[] = [];
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private service: ServiceService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -35,12 +32,12 @@ export class AnnuncioDettaglioComponent implements OnInit {
 
       this.service.getImmobileById(this.immobileId).subscribe((data) => {
         console.log(data);
-        this.immobileDetails = data;
-        this.latitudine = this.immobileDetails.latitudine;
-        this.longitudine = this.immobileDetails.longitudine;
+        this.asteDetails = data;
+        this.latitudine = this.asteDetails.latitudine;
+        this.longitudine = this.asteDetails.longitudine;
 
-        console.log(this.immobileDetails.utente.username);
-        this.caricaRecensioni(this.immobileDetails.utente.username)
+        console.log(this.asteDetails.utente.username);
+        this.caricaRecensioni(this.asteDetails.utente.username)
 
         // Imposta la mappa
         if (this.latitudine && this.longitudine) {
@@ -74,6 +71,12 @@ export class AnnuncioDettaglioComponent implements OnInit {
 
   getStarsArray(rating: number): number[] {
     return Array(rating).fill(0);
+  }
+
+  calculateEndDate(publicationDate: string): string {
+    const date = new Date(publicationDate);
+    date.setDate(date.getDate() + 60); // Aggiunge 60 giorni
+    return date.toISOString().split('T')[0]; // Restituisce la data in formato YYYY-MM-DD
   }
 
 

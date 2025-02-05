@@ -20,9 +20,11 @@
     </div>
 
     <div>
-      <label for="prezzo">Prezzo</label>
+      <span> Prezzo Attuale: {{ immobileDetails.prezzoVisualizzato | currency: 'EUR' }}</span>
+      <label for="prezzo">Nuovo Prezzo</label>
       <input id="prezzo" formControlName="prezzo" type="number" />
     </div>
+
 
     <div>
       <label for="mq">Metri quadri</label>
@@ -40,14 +42,10 @@
     </div>
 
     <div>
-      <label for="anno">Anno</label>
+      <label for="anno">Anno di costruzione</label>
       <input id="anno" formControlName="anno" type="number" />
     </div>
 
-    <div>
-      <label for="data">Data</label>
-      <input id="data" formControlName="data" />
-    </div>
 
     <div>
       <label for="provincia">Provincia</label>
@@ -84,6 +82,6 @@
   </form>
 </div>
 
-  <footer>
+<footer>
     <app-footer></app-footer>
-  </footer>
+</footer>

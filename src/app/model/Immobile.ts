@@ -10,7 +10,7 @@ export interface Immobile {
   camere?: number;
   bagni?: number;
   anno?: number;
-  etichetta?: string;
+  data?: string;
   provincia?: string;
   latitudine?: number;
   longitudine?: number;

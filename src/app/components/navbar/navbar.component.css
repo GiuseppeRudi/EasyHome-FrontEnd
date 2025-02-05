@@ -157,15 +157,15 @@ mat-icon:hover {
 ul {
   position: relative;
   display: flex;
-  gap: 15px; /* Ridotto lo spazio tra i pulsanti */
+  gap: 15px;
 }
 
 ul li {
   position: relative;
   list-style: none;
   top: 6px;
-  width: 45px; /* Ridotta la larghezza */
-  height: 45px; /* Ridotta l'altezza */
+  width: 45px;
+  height: 45px;
   background: #302f2f;
   border-radius: 45px;
   cursor: pointer;
@@ -177,7 +177,7 @@ ul li {
 }
 
 ul li:hover {
-  width: 135px; /* Adattata alla nuova dimensione */
+  width: 135px;
   box-shadow: 0 7px 18px rgba(0, 0, 0, 0);
 }
 
@@ -215,7 +215,7 @@ ul li:hover::after {
 
 ul li .icon {
   color: #777;
-  font-size: 1.3em; /* Ridotto leggermente */
+  font-size: 1.3em;
   transition: 0.5s;
   transition-delay: 0.25s;
 }
@@ -232,7 +232,7 @@ ul li span {
 
 ul li .title {
   color: #fff;
-  font-size: 0.9em; /* Ridotta leggermente */
+  font-size: 0.9em;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   transform: scale(0);

@@ -36,6 +36,8 @@ import { ModificaComponent } from './components/modifica/modifica.component';
 import { ModificaDettaglioComponent } from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FacebookComponent } from './components/facebook/facebook.component';
+import { AsteDettaglioComponent } from './components/aste/aste-dettaglio/aste-dettaglio.component';
+import { SuccessErrorDialogComponent } from './components/success-error-dialog/success-error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { FacebookComponent } from './components/facebook/facebook.component';
     ModificaComponent,
     ModificaDettaglioComponent,
     LoadingComponent,
+    SuccessErrorDialogComponent,
+    AsteDettaglioComponent,
     FacebookComponent,
 
 

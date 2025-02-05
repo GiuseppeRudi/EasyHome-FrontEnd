@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../service/service.service';
 import {ImmobileMinimal} from '../../model/ImmobileMinimal';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-annunci',
@@ -11,23 +12,29 @@ import {ImmobileMinimal} from '../../model/ImmobileMinimal';
 export class AnnunciComponent implements OnInit {
   immobiliminimal: ImmobileMinimal[] = [];
 
-  constructor(private service: ServiceService) {}
+  selectedImmobili: string | null = 'Tipo';
+  selectedAffittoVendita: string | null = 'Categoria';
+  selectedLuogo: string | null = 'Provincia';
+
+  constructor(  private route: ActivatedRoute,private service: ServiceService) {}
 
   ngOnInit() {
 
-    //DOPO VA MODIFICATA
-    const cachedImmobili = sessionStorage.getItem('immobili');
-    if (cachedImmobili) {
-      this.immobiliminimal = JSON.parse(cachedImmobili);
-      console.log('Dati caricati da sessionStorage:', this.immobiliminimal);
-    }
+    // Recupera i query parameters dalla URL
+    this.route.queryParams.subscribe(params => {
+      this.selectedImmobili = params['immobili'];
+      this.selectedAffittoVendita = params['affittoVendita'];
+      this.selectedLuogo = params['luogo'];
+
+      // Chiama il servizio con i parametri passati
+      this.service.getImmobiliMinimal(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
+    });
 
     this.service.getImmobiliObservable().subscribe(data => {
       console.log('Dati ricevuti dal backend:', data);
 
       if (data && data.length > 0) {
         this.immobiliminimal = data;
-        sessionStorage.setItem('immobili', JSON.stringify(this.immobiliminimal));
       }
     });
   }

@@ -14,40 +14,43 @@
     Benvenuto nella pagina di contatto di EasyHome
   </div>
 
-  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="row g-4 was-validated">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="row g-4">
     <h5>I tuoi dati personali:</h5>
     <div class="input-group mb-3">
       <span class="input-group-text bg-dark text-white">Persona</span>
-      <input type="text" formControlName="nome" class="form-control" placeholder="Nome" required />
-      <input type="text" formControlName="cognome" class="form-control" placeholder="Cognome" required />
+      <input type="text" formControlName="nome" class="form-control" placeholder="Nome" required
+             [ngClass]="{'is-invalid': formSubmitted && contactForm.get('nome')?.invalid}" />
+      <input type="text" formControlName="cognome" class="form-control" placeholder="Cognome" required
+             [ngClass]="{'is-invalid': formSubmitted && contactForm.get('cognome')?.invalid}" />
     </div>
 
     <div class="input-group mb-3">
       <span class="input-group-text bg-dark text-white">Email</span>
-      <input type="email" formControlName="email" class="form-control" placeholder="Inserisci email" required />
+      <input type="email" formControlName="email" class="form-control" placeholder="Inserisci email" required
+             [ngClass]="{'is-invalid': formSubmitted && contactForm.get('email')?.invalid}" />
       <div class="invalid-feedback">*Inserisci un'email valida.</div>
     </div>
 
     <h5>Privato/Azienda</h5>
     <div class="col-md-12">
       <div class="form-check">
-        <input type="radio" formControlName="tipo" value="azienda" class="form-check-input" required />
+        <input type="radio" formControlName="tipo" value="azienda" class="form-check-input" required
+               [ngClass]="{'is-invalid': formSubmitted && contactForm.get('tipo')?.invalid}" />
         <label class="form-check-label">Azienda</label>
       </div>
       <div class="form-check">
-        <input type="radio" formControlName="tipo" value="privato" class="form-check-input" required />
+        <input type="radio" formControlName="tipo" value="privato" class="form-check-input" required
+               [ngClass]="{'is-invalid': formSubmitted && contactForm.get('tipo')?.invalid}" />
         <label class="form-check-label">Privato</label>
-
         <div class="invalid-feedback">*Seleziona una opzione.</div>
       </div>
     </div>
 
-
-
     <h5>Aggiungi descrizione</h5>
     <div class="col-md-12">
       <label class="form-label">La tua domanda:</label>
-      <textarea formControlName="domanda" class="form-control" required></textarea>
+      <textarea formControlName="domanda" class="form-control" required
+                [ngClass]="{'is-invalid': formSubmitted && contactForm.get('domanda')?.invalid}"></textarea>
       <div class="valid-feedback">Bella domanda.</div>
       <div class="invalid-feedback">*Questo campo non può essere vuoto.</div>
     </div>
@@ -57,6 +60,7 @@
       <button type="reset" class="btn btn-secondary">Pulisci</button>
     </div>
   </form>
+
 </main>
 
 <app-footer></app-footer>

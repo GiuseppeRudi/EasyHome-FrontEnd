@@ -46,7 +46,7 @@
   padding: 20px;
 }
 
-
+/* Annuncio card */
 .annuncio-card {
   background: #fff;
   border-radius: 10px;
@@ -55,7 +55,7 @@
   margin-bottom: 20px;
 }
 
-
+/* Immagine principale */
 .main-img {
   width: 100%;
   height: auto;
@@ -65,9 +65,10 @@
 }
 
 .main-img:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
+/* Dettagli annuncio */
 .titolo {
   margin-top: 20px;
   font-size: 24px;
@@ -76,6 +77,7 @@
 }
 
 .descrizione {
+  margin-top: 20px;
   font-size: 16px;
   color: #666;
 }
@@ -90,7 +92,7 @@
   margin: 5px 0;
 }
 
-
+/* Mappa */
 .mappa-container {
   text-align: center;
   margin: 30px 0;
@@ -102,6 +104,7 @@
   border-radius: 10px;
 }
 
+/* Galleria immagini */
 .galleria {
   text-align: center;
   margin: 20px 0;
@@ -131,9 +134,15 @@
   transform: scale(1.1);
 }
 
+/* Sezione Recensioni */
+.recensioni-container {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
 
-
-
+/* Sezione Contatta Venditore */
 .contatta-venditore-container {
   margin: 30px 0;
 }

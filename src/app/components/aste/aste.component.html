@@ -19,8 +19,14 @@
 
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ asta.nome }}</h5>
-          <p class="card-text">Prezzo Base: €{{ asta.prezzo | number:'1.0-0' }}</p>
-          <!--<p class="card-text">Scadenza: {{ asta.dataScadenza | date:'dd/MM/yyyy' }}</p>-->
+          <p class="card-text">
+            <span *ngIf="asta.prezzo_scontato > 0" class="text-muted text-decoration-line-through">
+              €{{ asta.prezzo | number:'1.0-0' }}
+            </span>
+            <span class="fw-bold ms-2">
+              €{{ (asta.prezzo_scontato > 0 ? asta.prezzo_scontato : asta.prezzo) | number:'1.0-0' }}
+            </span>
+          </p>
 
           <ul class="dettagli-asta">
             <li><strong>Tipo:</strong> {{ asta.tipo }}</li>
@@ -29,7 +35,7 @@
           </ul>
 
           <div class="mt-auto text-center">
-            <a [routerLink]="['/aste', asta.id]" class="btn btn-primary">Dettagli</a>
+            <a [routerLink]="['/aste-dettaglio', asta.id]" class="btn btn-primary">Dettagli</a>
           </div>
         </div>
       </div>
