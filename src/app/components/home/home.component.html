@@ -1,105 +1,132 @@
-<!DOCTYPE html>
-<html lang="it">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EasyHome - Sito Immobiliare</title>
+<ng-template #immobiliTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container">
+    <h2>Seleziona Tipo</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of ['Tutti', 'Casa', 'Appartamento', 'Villa']"
+          class="option-item"
+          (click)="selectOption(dialogRef, option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</ng-template>
 
-</head>
+<ng-template #annuncioTemplate let-dialogRef="dialogRef">
+  <div class="dialog-container">
+    <h2>Seleziona Categoria</h2>
+    <ul class="options-list">
+      <li *ngFor="let option of ['Tutti', 'Affitto', 'Vendita']"
+          class="option-item"
+          (click)="selectOption(dialogRef, option)">
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</ng-template>
+<ng-template #luogoTemplate let-dialogRef="dialogRef">
+  <div class="dialog-map-container">
+    <div class="dialog-container-luogo">
 
-<body>
+      <ul class="options-list">
+        <ng-container *ngFor="let city of places; let i = index">
+          <!-- Apre una riga ogni due elementi -->
+          <div class="options-row" *ngIf="i % 2 === 0">
+            <li *ngIf="places[i]"
+                class="option-item"
+                (click)="selectLuogo(places[i].name, places[i].coordinates, places[i].zoom)"
+                [class.selected]="selectedLuogoTemp === places[i].name">
+              {{ places[i].name }}
+            </li>
+            <li *ngIf="places[i + 1]"
+                class="option-item"
+                (click)="selectLuogo(places[i + 1].name, places[i + 1].coordinates, places[i + 1].zoom)"
+                [class.selected]="selectedLuogoTemp === places[i + 1].name">
+              {{ places[i + 1].name }}
+            </li>
+          </div>
+        </ng-container>
+      </ul>
+
+      <div class="map-container">
+        <google-map [center]="center" [zoom]="zoom">
+          <map-marker *ngFor="let marker of filteredMarkers"
+                      [position]="marker.coordinates">
+          </map-marker>
+        </google-map>
+      </div>
+
+      <button class="bottone mt-2" (click)="confirmSelection(dialogRef)">Conferma</button>
+
+    </div>
+  </div>
+</ng-template>
 
 <header>
-
+  <navbar></navbar>
 </header>
 
 <main>
-  <navbar></navbar>
   <section class="hero">
+    <img class="logo" src="assets/logo.png">
+    <section class="search-section">
+      <form action="/search" method="get">
+        <div class="filters">
+          <div class="search-line">
+            <p>Cerco</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openSelectDialog(immobiliTemplate, 'selectedImmobili')">
+                {{ selectedImmobili || 'Tipo Immobile' }}
+              </button>
+            </div>
+            <p>in</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openSelectDialog(annuncioTemplate, 'selectedAffittoVendita')">
+                {{ selectedAffittoVendita || 'Tipo Annuncio' }}
+              </button>
+            </div>
+          </div>
 
-    <h1>Benvenuto su EasyHome</h1>
-    <p>Trova la casa dei tuoi sogni in modo semplice e veloce.</p>
-  </section>
-  <section class="search-section">
-    <h2>Ricerca Avanzata</h2>
-    <form action="/search" method="get">
-      <div class="filters">
-        <!-- Tipo di immobile -->
-        <div class="filter">
-          <label for="property-type">Tipo di immobile:</label>
-          <select id="property-type" name="property-type">
-            <option value="appartamento">Appartamento</option>
-            <option value="villa">Villa</option>
-            <option value="casa">Casa</option>
-            <option value="ufficio">Ufficio</option>
-          </select>
+          <div class="search-line">
+            <p>a</p>
+            <div class="filter">
+              <button type="button" mat-button (click)="openMap(luogoTemplate, 'selectedLuogo')">
+                {{ selectedLuogo || 'Seleziona Luogo' }}
+              </button>
+            </div>
+
+          </div>
+          <button
+            [class.attivo]="isSelectionComplete()"
+            [class.inattivo]="!isSelectionComplete()"
+            [disabled]="!isSelectionComplete()"   (click)="seeResults()" class="ricerca">Vedi risultati</button>
         </div>
-
-        <!-- Vendita o Affitto -->
-        <div class="filter">
-          <label for="property-status">Tipo Annuncio:</label>
-          <select id="property-status" name="property-status">
-            <option value="vendita">Vendita</option>
-            <option value="affitto">Affitto</option>
-          </select>
-        </div>
-
-        <!-- Ordina per -->
-        <div class="filter">
-          <label for="sort">Ordina per:</label>
-          <select id="sort" name="sort">
-            <option value="prezzo-asc">Prezzo: dal più basso</option>
-            <option value="prezzo-desc">Prezzo: dal più alto</option>
-            <option value="data-asc">Data: più vecchie</option>
-            <option value="data-desc">Data: più recenti</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Barra di ricerca -->
-      <div class="search-bar">
-        <input type="text" id="city" name="city" placeholder="Es. Cosenza">
-        <button>Cerca</button>
-
-      </div>
-    </form>
+      </form>
+    </section>
   </section>
 
-  <section class="featured-listings">
-    <h2>Annunci in Evidenza</h2>
-    <div class="listing">
-      <h3>Appartamento a Milano</h3>
-      <p>Una descrizione breve dell'appartamento...</p>
-      <a href="/listing/milano">Dettagli</a>
+  <section class="featured-properties">
+    <h2>EasyHome - è più facile con noi</h2>
+    <div class="properties-container">
+      <figure>
+        <img src="/assets/dream-house.png" alt="Appartamento moderno a Milano">
+        <figcaption>Trova la casa dei tuoi sogni</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/mappa.png" alt="Visualizza Mappe Interattive">
+        <figcaption>Visualizza mappe interattive</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/customers.png" alt="Vicine a te">
+        <figcaption>Vicine a te</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/agent.png" alt="Non siamo una semplice agenzia">
+        <figcaption>Non siamo una semplice agenzia</figcaption>
+      </figure>
     </div>
-    <div class="listing">
-      <h3>Villa al mare</h3>
-      <p>Una descrizione breve della villa...</p>
-      <a href="/listing/villa">Dettagli</a>
-    </div>
-    <!-- Aggiungi altri annunci qui -->
-  </section>
-
-  <section class="about-us">
-    <h2>Chi Siamo</h2>
-    <p>Scopri di più su EasyHome e sulla nostra missione di aiutarti a trovare la casa perfetta.</p>
-    <a href="/about">Leggi di più</a>
   </section>
 </main>
-
-
-
-
-
 <footer>
-  <p>&copy; 2025 EasyHome. Tutti i diritti riservati.</p>
-  <ul>
-    <li><a href="/privacy">Privacy</a></li>
-    <li><a href="/terms">Termini e condizioni</a></li>
-  </ul>
+  <app-footer></app-footer>
 </footer>
-
-</body>
-
-</html>
