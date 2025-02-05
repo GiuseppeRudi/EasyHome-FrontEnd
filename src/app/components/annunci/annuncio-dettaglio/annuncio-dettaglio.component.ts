@@ -19,6 +19,8 @@ export class AnnuncioDettaglioComponent implements OnInit {
   markerPosition: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   zoom: number = 14;
+  loading: boolean = true;
+  recensioni: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +39,7 @@ export class AnnuncioDettaglioComponent implements OnInit {
       anno: [0, Validators.required],
       provincia: ['', Validators.required],
       fotoPaths: [[]] // Array di immagini
+
     });
   }
 
@@ -52,6 +55,10 @@ export class AnnuncioDettaglioComponent implements OnInit {
         this.latitudine = this.immobileDetails.latitudine;
         this.longitudine = this.immobileDetails.longitudine;
 
+        console.log(this.immobileDetails.utente.username);
+        this.caricaRecensioni(this.immobileDetails.utente.username)
+
+        // Imposta la mappa
         if (this.latitudine && this.longitudine) {
           this.markerPosition = { lat: this.latitudine, lng: this.longitudine };
           this.center = { lat: this.latitudine, lng: this.longitudine };
@@ -62,6 +69,22 @@ export class AnnuncioDettaglioComponent implements OnInit {
 
   getImageSrc(imagePath: string): string {
     return this.service.getImageSrc(imagePath);
+  }
+
+
+  caricaRecensioni(venditore : string) {
+    if (venditore) {
+      this.service.getRecensioniByVenditore(venditore).subscribe(
+        (data) => {
+          this.recensioni = data;
+          this.loading = false;
+        },
+        (error) => {
+          console.error('Errore nel caricamento delle recensioni:', error);
+          this.loading = false;
+        }
+      );
+    }
   }
 
 }

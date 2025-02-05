@@ -50,4 +50,21 @@
 
 <app-recensione [immobileId]="immobileId"></app-recensione>
 
+
+<div *ngIf="loading">Caricamento recensioni...</div>
+
+<div *ngIf="!loading && recensioni.length > 0">
+  <div *ngFor="let recensione of recensioni" class="recensione">
+    <h3>Rating: {{ recensione.rating }}/5</h3>
+    <p>{{ recensione.descrizione }}</p>
+    <small>Acquirente: {{ recensione.acquirente }}</small>
+  </div>
+</div>
+
+<div *ngIf="!loading && recensioni.length === 0">
+  <p>Nessuna recensione disponibile.</p>
+</div>
+
+
+
 <app-footer></app-footer>

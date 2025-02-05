@@ -6,4 +6,5 @@ export interface ImmobileMinimal {
     categoria: string;
     mq: number;
     immagine: string;
+    prezzo_scontato: number;
 }
