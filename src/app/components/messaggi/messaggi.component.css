@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ h1 {
   margin-bottom: 30px;
 }
 
-/* Message Container */
+
 .messages-container {
   max-width: 1000px;
   margin: 20px auto;
@@ -125,7 +125,7 @@ h1 {
   outline: none;
 }
 
-/* Mobile Responsiveness */
+
 @media (max-width: 768px) {
   .messages-container {
     padding: 10px;
@@ -155,7 +155,6 @@ h1 {
   }
 }
 
-/* Animation Keyframes */
 @keyframes fadeIn {
   0% {
     opacity: 0;
