@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../../../service/service.service';
+import {SuccessErrorDialogComponent} from '../../success-error-dialog/success-error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modifica-dettaglio',
@@ -17,7 +19,7 @@ export class ModificaDettaglioComponent implements OnInit{
   anteprimaImmagini: string[] = [];
   username: string | null = null;
 
-  constructor(
+  constructor(private dialog:MatDialog,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -97,16 +99,31 @@ export class ModificaDettaglioComponent implements OnInit{
       // Invio dei dati al backend per aggiornare l'immobile
       this.service.updateImmobile(this.immobileId!, formData).subscribe({
         next: () => {
-          alert('Annuncio modificato con successo!');
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Successo',
+              message: 'Modifica eseguita con Successo'
+            }
+          });
           this.router.navigate(['/']);  // Ritorna alla lista degli annunci
         },
         error: (error) => {
           console.error('Errore:', error);
-          alert('Errore durante la modifica dell\'annuncio.');
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Errore',
+              message: 'Impossibile eseguire la modifica'
+            }
+          });
         }
       });
     } else {
-      alert('Per favore, completa tutti i campi.');
+      this.dialog.open(SuccessErrorDialogComponent, {
+        data: {
+          title: 'Info',
+          message: 'Compila tutti i campi!'
+        }
+      });
     }
   }
 

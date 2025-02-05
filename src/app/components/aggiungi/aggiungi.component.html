@@ -90,13 +90,14 @@
           <!-- Anteprima delle immagini -->
           <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
             <div *ngFor="let file of anteprimaImmagini; let i = index" class="preview-container">
+              <button type="button" class="remove-button" (click)="rimuoviFoto(i)">X</button>
               <img [src]="file" alt="Anteprima immagine" class="preview-img">
-              <button type="button" class="remove-button" (click)="rimuoviFoto(i)">Rimuovi</button>
             </div>
           </div>
         </div>
 
-        <div class="form-field">
+
+          <div class="form-field">
           <label for="provincia">Provincia</label>
           <div>
             <input id="provincia" formControlName="provincia" type="text" placeholder="Provincia">

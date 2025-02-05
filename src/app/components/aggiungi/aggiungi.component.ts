@@ -3,7 +3,10 @@ import {FormBuilder, FormGroup, Validators, ɵFormGroupRawValue, ɵGetProperty, 
 import { Router } from '@angular/router';
 import {ServiceService} from '../../service/service.service';
 import {GeocodingService} from '../../service/GeocodingService/geocoding-service.service';
-import {AuthService} from '../../auth/auth.service';
+import {SuccessErrorDialogComponent} from '../success-error-dialog/success-error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-aggiungi',
@@ -27,7 +30,7 @@ export class AggiungiComponent {
   zoom: number = 14;
 
 
-  constructor(private geocodingService: GeocodingService,private fb: FormBuilder, private router: Router, private service: ServiceService) {
+  constructor(private dialog : MatDialog ,private geocodingService: GeocodingService,private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
       nome:['',Validators.required],
       tipo: ['Vendita', Validators.required],
@@ -48,6 +51,7 @@ export class AggiungiComponent {
   }
 
   verificaIndirizzo(indirizzo: string) {
+
     console.log(indirizzo);
     if (indirizzo) {
       this.geocodingService.getLatLng(indirizzo).subscribe({
@@ -70,7 +74,12 @@ export class AggiungiComponent {
               console.log('Latitudine:', this.latitudine);
               console.log('Longitudine:', this.longitudine);
             } else {
-              console.error('Indirizzo non valido o non trovato');
+              this.dialog.open(SuccessErrorDialogComponent, {
+                data: {
+                  title: 'Errore',
+                  message: 'Indirizzo non valido o non trovato!'
+                }
+              });
             }
           }
         },
@@ -147,29 +156,40 @@ export class AggiungiComponent {
 
       this.service.addAnnuncio(formData).subscribe({
         next: (response) => {
-          alert('Annuncio aggiunto con successo!');
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Successo',
+              message: 'Annuncio aggiunto con successo!'
+            }
+          });
           this.router.navigate(['/']);
         },
-        error: (error) => {
-          console.error('Errore:', error);
-          alert("Errore durante l'invio dell'annuncio.");
+        error: (error)=>{
+          this.dialog.open(SuccessErrorDialogComponent, {
+            data: {
+              title: 'Errore',
+              message: "Errore durante l'invio dell'annuncio."
+            }
+          });
         }
       });
-    } else {
-      alert('Per favore, completa tutti i campi.');
+    }else {
+      console.log(this.form)
+      this.dialog.open(SuccessErrorDialogComponent, {
+        data: {
+          title: 'Errore',
+          message: "Per favore compila tutti i campi!."
+        }
+      });
+
     }
   }
 
-  ngOnInit() {
-    this.aggiornaData();
-  }
 
-// Funzione per ottenere solo la data attuale (YYYY-MM-DD)
-  aggiornaData() {
-    const oggi = new Date().toISOString().split('T')[0]; // Prende solo la parte della data
-    this.form.patchValue({ data: oggi });
+  aggiornaDataEOra() {
+    const dataEOraAttuale = new Date().toISOString(); // Formatta in ISO 8601
+    this.form.patchValue({ data: dataEOraAttuale });
   }
-
 
   rimuoviFoto(index: number) {
     this.fotoFiles.splice(index, 1);
@@ -180,6 +200,9 @@ export class AggiungiComponent {
     this.form.get('foto')?.setValue(this.fotoFiles);
   }
 
+  ngOnInit() {
+    this.aggiornaDataEOra();
+  }
 
 
 

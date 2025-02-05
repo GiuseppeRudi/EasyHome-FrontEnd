@@ -18,6 +18,7 @@ export class AnnunciComponent implements OnInit {
     if (cachedImmobili) {
       this.immobiliminimal = JSON.parse(cachedImmobili);
       console.log('Dati caricati da sessionStorage:', this.immobiliminimal);
+
     }
 
     this.service.getImmobiliObservable().subscribe(data => {

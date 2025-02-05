@@ -35,6 +35,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ModificaComponent } from './components/modifica/modifica.component';
 import { ModificaDettaglioComponent } from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { SuccessErrorDialogComponent } from './components/success-error-dialog/success-error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,9 @@ import { LoadingComponent } from './components/loading/loading.component';
     ModificaComponent,
     ModificaDettaglioComponent,
     LoadingComponent,
+    SuccessErrorDialogComponent,
+
+
 
 
 ],

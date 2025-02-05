@@ -1,4 +1,4 @@
-/* Stile generale del footer */
+
 footer {
   background-color: #111;
   color: #ccc;
@@ -8,7 +8,7 @@ footer {
 }
 
 .footer {
-  background-color: #1a1a1a; /* Colore di sfondo scuro */
+  background-color: #1a1a1a;
   color: #f9a825;
   padding: 20px 0;
   font-family: 'Arial', sans-serif;
@@ -65,14 +65,14 @@ footer {
 }
 
 .menu-group ul li a:hover {
-  color: #ff5722; /* Colore di evidenziazione */
+  color: #ff5722;
   text-decoration: underline;
 }
 
 .footer-copy {
   text-align: center;
   margin-top: 20px;
-  flex-basis: 100%; /* Allinea il copyright in una nuova riga */
+  flex-basis: 100%;
   font-size: 0.85em;
   color: #aaaaaa;
 }
@@ -81,7 +81,6 @@ footer {
   margin: 0;
 }
 
-/* Responsività */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
