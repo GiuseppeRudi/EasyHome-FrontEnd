@@ -47,7 +47,6 @@ export class AnnuncioDettaglioComponent implements OnInit {
       this.immobileId = Number(params.get('id'));
       console.log('ID immobile ricevuto:', this.immobileId);
 
-      // Chiama il servizio per ottenere i dettagli dell'immobile
       this.service.getImmobileById(this.immobileId).subscribe((data) => {
         console.log(data);
         this.immobileDetails = data;

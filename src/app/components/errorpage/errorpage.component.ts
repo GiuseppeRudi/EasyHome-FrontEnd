@@ -14,7 +14,6 @@ export class ErrorpageComponent implements OnInit{
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Ottieni il codice di errore dalla route
-    this.errorCode = this.route.snapshot.data['errorCode']; // Recupera l'errorCode passato nella route
+    this.errorCode = this.route.snapshot.data['errorCode'];
   }
 }

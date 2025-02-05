@@ -5,16 +5,13 @@
 
 <mat-toolbar color="primary">
 
-  <!-- Logo -->
   <a (click)="navigateTo('/')">
     <img class="logo" src="assets/logo1.jpg" alt="Logo">
   </a>
 
-  <!-- Menu items -->
   <div class="menu">
-    <!-- Menu item -->
     <ng-container *ngFor="let item of menuItems">
-      <!-- Se l'elemento è "Modifica/Aggiungi Annuncio" e l'utente è venditore, apri il dialog -->
+      <!-- se l'elemento è "Modifica/Aggiungi Annuncio" e l'utente è venditore, apri il dialog -->
       <ng-container *ngIf="item.label === 'Gestisci Annunci' && isVenditore; else normalButton">
         <button mat-button (click)="openDialogWithPrevent($event, editAddDialog)">
           <mat-icon>{{ item.icon }}</mat-icon>
@@ -33,19 +30,16 @@
 
   </div>
 
-  <!-- Template per Modifica/Aggiungi Annuncio -->
   <ng-template #editAddDialog>
     <mat-dialog-content>
       <h2 class="mb-4 text-center" style="font-size: 1.25rem;">Vuoi aggiungere un annuncio o modificarne uno già pubblicato?</h2>
       <div class="d-flex flex-column gap-3">
-        <!-- Bottone Modifica -->
         <button
           class="btn w-100 text-uppercase fw-bold text-white rounded-pill"
           style="background: linear-gradient(90deg, #000000, #333333); padding: 12px 20px; font-size: 0.8rem; border: none; transition: transform 0.2s, background-color 0.2s;"
           (click)="modificaAnnuncio()">
           Modifica Annuncio
         </button>
-        <!-- Bottone Aggiungi -->
         <button
           class="btn w-100 text-uppercase fw-bold text-white rounded-pill"
           style="background: linear-gradient(90deg, #000000, #333333); padding: 12px 20px; font-size: 0.8rem; border: none; transition: transform 0.2s, background-color 0.2s;"
@@ -57,7 +51,6 @@
     </mat-dialog-content>
 
   </ng-template>
-  <!-- Azione a destra (login/logout con nome utente) -->
   <div class="user-info">
     <button mat-icon-button aria-label="Account" (click)="toggleLogin()">
       <mat-icon>{{ logged ? 'exit_to_app' : 'account_circle' }}</mat-icon>
@@ -80,7 +73,6 @@
       </span>
     </label>
   </div>
-  <!-- Icona Notifiche visibile solo se loggato e se è venditore -->
   <div *ngIf="logged && isVenditore">
     <ul>
       <li style="--i:#616768;--j:#0b1217;">

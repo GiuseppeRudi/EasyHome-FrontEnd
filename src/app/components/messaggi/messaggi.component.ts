@@ -14,7 +14,6 @@ export class MessaggiComponent implements OnInit {
   messages: any[] = [];
 
   ngOnInit() {
-    // Controllo se ci sono dati salvati in LocalStorage
     const cachedMessaggi = sessionStorage.getItem('messaggi');
     if (cachedMessaggi) {
       this.messages = JSON.parse(cachedMessaggi);

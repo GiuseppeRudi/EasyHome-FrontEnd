@@ -22,10 +22,10 @@ export class HomeComponent implements  OnInit{
   selectedLuogo: string | null = 'Provincia';
 
   zoom=14;
-  center = { lat: 39.3042, lng: 16.2503 }; // Coordinate di Cosenza// Coordinate di Cosenza
+  center = { lat: 39.3042, lng: 16.2503 };
 
   markers: any[] = [];
-  filteredMarkers: any[] = []; // Marker filtrati in base al luogo selezionato
+  filteredMarkers: any[] = [];
   places: {
     name: string;
     zoom: number;
@@ -76,13 +76,12 @@ export class HomeComponent implements  OnInit{
 
   filterMarkers(cityName: string) {
     if (cityName !== '') {
-      this.filteredMarkers = this.markers; // Mostra tutti i marker
+      this.filteredMarkers = this.markers;
     } else {
       this.filteredMarkers = this.markers.filter(marker => marker.city === cityName); // Filtra per città
     }
   }
 
-  // Funzione per aprire la mappa in un dialog
   openMap(templateRef: TemplateRef<any>, selectedField: 'selectedLuogo') {
     this.dialog.open(templateRef, {
       width: '800px'
@@ -90,7 +89,6 @@ export class HomeComponent implements  OnInit{
   }
 
 
-  // Controlla che la selezione sia completa
   isSelectionComplete(): boolean {
     return (
       this.selectedImmobili !== 'Tipo' &&
@@ -114,7 +112,6 @@ export class HomeComponent implements  OnInit{
       next: (data: any) => {
         console.log(data);
 
-        // Map the response to a format that Google Maps can understand
         this.markers = data.map((marker: { lat: number; lng: number }) => ({
           coordinates: { lat: marker.lat, lng: marker.lng }
         }));

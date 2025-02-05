@@ -2,16 +2,13 @@
   <navbar></navbar>
 </header>
 
-<!-- Titolo Pagina -->
 <div class="container mt-5">
   <h2 class="text-center mb-4">🔨 Aste Immobiliari</h2>
 
-  <!-- Mostra un messaggio se non ci sono aste -->
   <div *ngIf="aste.length === 0" class="alert alert-warning text-center">
     Nessuna asta disponibile. Prova a tornare più tardi.
   </div>
 
-  <!-- Lista delle aste -->
   <div class="row justify-content-center">
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let asta of aste">
       <div class="card shadow-lg h-100">
@@ -31,7 +28,6 @@
             <li><strong>Superficie:</strong> {{ asta.mq }} m²</li>
           </ul>
 
-          <!-- Pulsante Dettagli -->
           <div class="mt-auto text-center">
             <a [routerLink]="['/aste', asta.id]" class="btn btn-primary">Dettagli</a>
           </div>
@@ -41,7 +37,6 @@
   </div>
 </div>
 
-<!-- Footer -->
 <footer class="footer mt-5">
   <app-footer></app-footer>
 </footer>

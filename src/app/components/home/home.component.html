@@ -1,4 +1,4 @@
-<!-- Template per "Tipo Immobile" -->
+
 <ng-template #immobiliTemplate let-dialogRef="dialogRef">
   <div class="dialog-container">
     <h2>Seleziona Tipo</h2>
@@ -12,7 +12,6 @@
   </div>
 </ng-template>
 
-<!-- Template per "Tipo Annuncio" -->
 <ng-template #annuncioTemplate let-dialogRef="dialogRef">
   <div class="dialog-container">
     <h2>Seleziona Categoria</h2>
@@ -29,7 +28,6 @@
   <div class="dialog-map-container">
     <div class="dialog-container-luogo">
 
-      <!-- Lista dei luoghi con due colonne per riga -->
       <ul class="options-list">
         <ng-container *ngFor="let city of places; let i = index">
           <!-- Apre una riga ogni due elementi -->
@@ -50,7 +48,6 @@
         </ng-container>
       </ul>
 
-      <!-- Mappa -->
       <div class="map-container">
         <google-map [center]="center" [zoom]="zoom">
           <map-marker *ngFor="let marker of filteredMarkers"
@@ -59,7 +56,6 @@
         </google-map>
       </div>
 
-      <!-- Bottone di conferma -->
       <button class="bottone mt-2" (click)="confirmSelection(dialogRef)">Conferma</button>
 
     </div>
@@ -76,7 +72,6 @@
     <section class="search-section">
       <form action="/search" method="get">
         <div class="filters">
-          <!-- Sezione superiore in una riga con Flexbox -->
           <div class="search-line">
             <p>Cerco</p>
             <div class="filter">
@@ -92,7 +87,6 @@
             </div>
           </div>
 
-          <!-- Sezione inferiore con "a" e Luogo -->
           <div class="search-line">
             <p>a</p>
             <div class="filter">

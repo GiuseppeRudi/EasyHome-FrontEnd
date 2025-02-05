@@ -6,7 +6,7 @@
   </header>
 
   <div class="wizard-container">
-    <!-- Passo 1: Dettagli dell'annuncio -->
+
     <div *ngIf="passoAttuale === 1" class="step">
       <h2 class="step-title">Passo 1: Dettagli dell'annuncio</h2>
       <form [formGroup]="form">
@@ -43,7 +43,6 @@
       </form>
     </div>
 
-    <!-- Passo 2: Dettagli finanziari e struttura -->
     <div *ngIf="passoAttuale === 2" class="step">
       <h2 class="step-title">Passo 2: Dettagli finanziari e struttura</h2>
       <form [formGroup]="form">
@@ -75,7 +74,6 @@
       </form>
     </div>
 
-    <!-- Passo 3: Posizione e conferma -->
     <div *ngIf="passoAttuale === 3" class="step">
       <h2 class="step-title">Passo 3: Posizione e Conferma</h2>
 
@@ -84,9 +82,11 @@
         <div class="form-field">
           <label for="foto">Foto
             <span class="warning-text">Attenzione: la prima immagine caricata sarà quella predefinita</span>
-          </label>
-          <input id="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
 
+          </label>
+
+          <input id="foto" type="file" (change)="onFileChange($event)" multiple accept="image/*">
+          <span class="warning-text">Ricorda: I file caricati devono essere in formato .png</span>
           <!-- Anteprima delle immagini -->
           <div *ngIf="anteprimaImmagini.length > 0" class="preview-images">
             <div *ngFor="let file of anteprimaImmagini; let i = index" class="preview-container">
@@ -126,14 +126,6 @@
 
 
 
-
-
-
-
-      <div class="form-field">
-          <label for="etichetta">Etichetta</label>
-          <input id="etichetta" formControlName="etichetta" type="text" placeholder="Etichetta dell'immobile">
-        </div>
 
         <div class="button-group">
           <button type="button" class="prev-button" (click)="tornaPasso()">Back</button>

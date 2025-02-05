@@ -2,8 +2,8 @@ export interface Immobile {
   immagine: string;
   id: number;
   nome: string;
-  tipo?: string;         // Può essere null
-  descrizione?: string;  // Può essere null
+  tipo?: string;
+  descrizione?: string;
   categoria?: string;
   prezzo?: number;
   mq?: number;

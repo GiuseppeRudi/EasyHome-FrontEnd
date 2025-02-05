@@ -33,8 +33,8 @@ user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:''
 
 
   openDialogWithPrevent(event: Event, dialogTemplate: TemplateRef<any>) {
-    event.preventDefault(); // Previene la navigazione
-    this.closeDialog(); // Chiude il dialog precedente, se aperto
+    event.preventDefault();
+    this.closeDialog();
     this.dialog.open(dialogTemplate, {
       width: '400px',
     });
@@ -66,13 +66,6 @@ user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:''
           console.log('Registrazione effettuata con successo:', response);
 
           this.closeDialog();
-          /*
-          setTimeout(() => {
-            this.router.navigate(['/']).then(() => {
-              window.location.reload(); // Ricarica la pagina per aggiornare i dati
-            });
-          }, 500);
-           */
         },
         error: (err) => {
           console.error('Errore durante la registrazione:', err);
@@ -89,20 +82,18 @@ user = { firstName: '',lastName:'',birthdate: '',country:'', province:'',city:''
         next: (response: any) => {
           console.log('Login effettuato con successo:', response);
 
-          // Salva le informazioni dell'utente nel frontend (es. sessionStorag o variabili)
           sessionStorage.setItem('username', response.username);
           sessionStorage.setItem('role', response.role);
           sessionStorage.setItem('userRole', 'acquirente');
           this.closeDialog();
           setTimeout(() => {
-            // Reindirizza o ricarica la pagina
             if (response.role === 'ROLE_ADMIN') {
               this.router.navigate(['/admin']).then(() => {
-                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+                window.location.reload();
               });
             } else {
               this.router.navigate(['/']).then(() => {
-                window.location.reload(); // Ricarica la pagina per aggiornare i dati
+                window.location.reload();
               });
             }
           }, 500);

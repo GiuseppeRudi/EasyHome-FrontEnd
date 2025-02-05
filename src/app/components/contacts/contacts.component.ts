@@ -33,9 +33,8 @@ export class ContactsComponent {
 
   aggiungiContatto() {
     if (this.contactForm.valid) {
-      console.log('Contatto da inviare:', this.contactForm.value);  // Verifica cosa stai inviando
+      console.log('Contatto da inviare:', this.contactForm.value);
 
-      // Invia i dati come oggetto JSON
       this.service.addrichiesta(this.contactForm.value).subscribe({
         next: (response) => {
           alert('Contatto aggiunto con successo!');

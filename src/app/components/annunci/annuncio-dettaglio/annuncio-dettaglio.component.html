@@ -2,7 +2,6 @@
 
 <div class="container">
   <div class="annuncio-card">
-    <!-- Immagine principale accanto alla descrizione -->
     <div class="immagine-principale">
       <img [src]="getImageSrc(form.value.fotoPaths[0])" alt="Immagine immobile" class="main-img">
     </div>
@@ -23,7 +22,6 @@
     </div>
   </div>
 
-  <!-- Dati venditore -->
   <div class="venditore-info" *ngIf="immobileDetails.utente">
     <h3>Dettagli venditore</h3>
     <p><strong>Nome:</strong> {{ immobileDetails.utente.firstName || 'N/D' }}</p>
@@ -32,7 +30,7 @@
     <p><strong>Telefono:</strong> {{ immobileDetails.utente.phoneNumber || 'N/D' }}</p>
   </div>
 
-  <!-- Mappa Google -->
+  <!-- mappa Google -->
   <div class="mappa-container" *ngIf="latitudine && longitudine">
     <h3>Posizione</h3>
     <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
@@ -42,7 +40,6 @@
 
   <app-contattavenditore [venditore]="immobileDetails.utente.username" [immobileId]="immobileId"></app-contattavenditore>
 
-  <!-- Galleria immagini -->
   <div class="galleria">
     <h3>Galleria Immagini</h3>
     <div class="immagini">
