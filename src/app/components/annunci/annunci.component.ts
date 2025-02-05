@@ -14,6 +14,8 @@ export class AnnunciComponent implements OnInit {
   constructor(private service: ServiceService) {}
 
   ngOnInit() {
+
+    //DOPO VA MODIFICATA
     const cachedImmobili = sessionStorage.getItem('immobili');
     if (cachedImmobili) {
       this.immobiliminimal = JSON.parse(cachedImmobili);

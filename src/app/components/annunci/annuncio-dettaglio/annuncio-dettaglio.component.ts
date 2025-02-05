@@ -39,6 +39,7 @@ export class AnnuncioDettaglioComponent implements OnInit {
       anno: [0, Validators.required],
       provincia: ['', Validators.required],
       fotoPaths: [[]] // Array di immagini
+
     });
   }
 

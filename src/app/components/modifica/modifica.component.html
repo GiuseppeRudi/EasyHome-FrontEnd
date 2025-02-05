@@ -19,7 +19,14 @@
 
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ immobile.nome }}</h5>
-          <p class="card-text">Prezzo: €{{ immobile.prezzo | number:'1.0-0' }}</p>
+          <p class="card-text">
+            <span *ngIf="immobile.prezzo_scontato > 0" class="text-muted text-decoration-line-through">
+              €{{ immobile.prezzo | number:'1.0-0' }}
+            </span>
+            <span class="fw-bold ms-2">
+              €{{ (immobile.prezzo_scontato > 0 ? immobile.prezzo_scontato : immobile.prezzo) | number:'1.0-0' }}
+            </span>
+          </p>
 
           <ul class="dettagli-annuncio">
             <li><strong>Tipo:</strong> {{ immobile.tipo }}</li>
