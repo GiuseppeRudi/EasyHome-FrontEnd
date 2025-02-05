@@ -44,21 +44,24 @@ export class ModificaDettaglioComponent implements OnInit{
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.immobileId = Number(params.get('id'));
-      console.log('ID immobile ricevuto:', this.immobileId);
+
 
       // Chiama il servizio per ottenere i dettagli dell'immobile
       this.service.getImmobileById(this.immobileId).subscribe((data) => {
         console.log(data);
         this.immobileDetails = data;
 
+        // Calcola il prezzo da visualizzare (prezzo_scontato se è maggiore di 0, altrimenti prezzo)
+        const prezzo = this.immobileDetails.prezzo;
+        const prezzoScontato = this.immobileDetails.prezzo_scontato;
+        this.immobileDetails.prezzoVisualizzato = (prezzoScontato > 0) ? prezzoScontato : prezzo;
+
         this.modificaForm.patchValue(this.immobileDetails);
       });
     });
   }
 
-  rimuoviImmagine(index: number) {
-    this.immobileDetails.fotoPaths.splice(index, 1);
-  }
+
 
 
   // Metodo per la modifica dell'annuncio

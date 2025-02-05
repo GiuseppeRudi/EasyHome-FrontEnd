@@ -58,9 +58,8 @@ export class AuthService {
       withCredentials: true,
     }).pipe(
       switchMap((user) => {
-        console.log("AFF");
         this.currentUserSubject.next(user);
-        console.log(this.currentUserSubject.value);
+
         return of(user);
       }),
       catchError(() => {

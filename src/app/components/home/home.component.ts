@@ -97,10 +97,17 @@ export class HomeComponent implements  OnInit{
     );
   }
   seeResults(): void {
-    console.log(this.selectedAffittoVendita);
-    this.service.getImmobiliMinimal(this.selectedImmobili, this.selectedAffittoVendita, this.selectedLuogo);
-    this.router.navigate(['/annunci']); // Naviga direttamente
+
+    // Passa i parametri alla pagina degli annunci tramite query parameters
+    this.router.navigate(['/annunci'], {
+      queryParams: {
+        immobili: this.selectedImmobili,
+        affittoVendita: this.selectedAffittoVendita,
+        luogo: this.selectedLuogo
+      }
+    });
   }
+
 
   ngOnInit(): void {
     this.loadMarkers();

@@ -20,6 +20,7 @@ import {PrivacyComponent} from './components/privacy/privacy.component';
 import {TerminiecondizioniComponent} from './components/terminiecondizioni/terminiecondizioni.component';
 import {ModificaComponent} from './components/modifica/modifica.component';
 import {ModificaDettaglioComponent} from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
+import {AsteDettaglioComponent} from './components/aste/aste-dettaglio/aste-dettaglio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'contattavenditore', component:  ContattavenditoreComponent, canActivate :[authGuard], data: { type: ["acquirente"] }},
   { path: 'annunci/:id', component: AnnuncioDettaglioComponent, canActivate :[authGuard], data: { type: ["acquirente"] }},
   { path: 'modifica-dettaglio/:id', component: ModificaDettaglioComponent, canActivate :[authGuard], data: { type: ["venditore"] }},
+  { path: 'aste-dettaglio/:id', component: AsteDettaglioComponent, canActivate :[authGuard], data: { type: ["acquirente"] }},
   { path: '403', component: ErrorpageComponent, data: { errorCode: 403 } },
   { path: '***', component: ErrorpageComponent, data: { errorCode: 404 } },
   { path: '**', component: ErrorpageComponent, data: { errorCode: 404 } }

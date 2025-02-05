@@ -1,26 +1,36 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <navbar></navbar>
 
 <div class="container">
   <div class="annuncio-card">
     <div class="immagine-principale">
-      <img [src]="getImageSrc(form.value.fotoPaths[0])" alt="Immagine immobile" class="main-img">
+      <img [src]="getImageSrc(immobileDetails.fotoPaths[0])" alt="Immagine immobile" class="main-img">
     </div>
-
     <div class="annuncio-info">
-      <h2 class="titolo">{{ form.value.nome }}</h2>
-      <p class="descrizione">{{ form.value.descrizione }}</p>
+
+      <h2 class="titolo">{{ immobileDetails.nome }}</h2>
+
+      <!-- Prezzo evidenziato -->
+      <p class="prezzo">
+    <span *ngIf="immobileDetails.prezzo_scontato > 0" class="text-muted text-decoration-line-through prezzo-originale">
+      €{{ immobileDetails.prezzo | number:'1.0-0' }}
+    </span>
+        <span class="fw-bold text-danger prezzo-scontato">
+      €{{ (immobileDetails.prezzo_scontato > 0 ? immobileDetails.prezzo_scontato : immobileDetails.prezzo) | number:'1.0-0' }}
+    </span>
+      </p>
+
+      <p class="descrizione">{{ immobileDetails.descrizione }}</p>
       <ul class="dettagli">
-        <li><strong>Tipo:</strong> {{ form.value.tipo }}</li>
-        <li><strong>Categoria:</strong> {{ form.value.categoria }}</li>
-        <li><strong>Prezzo:</strong> €{{ form.value.prezzo | number:'1.0-0' }}</li>
-        <li><strong>Metri quadri:</strong> {{ form.value.mq }} m²</li>
-        <li><strong>Camere:</strong> {{ form.value.camere }}</li>
-        <li><strong>Bagni:</strong> {{ form.value.bagni }}</li>
-        <li><strong>Anno di costruzione:</strong> {{ form.value.anno }}</li>
-        <li><strong>Provincia:</strong> {{ form.value.provincia }}</li>
+        <li><strong>Tipo:</strong> {{ immobileDetails.tipo }}</li>
+        <li><strong>Categoria:</strong> {{ immobileDetails.categoria }}</li>
+        <li><strong>Metri quadri:</strong> {{ immobileDetails.mq }} m²</li>
+        <li><strong>Camere:</strong> {{ immobileDetails.camere }}</li>
+        <li><strong>Bagni:</strong> {{ immobileDetails.bagni }}</li>
+        <li><strong>Anno di costruzione:</strong> {{ immobileDetails.anno }}</li>
+        <li><strong>Provincia:</strong> {{ immobileDetails.provincia }}</li>
       </ul>
     </div>
-  </div>
 
   <div class="venditore-info" *ngIf="immobileDetails.utente">
     <h3>Dettagli venditore</h3>
@@ -38,12 +48,13 @@
     </google-map>
   </div>
 
-  <app-contattavenditore [venditore]="immobileDetails.utente.username" [immobileId]="immobileId"></app-contattavenditore>
+    <app-contattavenditore [venditore]="immobileDetails.utente.username" [immobileId]="immobileId" [buttonText]="'Contatta Venditore'"></app-contattavenditore>
+
 
   <div class="galleria">
     <h3>Galleria Immagini</h3>
     <div class="immagini">
-      <img *ngFor="let img of form.value.fotoPaths.slice(1)" [src]="getImageSrc(img)" class="galleria-img">
+      <img *ngFor="let img of immobileDetails.fotoPaths.slice(1)" [src]="getImageSrc(img)" class="galleria-img">
     </div>
   </div>
 </div>
@@ -51,20 +62,35 @@
 <app-recensione [immobileId]="immobileId"></app-recensione>
 
 
-<div *ngIf="loading">Caricamento recensioni...</div>
+  <div class="recensioni-container mt-5">
+    <h3 class="text-center mb-4">Recensioni</h3>
 
-<div *ngIf="!loading && recensioni.length > 0">
-  <div *ngFor="let recensione of recensioni" class="recensione">
-    <h3>Rating: {{ recensione.rating }}/5</h3>
-    <p>{{ recensione.descrizione }}</p>
-    <small>Acquirente: {{ recensione.acquirente }}</small>
+    <div *ngIf="loading" class="text-center">
+      <p>Caricamento recensioni...</p>
+    </div>
+
+    <div *ngIf="!loading && recensioni.length > 0" class="row">
+      <div *ngFor="let recensione of recensioni" class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card recensione-card shadow-lg p-3">
+          <div class="card-body">
+            <div class="rating mb-2">
+              <ng-container *ngFor="let star of getStarsArray(recensione.rating); let i = index">
+                <i class="fas fa-star text-warning"></i>
+              </ng-container>
+            </div>
+            <p class="card-text">{{ recensione.descrizione }}</p>
+            <small class="text-muted">Acquirente: {{ recensione.acquirente }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && recensioni.length === 0" class="text-center">
+      <p class="alert alert-warning">Nessuna recensione disponibile.</p>
+    </div>
   </div>
 </div>
+<footer>
+  <app-footer></app-footer>
+</footer>
 
-<div *ngIf="!loading && recensioni.length === 0">
-  <p>Nessuna recensione disponibile.</p>
-</div>
-
-
-
-<app-footer></app-footer>

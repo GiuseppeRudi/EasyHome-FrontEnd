@@ -11,6 +11,7 @@ import {ServiceService} from '../../service/service.service';
 export class ContattavenditoreComponent {
   @Input() immobileId!: number;
   @Input() venditore!: string;
+  @Input() buttonText: string = "Contatta il venditore";
   contactForm: FormGroup;
   showModal: boolean = false;
 

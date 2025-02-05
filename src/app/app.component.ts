@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {
-      console.log("prova")
+
       if (event instanceof NavigationStart) {
         this.loading = true;
       } else if (event instanceof NavigationEnd || event instanceof NavigationError) {

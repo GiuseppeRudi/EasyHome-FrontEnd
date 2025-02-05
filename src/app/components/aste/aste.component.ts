@@ -17,19 +17,11 @@ export class AsteComponent implements OnInit {
 
     this.service.getImmobiliMinimal('Tutti','Aste','Tutte');
 
-    const cachedAste = sessionStorage.getItem('aste');
-    if (cachedAste) {
-      this.aste = JSON.parse(cachedAste);
-      console.log('Dati caricati da sessionStorage:', this.aste);
-    }
-
     // Chiamata al servizio per ottenere gli immobili
     this.service.getImmobiliObservable().subscribe(data => {
       console.log('Dati ricevuti dal backend:', data);
-
       if (data && data.length > 0) {
         this.aste = data;
-        sessionStorage.setItem('immobili', JSON.stringify(this.aste));
       }
     });
   }
@@ -41,4 +33,5 @@ export class AsteComponent implements OnInit {
   onImageError(event: Event) {
     (event.target as HTMLImageElement).src = 'assets/no-image.png';
   }
+
 }

@@ -48,7 +48,7 @@ export class AggiungiComponent {
   }
 
   verificaIndirizzo(indirizzo: string) {
-    console.log(indirizzo);
+
     if (indirizzo) {
       this.geocodingService.getLatLng(indirizzo).subscribe({
         next: (response) => {
@@ -135,7 +135,7 @@ export class AggiungiComponent {
       formData.append('longitudine', this.form.get('longitudine')?.value);
       formData.append('provincia', this.form.get('provincia')?.value);
       this.username = sessionStorage.getItem('username');
-      console.log(sessionStorage.getItem('username'));
+
       if(this.username!=null) formData.append('user', this.username);
 
       if (this.fotoFiles.length > 0) {
@@ -143,7 +143,7 @@ export class AggiungiComponent {
           formData.append('foto', file, file.name);
         });
       }
-      console.log('Annuncio da inviare:', formData);
+
 
       this.service.addAnnuncio(formData).subscribe({
         next: (response) => {
