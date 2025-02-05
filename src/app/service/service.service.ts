@@ -183,5 +183,12 @@ export class ServiceService {
     return this.http.get<any[]>(`${this.apiUrl}/${venditore}`);
   }
 
+  createAd(adName: string, adsetId: string, creativeId: string) {
+    return this.http.post(`${this.apiUrl}/auth/facebook/ads`, { adName, adsetId, creativeId },{
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    });
+  }
+
 }
 

@@ -34,7 +34,7 @@ export class ModificaDettaglioComponent implements OnInit{
       camere: [null, [Validators.min(0)]],
       bagni: [null, [Validators.min(0)]],
       anno: [null],
-      etichetta: [''],
+      data: [''],
       provincia: [''],
       latitudine: [null],
       longitudine: [null]
@@ -76,7 +76,7 @@ export class ModificaDettaglioComponent implements OnInit{
       formData.append('camere', this.modificaForm.get('camere')?.value.toString());
       formData.append('bagni', this.modificaForm.get('bagni')?.value.toString());
       formData.append('anno', this.modificaForm.get('anno')?.value.toString());
-      formData.append('etichetta', this.modificaForm.get('etichetta')?.value);
+      formData.append('data', this.modificaForm.get('data')?.value);
       formData.append('latitudine', this.modificaForm.get('latitudine')?.value);
       formData.append('longitudine', this.modificaForm.get('longitudine')?.value);
       formData.append('provincia', this.modificaForm.get('provincia')?.value);
