@@ -18,13 +18,13 @@ export class AggiungiComponent {
   googleMapsUrl: string = '';
   latitudine: number | null = null;
   longitudine: number | null = null;
-  lat: number = 0;  // Inizializzato a 0
-  lng: number = 0;  // Inizializzato a 0
+  lat: number = 0;
+  lng: number = 0;
 
 
   markerPosition: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
-  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 }; // Centro mappa
-  zoom: number = 14; // Zoom della mappa
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  zoom: number = 14;
 
 
   constructor(private geocodingService: GeocodingService,private fb: FormBuilder, private router: Router, private service: ServiceService) {
@@ -38,7 +38,7 @@ export class AggiungiComponent {
       camere: [0, Validators.required],
       bagni: [0, Validators.required],
       anno: [0, Validators.required],
-      etichetta: ['', Validators.required],
+      data: ['', Validators.required],
       provincia: ['', Validators.required],
       indirizzo: ['', Validators.required],
       latitudine: [null, Validators.required],
@@ -47,7 +47,6 @@ export class AggiungiComponent {
     });
   }
 
-  // Funzione per verificare l'indirizzo
   verificaIndirizzo(indirizzo: string) {
     console.log(indirizzo);
     if (indirizzo) {
@@ -57,7 +56,6 @@ export class AggiungiComponent {
             const location = response.results[0].geometry.location;
 
             if (location && location.lat && location.lng) {
-              // Impostiamo latitudine e longitudine
               this.latitudine = location.lat;
               this.longitudine = location.lng;
 
@@ -66,7 +64,6 @@ export class AggiungiComponent {
               longitudine: location.lng,
             });
 
-              // Impostiamo la posizione del marker e il centro della mappa
               this.markerPosition = { lat: this.latitudine || 0, lng: this.longitudine || 0 };
               this.center = { lat: this.latitudine || 0, lng: this.longitudine || 0 };
 
@@ -83,9 +80,6 @@ export class AggiungiComponent {
   }
 
 
-
-
-  // Funzione per gestire il caricamento dei file
   anteprimaImmagini: string[] = [];
 
   onFileChange(event: any) {
@@ -94,10 +88,8 @@ export class AggiungiComponent {
       const nuoviFiles = Array.from(files);
       this.fotoFiles.push(...nuoviFiles);
 
-      // Aggiorna il form control con l'array di file
       this.form.get('foto')?.setValue(this.fotoFiles);
 
-      // Anteprima
       for (let file of nuoviFiles) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
@@ -138,7 +130,7 @@ export class AggiungiComponent {
       formData.append('camere', this.form.get('camere')?.value.toString());
       formData.append('bagni', this.form.get('bagni')?.value.toString());
       formData.append('anno', this.form.get('anno')?.value.toString());
-      formData.append('etichetta', this.form.get('etichetta')?.value);
+      formData.append('data', this.form.get('data')?.value);
       formData.append('latitudine', this.form.get('latitudine')?.value);
       formData.append('longitudine', this.form.get('longitudine')?.value);
       formData.append('provincia', this.form.get('provincia')?.value);
@@ -168,16 +160,23 @@ export class AggiungiComponent {
     }
   }
 
-  // Dentro il componente AggiungiComponent
+  ngOnInit() {
+    this.aggiornaData();
+  }
+
+// Funzione per ottenere solo la data attuale (YYYY-MM-DD)
+  aggiornaData() {
+    const oggi = new Date().toISOString().split('T')[0]; // Prende solo la parte della data
+    this.form.patchValue({ data: oggi });
+  }
+
+
   rimuoviFoto(index: number) {
-    // Rimuove la foto dall'array fotoFiles
     this.fotoFiles.splice(index, 1);
 
-    // Rimuove l'anteprima dell'immagine
     this.anteprimaImmagini.splice(index, 1);
 
 
-    // Rimuove la foto dal controllo del form
     this.form.get('foto')?.setValue(this.fotoFiles);
   }
 

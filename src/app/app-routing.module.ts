@@ -22,9 +22,9 @@ import {ModificaComponent} from './components/modifica/modifica.component';
 import {ModificaDettaglioComponent} from './components/modifica/modifica-dettaglio/modifica-dettaglio.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },  // La home page
-  { path: 'about', component: AboutComponent },  // Pagina About
-  { path: 'contacts', component: ContactsComponent },  //pagina contatti
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contacts', component: ContactsComponent },
   { path: 'annunci', component: AnnunciComponent },
   { path: 'aggiungi_annuncio', component: AggiungiComponent, canActivate :[authGuard], data: { type: ["venditore"] } },
   { path: 'modifica', component: ModificaComponent, canActivate :[authGuard], data: { type: ["venditore"] } },
@@ -46,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],  // Configura il RouterModule con le rotte
-  exports: [RouterModule]  // Esporta il RouterModule
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

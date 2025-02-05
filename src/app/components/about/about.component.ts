@@ -8,9 +8,9 @@ import {Component, ViewChild} from '@angular/core';
 })
 export class AboutComponent {
 
-  center = {lat: 39.3042, lng: 16.2503}; // Coordinate di Cosenza
+  center = {lat: 39.3042, lng: 16.2503};
   zoom = 12; // Livello di zoom
-  markerPosition = {lat: 39.3042, lng: 16.2503}; // Stessa posizione per il marker
+  markerPosition = {lat: 39.3042, lng: 16.2503};
 
   // Coordinate della sede (Cosenza)
   latitude: number = 39.314460;

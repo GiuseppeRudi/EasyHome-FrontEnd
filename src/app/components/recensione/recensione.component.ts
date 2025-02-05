@@ -13,23 +13,22 @@ export class RecensioneComponent {
   @Input() immobileId!: number;
   username: string | null = '';
   form: FormGroup;
-  rating: number = 0; // Valore del rating delle stelle
-  descrizione: string = ''; // Descrizione della recensione
+  rating: number = 0;
+  descrizione: string = '';
 
   constructor(private fb: FormBuilder, private router: Router, private service: ServiceService) {
     this.form = this.fb.group({
-      rating: [0, Validators.required], // Rating delle stelle
-      descrizione: ['', Validators.required] // Descrizione
+      rating: [0, Validators.required],
+      descrizione: ['', Validators.required]
     });
   }
 
-  // Funzione per gestire la selezione del rating
+
   setRating(value: number) {
     this.rating = value;
-    this.form.get('rating')?.setValue(value); // Imposta il valore nel form
+    this.form.get('rating')?.setValue(value);
   }
 
-  // Funzione per inviare la recensione al backend
   submitRecensione() {
     if (this.form.valid) {
       const formData = new FormData();
@@ -42,7 +41,6 @@ export class RecensioneComponent {
       if(this.username!=null) formData.append('acquirente', this.username);
       console.log('Form Submitted', formData.keys());
 
-      // Chiamata al servizio per inviare la recensione
       this.service.addRecensione(formData).subscribe({
         next: (response) => {
           alert('Recensione inviata con successo!');

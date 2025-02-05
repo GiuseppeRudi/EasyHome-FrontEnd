@@ -14,10 +14,8 @@ import {NavbarComponent} from '../navbar/navbar.component';
 export class AdminpageComponent implements OnInit {
   username: string | null = '';
   usernameToBan: string = '';
- // Array per contenere gli username
-  userList: { username: string; role: string }[] = [];  // Ora include sia username che ruolo
+  userList: { username: string; role: string }[] = [];
 
-  // Form per cambiare il ruolo e per il ban
   changeUserTypeForm: FormGroup;
   banUserForm: FormGroup;
 
@@ -39,7 +37,7 @@ export class AdminpageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUserList();  // Carica la lista degli utenti
+    this.loadUserList();
   }
 
   logout() {
@@ -52,29 +50,26 @@ export class AdminpageComponent implements OnInit {
     });
   }
 
-  // Carica la lista utenti con ruoli
   loadUserList(): void {
     this.service.getUsers().subscribe({
       next: (users) => {
         console.log("Dati ricevuti dal server:", users);
-        this.userList = users;  // Ora la lista contiene sia username che ruolo
+        this.userList = users;
       },
       error: (err) => console.error('Errore nel recupero degli utenti:', err),
     });
   }
-  errorMessage: string = ''; // Variabile per il messaggio di errore
+  errorMessage: string = '';
 
   deleteUser(username: string): void {
     this.service.deleteUser(username).subscribe({
       next: (response) => {
         // Successo nella cancellazione
         console.log('Utente eliminato:', response);
-        window.location.reload();  // Ricarica la pagina
-        // Aggiorna la lista degli utenti, ricaricando da API
-        this.errorMessage = ''; // Pulisce eventuali messaggi di errore
+        window.location.reload();
+        this.errorMessage = '';
       },
       error: (err) => {
-        // Gestione errori
         console.error('Errore nell\'eliminazione dell\'utente:', err);
         if (err.status === 404) {
           this.errorMessage = 'L\'utente non esiste';
@@ -83,7 +78,7 @@ export class AdminpageComponent implements OnInit {
         }
       }
     });
-    this.usernameToBan = ''; // Reset username
+    this.usernameToBan = '';
   }
 
 
@@ -101,7 +96,7 @@ export class AdminpageComponent implements OnInit {
       next: (response) => {
         console.log("Ruolo cambiato con successo:", response);
         alert("Ruolo aggiornato con successo!");
-        window.location.reload();  // Ricarica la pagina
+        window.location.reload();
       },
       error: (error) => {
         console.error("Errore nel cambiare il ruolo:", error);

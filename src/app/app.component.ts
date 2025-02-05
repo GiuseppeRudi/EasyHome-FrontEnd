@@ -14,14 +14,11 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Ascolta gli eventi del router per rilevare quando inizia e finisce una navigazione
     this.router.events.subscribe(event => {
       console.log("prova")
       if (event instanceof NavigationStart) {
-        // Mostra lo spinner quando la navigazione inizia
         this.loading = true;
       } else if (event instanceof NavigationEnd || event instanceof NavigationError) {
-        // Nascondi lo spinner quando la navigazione è terminata (sia con successo che con errore)
         this.loading = false;
       }
     });

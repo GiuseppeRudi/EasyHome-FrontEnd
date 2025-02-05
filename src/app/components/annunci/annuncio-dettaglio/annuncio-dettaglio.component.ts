@@ -45,7 +45,6 @@ export class AnnuncioDettaglioComponent implements OnInit {
       this.immobileId = Number(params.get('id'));
       console.log('ID immobile ricevuto:', this.immobileId);
 
-      // Chiama il servizio per ottenere i dettagli dell'immobile
       this.service.getImmobileById(this.immobileId).subscribe((data) => {
         console.log(data);
         this.immobileDetails = data;
@@ -53,7 +52,6 @@ export class AnnuncioDettaglioComponent implements OnInit {
         this.latitudine = this.immobileDetails.latitudine;
         this.longitudine = this.immobileDetails.longitudine;
 
-        // Imposta la mappa
         if (this.latitudine && this.longitudine) {
           this.markerPosition = { lat: this.latitudine, lng: this.longitudine };
           this.center = { lat: this.latitudine, lng: this.longitudine };

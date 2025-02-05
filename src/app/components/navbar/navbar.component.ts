@@ -18,7 +18,7 @@ import {AuthService} from '../../auth/auth.service';
   providedIn: 'root'
 })
 export class NavbarComponent implements OnInit{
-  logged = false; // Stato di login
+  logged = false;
   username: string | null = null;
   userRole: string | null = null;
   isVenditore = false;
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit{
   menuItems = [
     { label: 'Home', icon: 'home', route: '/' },
     { label: 'About', icon: 'info', route: '/about' },
-    { label: 'Aste', icon: 'gavel', route: '/aste' },  // Aste visibile sia loggato che non loggato
+    { label: 'Aste', icon: 'gavel', route: '/aste' },
     { label: 'Contatti', icon: 'contact_mail', route: '/contacts' },
   ];
 
@@ -53,12 +53,11 @@ export class NavbarComponent implements OnInit{
     }
   }
 
-  // Navigazione tra le route con ritardo
   navigateTo(route: string) {
-    this.closeDialog(); // Chiudi il dialogo prima della navigazione
+    this.closeDialog();
     setTimeout(() => {
-      this.router.navigate([route]); // Naviga alla route dopo un ritardo
-    }, 150); // Ritardo di 500 millisecondi (0.5 secondi)
+      this.router.navigate([route]);
+    }, 150);
   }
 
   modificaAnnuncio() {

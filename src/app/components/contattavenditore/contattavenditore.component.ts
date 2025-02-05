@@ -54,7 +54,7 @@ export class ContattavenditoreComponent {
           alert("Errore durante l'invio del messaggio.");
         }
       })
-      this.closeModal();  // Chiude la modale dopo l'invio
+      this.closeModal();
     } else {
       console.log('Form is invalid');
     }

@@ -10,7 +10,6 @@ export class AuthService {
 
   private apiUrl = 'api';
 
-  // Stream reattivo per i dati dell'utente
   currentUserSubject = new BehaviorSubject<any | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -25,7 +24,7 @@ export class AuthService {
 
     return this.http.post<void>(`${this.apiUrl}/login`, body.toString(), {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      withCredentials: true, // Per inviare il cookie di sessione
+      withCredentials: true,
     });
 
   }
@@ -34,7 +33,7 @@ export class AuthService {
     return this.http.post<void>(`${this.apiUrl}/open/createUser`, form, {
       headers: {'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:4200'},
-      withCredentials: true, // Per inviare i cookie di sessione
+      withCredentials: true,
     });
   }
 
@@ -52,23 +51,19 @@ export class AuthService {
 
   getUser(): Observable<any | null> {
     if (this.currentUserSubject.value) {
-      // Se l'utente è già presente, restituisci il valore
       return of(this.currentUserSubject.value);
 
     }
-// Altrimenti, effettua una chiamata HTTP per recuperare l'utente
     return this.http.get<any>(`/${this.apiUrl}/open/check-user`, {
       withCredentials: true,
     }).pipe(
       switchMap((user) => {
         console.log("AFF");
-        // Se l'utente è autenticato, aggiorna il BehaviorSubject
         this.currentUserSubject.next(user);
         console.log(this.currentUserSubject.value);
         return of(user);
       }),
       catchError(() => {
-        // In caso di errore (es: 401 Unauthorized), restituisci null
         this.currentUserSubject.next(null);
         return of(null);
       })
