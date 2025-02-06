@@ -1,21 +1,21 @@
-/* Contenitore della lista */
+
 .options-list {
   display: flex;
   flex-direction: column;
   padding: 0;
   list-style: none;
-  margin: 0; /* Rimuove ogni spazio tra le righe */
+  margin: 0;
 }
 
-/* Ogni riga contiene due elementi */
+
 .options-row {
   display: flex;
   justify-content: space-between;
-  margin: 0; /* Rimuove ogni spazio tra le righe */
+  margin: 0;
   padding: 0;
 }
 
-/* Stile dei singoli elementi */
+
 .option-item {
   flex: 1;
   padding: 10px;
@@ -24,32 +24,34 @@
   text-align: center;
   cursor: pointer;
   transition: background 0.3s;
-  margin: 0; /* Rimuove ogni spazio tra gli elementi */
+  margin: 0;
   border: 1px solid #ddd;
 }
 
-/* Effetto hover */
+
 .option-item:hover {
-  background-color: #ddd;
+  background-color: black;
 }
 
-/* Selezione attiva */
+
 .selected {
   background-color: #007bff;
-  color: white;
-  border-color: #0056b3;
+  color: black;
+
+  border: 4px solid black;
+
 }
 
-/* Contenitore della mappa - OCCUPA TUTTO LO SPAZIO DISPONIBILE */
+
 .map-container {
   flex-grow: 1;
   width: 100%;
-  height: calc(100vh - 200px); /* Occupa tutto lo schermo tranne lo spazio necessario per la lista */
+  height: calc(100vh - 200px);
   border-radius: 8px;
   overflow: hidden;
 }
 
-/* Bottone di conferma */
+
 .bottone {
   width: 100%;
   padding: 10px;
@@ -66,7 +68,7 @@
 }
 
 
-/* Reset di base per margini e padding */
+
 * {
   margin: 0;
   padding: 0;
@@ -84,7 +86,7 @@ header {
 
   z-index: 1000;
 }
-/* Corpo della pagina */
+
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
@@ -94,12 +96,12 @@ body {
 }
 @keyframes fadeInLeftToRight {
   0% {
-    transform: translateX(-100%); /* Inizia da sinistra (fuori dallo schermo) */
+    transform: translateX(-100%);
     opacity: 0; /* Inizia invisibile */
   }
   100% {
-    transform: translateX(0); /* Si sposta nella posizione finale */
-    opacity: 1; /* Diventa completamente visibile */
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
@@ -109,20 +111,20 @@ body {
 .hero{
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),  url('/assets/sfondo.jpg'); /* Percorso dell'immagine */
 
-  background-size: cover; /* L'immagine copre tutto il contenitore */
-  background-position: center; /* Centra l'immagine */
-  background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
 }
 
-/* Sezione Hero */
+
 .hero {
   background-color: lightblue;
   padding: 50px 20px;
   text-align: center;
 }
 
-/* Annunci in Evidenza */
+
 .featured-listings {
   padding: 40px 20px;
   background-color: #ecf0f1;
@@ -163,7 +165,6 @@ body {
   text-decoration: underline;
 }
 
-/* Sezione Ricerca Avanzata al Centro */
 .search-section {
   display: flex;
 
@@ -185,7 +186,7 @@ body {
 .search-section form {
   display: flex;
   flex-direction: column;
-  width: 300px;  /* Larghezza del form */
+  width: 300px;
   align-items: center;
 }
 
@@ -194,7 +195,7 @@ body {
   font-weight: bold;
 }
 
-/* Barra di ricerca */
+
 .search-bar {
   display: flex;
   align-items: center;
@@ -219,12 +220,12 @@ body {
 
 @keyframes slideIn {
   0% {
-    transform: translateY(-100%); /* Inizia al di sopra della posizione finale */
-    opacity: 0; /* Inizia invisibile */
+    transform: translateY(-100%);
+    opacity: 0;
   }
   100% {
-    transform: translateY(0); /* Arriva alla sua posizione finale */
-    opacity: 1; /* Rende il testo visibile */
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -237,7 +238,7 @@ body {
 
 .search-section {
   padding: 20px;
-  background-color: transparent; /* Imposta lo sfondo della sezione come trasparente */
+  background-color: transparent;
 }
 
 .filters {
@@ -252,30 +253,30 @@ body {
 .search-line {
   display: flex;
   align-items: center;
-  gap: 10px; /* Distanza tra gli elementi nella riga */
+  gap: 10px;
 }
 
 .search-line p {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  color: white; /* Colore del testo */
+  color: white;
 }
 
 .filter button {
   padding: 10px 20px;
   font-size: 14px;
-  background-color: transparent; /* Bottone con sfondo trasparente */
-  border: 1px solid white; /* Bordi sottili */
+  background-color: transparent;
+  border: 1px solid white;
   border-radius: 5px;
   transition: all 0.3s ease;
   cursor: pointer;
-  color: white; /* Colore del testo nel bottone */
+  color: white;
 }
 
 .filter button:hover {
-  background-color: rgba(0, 123, 255, 0.1); /* Sfondo trasparente con effetto hover */
-  color: white; /* Colore del testo al passaggio del mouse */
+  background-color: rgba(0, 123, 255, 0.1);
+  color: white;
   border-color: white;
 
 }
@@ -291,8 +292,6 @@ body {
   }
 }
 
-
-/* Aggiungiamo un'animazione per il dialog */
 .dialog-container {
   background-color: #ffffff;
   padding: 20px;
@@ -409,10 +408,10 @@ h2 {
 
 
 
-/* Stile per la sezione Chi Siamo */
+
 .about-us {
-  background-color: #222; /* Sfondo scuro */
-  color: #eee; /* Testo chiaro */
+  background-color: #222;
+  color: #eee;
   text-align: center;
   padding: 40px 20px;
   border-radius: 10px;
@@ -424,7 +423,7 @@ h2 {
 .about-us h2 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #f9a825; /* Colore accento */
+  color: #f9a825;
 }
 
 .about-us p {
@@ -434,8 +433,8 @@ h2 {
 }
 
 .about-us .cta-button {
-  background-color: #f9a825; /* Colore accento */
-  color: #222; /* Testo scuro */
+  background-color: #f9a825;
+  color: #222;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -446,8 +445,8 @@ h2 {
 }
 
 .about-us .cta-button:hover {
-  background-color: #ffc107; /* Colore più chiaro al hover */
-  transform: translateY(-2px); /* Leggero sollevamento */
+  background-color: #ffc107;
+  transform: translateY(-2px);
 }
 
 .properties-container {
@@ -457,7 +456,7 @@ h2 {
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
-  max-width: 1200px; /* Limitiamo la larghezza */
+  max-width: 1200px;
 }
 
 figure {
@@ -468,13 +467,13 @@ figure {
   border-radius: 12px;
   overflow: hidden;
   background-color: #fafafa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra morbida */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 figure:hover {
-  transform: translateY(-5px); /* Effetto di sollevamento più marcato */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombra più forte */
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 figure img {
@@ -482,7 +481,7 @@ figure img {
   height: auto;
   display: block;
   object-fit: cover;
-  border-bottom: 4px solid #fafafa; /* Separazione sottile tra immagine e testo */
+  border-bottom: 4px solid #fafafa;
 }
 
 figcaption {
@@ -496,7 +495,6 @@ figcaption {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Stile generale del footer */
 footer {
   background-color: #111;
   color: #ccc;
@@ -505,8 +503,11 @@ footer {
   font-size: 14px;
 }
 
+.map-container{
+  height: 500px;
+}
 .footer {
-  background-color: #1a1a1a; /* Colore di sfondo scuro */
+  background-color: #1a1a1a;
   color: #f9a825;
   padding: 20px 0;
   font-family: 'Arial', sans-serif;
@@ -563,14 +564,14 @@ footer {
 }
 
 .menu-group ul li a:hover {
-  color: #ff5722; /* Colore di evidenziazione */
+  color: #ff5722;
   text-decoration: underline;
 }
 
 .footer-copy {
   text-align: center;
   margin-top: 20px;
-  flex-basis: 100%; /* Allinea il copyright in una nuova riga */
+  flex-basis: 100%;
   font-size: 0.85em;
   color: #aaaaaa;
 }
@@ -579,7 +580,6 @@ footer {
   margin: 0;
 }
 
-/* Responsività */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -597,49 +597,47 @@ footer {
 }
 
 
-/* Stile di base per il bottone */
+
 .bottone {
-  padding: 12px;
   font-size: 13px;
   text-transform: uppercase;
-  background-color: black; /* colore di base */
+  background-color: black;
   color: white;
-  border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: block; /* Assicura che il bottone prenda tutta la larghezza disponibile */
-  margin-left: auto; /* Allinea il bottone a destra */
-  margin-right: 0; /* Assicura che il bottone sia allineato a destra */
-  text-align: right; /* Allineamento del testo a destra */
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  text-align: center;
 }
 
 /* Animazione hover */
 .bottone:hover {
-  background-color: white; /* cambia colore di sfondo quando il mouse è sopra */
-  color: black; /* cambia il colore del testo quando hover */
-  transform: translateY(-3px); /* sposta il bottone verso l'alto */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* effetto ombra più pronunciato */
+  background-color: white;
+  color: black;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
-/* Animazione al focus per l'accessibilità */
+
 .bottone:focus {
-  outline: none; /* rimuove il bordo di default del focus */
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* effetto focus con ombra bianca */
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
-/* Stile per il bottone disabilitato */
+
 .bottone:disabled {
-  background-color: #b0bec5; /* colore grigio per i bottoni disabilitati */
+  background-color: #b0bec5;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* Aggiunta di un effetto pulsante durante il clic */
+
 .bottone:active {
-  transform: scale(0.95); /* effetto di riduzione per il clic */
+  transform: scale(0.95);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 

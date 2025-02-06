@@ -88,12 +88,12 @@ export class ServiceService {
     });
   }
 
-  getUsers(): Observable<{ username: string; role: string }[]> {
-    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/open/users`);
+  getUsers(username:string): Observable<{ username: string; role: string }[]> {
+    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/admin/users/${username}`);
   }
 
   changeUserRole(username: string, newRole: string): Observable<any> {
-    const body = { username, newRole };
+    const body = {username, newRole };
 
     return this.http.post(`${this.apiUrl}/admin/change_role`, body, {
       headers: { 'Content-Type': 'application/json' },
@@ -154,7 +154,7 @@ export class ServiceService {
       withCredentials: true
     }).subscribe({
       next: (response) => {
-
+        console.log(response);
         this.messaggiSubject.next(response);
       },
       error: (err) => console.error("GetMessaggiById doesn't work", err),
@@ -181,6 +181,19 @@ export class ServiceService {
 
   getRecensioniByVenditore(venditore: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/auth/${venditore}/recensioni`);
+  }
+
+  createAd(adName: string, adsetId: string, creativeId: string) {
+    return this.http.post(`${this.apiUrl}/auth/facebook/ads`, { adName, adsetId, creativeId },{
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    });
+  }
+
+  deleteMessaggio(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/auth/messaggi/deleteMessaggio/${id}`, {
+      withCredentials: true
+    })
   }
 
 }

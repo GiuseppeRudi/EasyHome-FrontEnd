@@ -3,7 +3,7 @@
 
 <div class="container">
   <div class="annuncio-card">
-    <div class="immagine-principale">
+    <div class="main-img">
       <img [src]="getImageSrc(immobileDetails.fotoPaths[0])" alt="Immagine immobile" class="main-img">
     </div>
     <div class="annuncio-info">
@@ -59,7 +59,7 @@
   </div>
 </div>
 
-<app-recensione [immobileId]="immobileId"></app-recensione>
+<app-recensione [venditore]="immobileDetails.utente.username" [immobileId]="immobileId"></app-recensione>
 
 
   <div class="recensioni-container mt-5">

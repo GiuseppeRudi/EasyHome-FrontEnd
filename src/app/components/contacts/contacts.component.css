@@ -1,11 +1,8 @@
-/* Stili per h2, h3 */
 h2, h3 {
   color: #000000;
   font-family: 'Arial', sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
-
-/* Stile per i link di navigazione */
 .nav-link {
   color: #000000;
   font-weight: bold;
@@ -17,13 +14,11 @@ h2, h3 {
   color: black;
 }
 
-/* Stile per il link attivo */
 .active-red {
   background-color: #000000;
   border-color: #000000;
 }
 
-/* Stili per i pulsanti */
 .btn-primary {
   background-color: #000000;
   border-color: #000000;
@@ -39,17 +34,16 @@ h2, h3 {
   border-color: black;
 }
 
-/* Stile per lo sfondo rosso scuro */
 .bg-dark-red {
   background-color: #000000 !important;
 }
 
-/* Stile per i bordi rossi chiari */
+
 .border-light-red {
   border-color: #000000 !important;
 }
 
-/* Stile per il piè di pagina */
+
 footer {
   background-color: #000000;
   color: #ffcccc;
@@ -60,17 +54,15 @@ footer:hover {
   background-color: #000000;
 }
 
-/* Colore rosa per il testo */
+
 .text-pink {
   color: #ffcccc;
 }
 
-/* Gestione dell'overflow per il corpo */
 body {
   overflow-x: hidden;
 }
 
-/* Animazione di fade-in per gli elementi */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -82,7 +74,6 @@ body {
   transform: translateY(0);
 }
 
-/* Effetto hover per le immagini */
 img {
   transition: transform 0.5s ease;
 }
@@ -91,7 +82,6 @@ img:hover {
   transform: scale(1.05);
 }
 
-/* Effetto hover per i pulsanti */
 .btn {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -100,7 +90,6 @@ img:hover {
   transform: translateY(-2px);
 }
 
-/* Effetto hover per le card */
 .card {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
@@ -110,7 +99,6 @@ img:hover {
   transform: translateY(-5px);
 }
 
-/* Stile per i form di input */
 .input-group .form-control {
   border-radius: 0.25rem;
 }
@@ -125,7 +113,6 @@ input.form-control:focus, textarea.form-control:focus {
   box-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
 }
 
-/* Stile per il footer */
 footer {
   background-color: black;
   color: #ffcccc;
@@ -136,7 +123,7 @@ footer p {
   margin: 0;
 }
 
-/* Stili per la sezione alert */
+
 .alert-info {
   background-color: #f0f8ff;
   color: black;

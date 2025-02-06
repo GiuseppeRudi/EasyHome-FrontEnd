@@ -6,6 +6,8 @@ import {catchError, Observable, throwError} from 'rxjs';
   providedIn: 'root'
 })
 export class GeocodingService {
+
+  //KEY FUNZIONANTE
   private apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 
   constructor(private http: HttpClient) {}

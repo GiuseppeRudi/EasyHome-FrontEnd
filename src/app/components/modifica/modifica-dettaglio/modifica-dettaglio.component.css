@@ -55,7 +55,6 @@
   margin-left: 10px;
 }
 
-/* Stile di base per il container */
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -72,7 +71,6 @@ h2 {
   text-align: center;
 }
 
-/* Stile per il form */
 form {
   display: grid;
   gap: 20px;
@@ -128,7 +126,6 @@ button[type="submit"]:focus {
   outline: none;
 }
 
-/* Stile per la sezione immagini */
 img {
   max-width: 100%;
   height: auto;
@@ -153,7 +150,6 @@ input[type="file"]::file-selector-button:hover {
   background-color: #0056b3;
 }
 
-/* Messaggi di errore */
 .ng-invalid.ng-touched {
   border-color: red;
 }

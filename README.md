@@ -1,59 +1,44 @@
-# Prova2
+# EasyHome - Guida alla Configurazione
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+Benvenuto in **EasyHome**, la piattaforma dedicata alla gestione degli immobili. Segui i passaggi di questa guida per configurare e avviare il progetto in locale.
 
-## Development server
+**Nota Importante:** Le **API KEY** non sono incluse nei file scaricabili. Le **API di Google Maps** e **Geocoding** sono limitate a utilizzo solo con **localhost:4200** (cioè Angular). Al momento, la chiave di Google Maps in uso è una chiave di sviluppo. Per utilizzare la chiave corretta, bisogna andare nel file `index.html` e modificare l'uso della chiave API.
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Configurazione del Backend
 
-## Code scaffolding
+### 1. **Scarica il Backend**
+- Accedi al repository [EasyHome-BackEnd](https://github.com/GiuseppeRudi/EasyHome-BackEnd) e scarica il progetto.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 2. **Imposta le Variabili d'Ambiente**
+Aggiungi le seguenti variabili d'ambiente per l'utente corrente:
 
-```bash
-ng generate component component-name
-```
+- **POSTGRES_PASSWORD**: La tua password per il database PostgreSQL.
+- **POSTGRES_USER**: Il tuo nome utente per il database PostgreSQL.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Nota:** Dopo aver configurato le variabili d'ambiente, riavvia il computer per applicare le modifiche.
 
-```bash
-ng generate --help
-```
+### 3. **Ripristina il Database**
+- Apri **DBeaver** e connettiti al database PostgreSQL.
+- Se esiste già una copia del database **EasyHome**, eliminala.
+- Crea un nuovo database chiamato **EasyHome**.
+- Ripristina il database:
+  - Clicca con il tasto destro sul nuovo database e seleziona **Strumenti > Ripristina**.
+  - Scegli il formato **pain**, seleziona le opzioni **clean (drop)** e **crea database**.
+  - Seleziona il file di backup **.sql** dalla cartella **dump** del Backend.
+  - Avvia il ripristino.
 
-## Building
+### 4. **Avvia il Backend**
+Il Backend è ora pronto per essere avviato.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## Configurazione del Frontend
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 1. **Installa le Dipendenze**
+All'interno della cartella del Frontend, esegui il comando:
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   ```bash
+   npm install

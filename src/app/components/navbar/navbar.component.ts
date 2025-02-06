@@ -66,7 +66,6 @@ export class NavbarComponent implements OnInit{
   }
 
   notifiche() {
-    if(this.username!=null) this.service.getMessaggiById(this.username);
     this.router.navigate(['/messaggi']);
   }
 
