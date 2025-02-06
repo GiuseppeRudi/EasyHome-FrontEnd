@@ -1,59 +1,56 @@
-# Prova2
+EasyHome - Guida alla Configurazione
+Benvenuto in EasyHome, la piattaforma di immobili. Segui questa guida per configurare e avviare il progetto in locale.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+In questa guida e nei file scaricabili non sono presenti le API KEY
+---
 
-## Development server
+Configurazione Backend
+Scarica il Backend da https://github.com/GiuseppeRudi/EasyHome-BackEnd
 
-To start a local development server, run:
+Imposta le variabili d'ambiente
+Aggiungi le seguenti variabili d'ambiente per l'utente corrente:
 
-```bash
-ng serve
-```
+POSTGRES_PASSWORD: La tua password per il database Postgres
+POSTGRES_USER: Il tuo nome utente per il database Postgres
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Nota: Dopo aver configurato le variabili d'ambiente, riavvia il computer per applicare le modifiche.
 
-## Code scaffolding
+Ripristina il database
+Apri DBEaver e connettiti al database Postgres.
+Se è presente una copia del database EasyHome, eliminala.
+Crea un nuovo database chiamato EasyHome.
+Ripristina il database:
+Clicca con il tasto destro sul nuovo database e seleziona Strumenti > Ripristina.
+Seleziona il formato pain, spunta le opzioni clean (drop) e crea database.
+Scegli il file di backup .sql dalla cartella dump del Backend
+Avvia il ripristino.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Avvia il Backend
+Ora il Backend è pronto per essere avviato.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Configurazione Frontend
+Installa le dipendenze
+All'interno della cartella del Frontend, esegui il comando:
 
-```bash
-ng generate --help
-```
+npm install
 
-## Building
 
-To build the project run:
+Configura l'ambiente
+Scarica il Frontend da https://github.com/GiuseppeRudi/EasyHome-FrontEnd
+Estrai il contenuto.
 
-```bash
-ng build
-```
+Avvia il Frontend.
+Ora puoi avviare il Frontend.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+(Facoltativo) Presentazione del Progetto
+Per una panoramica rapida del progetto, consulta la seguente presentazione:
+[Introduzione a EasyHome](power point di simone)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Supporto
+Se riscontri problemi, non esitare a contattarci.

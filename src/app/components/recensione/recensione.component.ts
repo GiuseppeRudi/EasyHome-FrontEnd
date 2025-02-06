@@ -13,6 +13,7 @@ import {SuccessErrorDialogComponent} from '../success-error-dialog/success-error
 })
 export class RecensioneComponent {
   @Input() immobileId!: number;
+  @Input() venditore!: string;
   username: string | null = '';
   form: FormGroup;
   rating: number = 0;
@@ -32,13 +33,12 @@ export class RecensioneComponent {
   }
 
   submitRecensione() {
-    if (this.form.valid) {
+    this.username = sessionStorage.getItem('username');
+    if (this.form.valid && this.username!=this.venditore) {
       const formData = new FormData();
       formData.append('rating', this.form.get('rating')?.value.toString());
       formData.append('descrizione', this.form.get('descrizione')?.value);
       formData.append('idImmobile', this.immobileId.toString());
-
-      this.username = sessionStorage.getItem('username');
 
       if(this.username!=null) formData.append('acquirente', this.username);
       console.log('Form Submitted', formData.keys());
@@ -71,7 +71,7 @@ export class RecensioneComponent {
       this.dialog.open(SuccessErrorDialogComponent, {
         data: {
           title: 'Info',
-          message: 'Per favore, completa tutti i campi.'
+          message: 'Non è possibile inviare la recensione.'
         }
       });
 

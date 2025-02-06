@@ -35,11 +35,11 @@
 .prezzo-scontato {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #d9534f; /* Rosso per evidenziare */
+  color: #d9534f;
 }
 
 
-/* Stile generale */
+
 .container {
   max-width: 1200px;
   margin: auto;
