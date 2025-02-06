@@ -53,13 +53,15 @@ export class AdminpageComponent implements OnInit {
   }
 
   loadUserList(): void {
-    this.service.getUsers().subscribe({
-      next: (users) => {
-        console.log("Dati ricevuti dal server:", users);
-        this.userList = users;
-      },
-      error: (err) => console.error('Errore nel recupero degli utenti:', err),
-    });
+    if(this.username!=null){
+      this.service.getUsers(this.username).subscribe({
+        next: (users) => {
+          console.log("Dati ricevuti dal server:", users);
+          this.userList = users;
+        },
+        error: (err) => console.error('Errore nel recupero degli utenti:', err),
+      });
+    }
   }
   errorMessage: string = '';
 
@@ -93,7 +95,6 @@ export class AdminpageComponent implements OnInit {
       console.error("Errore: username e ruolo sono obbligatori!");
       return;
     }
-
     this.service.changeUserRole(username, newRole).subscribe({
       next: (response) => {
         console.log("Ruolo cambiato con successo:", response);

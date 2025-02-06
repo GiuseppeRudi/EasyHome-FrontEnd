@@ -88,12 +88,12 @@ export class ServiceService {
     });
   }
 
-  getUsers(): Observable<{ username: string; role: string }[]> {
-    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/open/users`);
+  getUsers(username:string): Observable<{ username: string; role: string }[]> {
+    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/admin/users/${username}`);
   }
 
   changeUserRole(username: string, newRole: string): Observable<any> {
-    const body = { username, newRole };
+    const body = {username, newRole };
 
     return this.http.post(`${this.apiUrl}/admin/change_role`, body, {
       headers: { 'Content-Type': 'application/json' },
