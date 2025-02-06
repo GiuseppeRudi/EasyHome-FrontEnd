@@ -72,7 +72,12 @@ export class ContattavenditoreComponent {
       })
       this.closeModal();
     } else {
-      console.log('Form is invalid');
+      this.dialog.open(SuccessErrorDialogComponent, {
+        data: {
+          title: 'Info',
+          message: 'Non è possibile inviare il messaggio'
+        }
+      });
     }
   }
 }
