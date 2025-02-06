@@ -12,21 +12,16 @@ export class MessaggiComponent implements OnInit {
   constructor(private service: ServiceService) {}
 
   messages: any[] = [];
+  username: string | null = '';
 
   ngOnInit() {
-    const cachedMessaggi = sessionStorage.getItem('messaggi');
-    if (cachedMessaggi) {
-      this.messages = JSON.parse(cachedMessaggi);
-      console.log('Dati caricati da sessionStorage:', this.messages);
-    }
-
+    this.username=sessionStorage.getItem('username');
+    if(this.username!=null) this.service.getMessaggiById(this.username);
     this.service.getMessaggiObservable().subscribe(data => {
       console.log('Dati ricevuti dal backend:', data);
 
       if (data && data.length > 0) {
         this.messages = data;
-        sessionStorage.setItem('messaggi', JSON.stringify(this.messages));
-        console.log('Dati salvati in sessionStorage:', sessionStorage.getItem('messaggi'));
       }
     });
   }
@@ -36,7 +31,9 @@ export class MessaggiComponent implements OnInit {
   }
 
   deleteMessage(index: number) {
-    this.messages.splice(index, 1);
+    this.service.deleteMessaggio(index).subscribe(data => {
+      window.location.reload();
+    })
   }
 }
 

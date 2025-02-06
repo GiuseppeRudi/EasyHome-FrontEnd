@@ -154,7 +154,7 @@ export class ServiceService {
       withCredentials: true
     }).subscribe({
       next: (response) => {
-
+        console.log(response);
         this.messaggiSubject.next(response);
       },
       error: (err) => console.error("GetMessaggiById doesn't work", err),
@@ -188,6 +188,12 @@ export class ServiceService {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true
     });
+  }
+
+  deleteMessaggio(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/auth/messaggi/deleteMessaggio/${id}`, {
+      withCredentials: true
+    })
   }
 
 }

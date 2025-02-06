@@ -23,7 +23,7 @@
       <button (click)="toggleExpand(message)" class="expand-button">
         {{ message.expanded ? 'Comprimi' : 'Espandi' }}
       </button>
-      <button (click)="deleteMessage(i)" class="delete-button">Elimina</button>
+      <button (click)="deleteMessage(message.id)" class="delete-button">Elimina</button>
     </div>
   </div>
 </div>
