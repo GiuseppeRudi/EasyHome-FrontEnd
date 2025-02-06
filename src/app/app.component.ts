@@ -8,7 +8,7 @@ import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angula
   styleUrls: ['./app.component.css'] // Corretto il nome dell'attributo da `styleUrl` a `styleUrls`
 })
 export class AppComponent implements OnInit {
-  title = 'prova2';
+  title = 'EasyHome';
   loading: boolean = false;
 
   constructor(private router: Router) {}

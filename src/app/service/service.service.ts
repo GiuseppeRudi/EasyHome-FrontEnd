@@ -88,6 +88,10 @@ export class ServiceService {
     });
   }
 
+  eliminaImmobile(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/auth/immobili/deleteImmobile/${id}`);
+  }
+
   getUsers(): Observable<{ username: string; role: string }[]> {
     return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/admin/users`);
   }

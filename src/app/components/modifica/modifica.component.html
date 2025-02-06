@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <header>
   <navbar></navbar>
 </header>
@@ -36,6 +38,7 @@
 
           <div class="buttons mt-auto text-center">
             <a [routerLink]="['/modifica-dettaglio', immobile.id]"  class="btn btn-primary">Modifica</a>
+            <button class="btn btn-danger" (click)="apriModale(deleteModal, immobile.id)" data-bs-toggle="modal" data-bs-target="#deleteModal">Elimina</button>
             <app-facebook></app-facebook>
           </div>
         </div>
@@ -43,6 +46,27 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modale di conferma eliminazione -->
+<ng-template #deleteModal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="annulla()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Sei sicuro di voler eliminare questo immobile?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="annulla()" data-bs-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-danger" (click)="confermaEliminazione()" data-bs-dismiss="modal">Elimina</button>
+      </div>
+    </div>
+</ng-template>
+
+
+
 
 <footer class="footer mt-5">
   <app-footer></app-footer>

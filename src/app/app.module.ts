@@ -38,7 +38,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { FacebookComponent } from './components/facebook/facebook.component';
 import { AsteDettaglioComponent } from './components/aste/aste-dettaglio/aste-dettaglio.component';
 import { SuccessErrorDialogComponent } from './components/success-error-dialog/success-error-dialog.component';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +68,8 @@ import { SuccessErrorDialogComponent } from './components/success-error-dialog/s
     FacebookComponent,
 
 
+
+
 ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ import { SuccessErrorDialogComponent } from './components/success-error-dialog/s
     ReactiveFormsModule,
     MatCardContent,
     MatCard,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot()
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
