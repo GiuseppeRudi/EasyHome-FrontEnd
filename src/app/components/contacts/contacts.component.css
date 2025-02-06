@@ -113,11 +113,6 @@ input.form-control:focus, textarea.form-control:focus {
   box-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
 }
 
-footer {
-  background-color: black;
-  color: #ffcccc;
-  padding: 10px;
-}
 
 footer p {
   margin: 0;
