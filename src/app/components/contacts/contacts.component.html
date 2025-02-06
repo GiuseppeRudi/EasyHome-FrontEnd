@@ -50,7 +50,7 @@
     <div class="col-md-12">
       <label class="form-label">La tua domanda:</label>
       <textarea formControlName="domanda" class="form-control" required
-                [ngClass]="{'is-invalid': formSubmitted && contactForm.get('domanda')?.invalid}"></textarea>
+                [ngClass]="{'is-invalid': formSubmitted && contactForm.get('domanda')?.invalid}" placeholder="Minimo 10 caratteri"></textarea>
       <div class="valid-feedback">Bella domanda.</div>
       <div class="invalid-feedback">*Questo campo non può essere vuoto.</div>
     </div>

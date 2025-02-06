@@ -88,8 +88,8 @@ export class ServiceService {
     });
   }
 
-  getUsers(username:string): Observable<{ username: string; role: string }[]> {
-    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/admin/users/${username}`);
+  getUsers(): Observable<{ username: string; role: string }[]> {
+    return this.http.get<{ username: string; role: string }[]>(`${this.apiUrl}/admin/users`);
   }
 
   changeUserRole(username: string, newRole: string): Observable<any> {

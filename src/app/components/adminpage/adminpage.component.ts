@@ -53,25 +53,42 @@ export class AdminpageComponent implements OnInit {
   }
 
   loadUserList(): void {
-    if(this.username!=null){
-      this.service.getUsers(this.username).subscribe({
+    this.service.getUsers().subscribe({
         next: (users) => {
           console.log("Dati ricevuti dal server:", users);
           this.userList = users;
         },
         error: (err) => console.error('Errore nel recupero degli utenti:', err),
       });
-    }
+
   }
   errorMessage: string = '';
 
   deleteUser(username: string): void {
+
     this.service.deleteUser(username).subscribe({
       next: (response) => {
         // Successo nella cancellazione
+
         console.log('Utente eliminato:', response);
-        window.location.reload();
+
+        if(username==this.username)
+        {
+          sessionStorage.clear();
+          this.router.navigate(['/']);
+        }
+        else {
+
+          window.location.reload();
+        }
         this.errorMessage = '';
+
+        this.dialog.open(SuccessErrorDialogComponent, {
+          data: {
+            title: 'Successo',
+            message: ` ${username} bannato con successo!`
+          }
+        });
       },
       error: (err) => {
         console.error('Errore nell\'eliminazione dell\'utente:', err);
@@ -97,6 +114,7 @@ export class AdminpageComponent implements OnInit {
     }
     this.service.changeUserRole(username, newRole).subscribe({
       next: (response) => {
+
         console.log("Ruolo cambiato con successo:", response);
         this.dialog.open(SuccessErrorDialogComponent, {
           data: {
@@ -104,7 +122,17 @@ export class AdminpageComponent implements OnInit {
             message: 'Ruolo cambiato con successo!'
           }
         });
-        window.location.reload();
+
+        if(username==this.username)
+        {
+          sessionStorage.clear();
+          this.router.navigate(['/']);
+        }
+        else {
+
+          window.location.reload();
+        }
+
       },
       error: (error) => {
         console.error("Errore nel cambiare il ruolo:", error);
