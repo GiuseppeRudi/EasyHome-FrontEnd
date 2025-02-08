@@ -127,7 +127,6 @@ export class NavbarComponent implements OnInit{
       this.menuItems=[];
       this.menuItems.push( { label: 'Home', icon: 'home', route: '/' });
       this.menuItems.push({ label: 'Modifica Annunci', icon: 'build', route: '/modifica' });
-      this.menuItems.push( { label: 'Aste', icon: 'gavel', route: '/aste' });
       this.menuItems.push( { label: 'Admin', icon: 'admin_panel_settings', route: '/admin' });
     }
   }
@@ -139,7 +138,7 @@ export class NavbarComponent implements OnInit{
     console.log(this.isVenditore ? 'Venditore' : 'Acquirente');
     window.location.reload();
     this.updateMenuItems();  // Aggiorna i menu
-    //this.cdRef.detectChanges(); // Forza l'aggiornamento della vista
+
   }
 
 }

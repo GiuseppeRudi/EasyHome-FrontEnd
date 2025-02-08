@@ -15,12 +15,12 @@ export class GeocodingService {
   getLatLng(address: string): Observable<any> {
     const params = new HttpParams()
       .set('address', address)
-      .set('key', 'AIzaSyD2U3yjRS_sW8tXrKFEZy8Ve07RE-JWjc8'); // Sostituisci con la tua API Key
+      .set('key', 'AIzaSyD2U3yjRS_sW8tXrKFEZy8Ve07RE-JWjc8');
 
     return this.http.get(this.apiUrl, { params }).pipe(
       catchError(error => {
         console.error('Errore nella geocodifica:', error);
-        return throwError(error); // Propaga l'errore
+        return throwError(error);
       })
     );
   }
