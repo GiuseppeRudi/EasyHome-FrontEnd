@@ -9,8 +9,8 @@
   color: #fff;
   overflow: hidden;
 }
-.logout-btn {
-  background-color: #ff4d4d;
+
+button {
   color: white;
   border: none;
   border-radius: 5px;
@@ -18,7 +18,19 @@
   cursor: pointer;
   font-size: 14px;
   float: right;
-  margin-top: -35px;
+  margin-top: -15px;
+}
+
+.home-btn {
+  background-color: blue;
+}
+
+.home-btn:hover {
+  background-color: darkblue;
+}
+
+.logout-btn {
+  background-color: #ff4d4d;
 }
 
 .logout-btn:hover {
@@ -132,3 +144,6 @@ input, select {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
+
+
+

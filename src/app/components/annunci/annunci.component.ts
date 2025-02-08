@@ -15,6 +15,7 @@ export class AnnunciComponent implements OnInit {
   selectedImmobili: string | null = 'Tipo';
   selectedAffittoVendita: string | null = 'Categoria';
   selectedLuogo: string | null = 'Provincia';
+  selectedSorting: string  = 'filtro';
 
   constructor(  private route: ActivatedRoute,private service: ServiceService) {}
 
@@ -37,6 +38,13 @@ export class AnnunciComponent implements OnInit {
         this.immobiliminimal = data;
       }
     });
+  }
+  sortImmobili() {
+    this.immobiliminimal.sort((a, b) =>
+      this.selectedSorting === 'prezzo'
+        ? (a.prezzo_scontato || a.prezzo) - (b.prezzo_scontato || b.prezzo)
+        : a.mq - b.mq
+    );
   }
 
 

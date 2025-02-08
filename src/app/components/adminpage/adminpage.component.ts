@@ -146,4 +146,9 @@ export class AdminpageComponent implements OnInit {
     });
   }
 
+
+  goHome(){
+    this.router.navigate(['/']);
+  }
+
 }

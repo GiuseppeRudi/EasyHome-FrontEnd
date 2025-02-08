@@ -29,7 +29,9 @@ export class NavbarComponent implements OnInit{
     { label: 'About', icon: 'info', route: '/about' },
     { label: 'Aste', icon: 'gavel', route: '/aste' },
     { label: 'Contatti', icon: 'contact_mail', route: '/contacts' },
+
   ];
+  role: string | null=null;
 
   constructor(private authService: AuthService, private dialog: MatDialog, private router: Router, private dialogService: DialogService,private service: ServiceService) {}
 
@@ -80,6 +82,13 @@ export class NavbarComponent implements OnInit{
     this.authService.logout().subscribe({
       next: () => {
         sessionStorage.clear();
+        this.menuItems = [
+          { label: 'Home', icon: 'home', route: '/' },
+          { label: 'About', icon: 'info', route: '/about' },
+          { label: 'Aste', icon: 'gavel', route: '/aste' },
+          { label: 'Contatti', icon: 'contact_mail', route: '/contacts' },
+
+        ];
         this.userRole = null;
         this.logged = false;
         this.username = null;
@@ -93,6 +102,7 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     this.userRole = sessionStorage.getItem('userRole');
     this.username = sessionStorage.getItem('username');
+    this.role=sessionStorage.getItem("role");
     if (this.username) {
       this.logged = true;
       this.isVenditore = this.userRole === 'venditore'; // Imposta il ruolo iniziale
@@ -111,9 +121,15 @@ export class NavbarComponent implements OnInit{
   updateMenuItems(): void {
     this.removeModifyItem();
     if (this.logged && this.isVenditore) {
-      this.menuItems.push({ label: 'Gestisci Annunci', icon: 'build', route: '/services' });
+      this.menuItems.push({ label: 'Gestisci Annunci', icon: 'build', route: '' });
     }
-
+    if(this.logged && this.role=="ROLE_ADMIN"){
+      this.menuItems=[];
+      this.menuItems.push( { label: 'Home', icon: 'home', route: '/' });
+      this.menuItems.push({ label: 'Modifica Annunci', icon: 'build', route: '/modifica' });
+      this.menuItems.push( { label: 'Aste', icon: 'gavel', route: '/aste' });
+      this.menuItems.push( { label: 'Admin', icon: 'admin_panel_settings', route: '/admin' });
+    }
   }
 
   toggleRole() {

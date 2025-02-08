@@ -114,3 +114,41 @@ button:focus {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
 }
+
+/* Stile per il contenitore del filtro */
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Stile per l'elemento <select> */
+#sorting {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+
+  border: 2px solid #007bff; /* Bordo blu */
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Effetto hover */
+#sorting:hover {
+  border-color: #0056b3;
+}
+
+/* Stile per il primo option disabilitato */
+#sorting option:disabled {
+  color: gray;
+}
+
+/* Adattabilità su schermi piccoli */
+@media (max-width: 576px) {
+  #sorting {
+    width: 100%;
+  }
+}
+
